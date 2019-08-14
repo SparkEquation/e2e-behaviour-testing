@@ -1,0 +1,34 @@
+{
+  "name": "ui-testing-template-cypress",
+  "version": "1.0.0",
+  "description": "BDD UI testing framework with cypress and cucumber",
+  "scripts": {
+    "test": "cypress run",
+    "open": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh:git@github.com:SparkEquation/ui-testing-template-cypress.git"
+  },
+  "keywords": [
+    "cypress",
+    "cucumber",
+    "testing",
+    "bdd"
+  ],
+  "dependencies": {
+    "cypress": "^3.4.1",
+    "cypress-cucumber-preprocessor": "^1.13.1",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.3.0"
+  },
+  "devDependencies": {
+    "@cypress/browserify-preprocessor": "latest",
+    "@types/node": "^12.7.1",
+    "tsify": "^4.0.1",
+    "typescript": "^3.5.3"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  }
+}
