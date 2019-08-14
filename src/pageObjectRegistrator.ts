@@ -1,10 +1,12 @@
-import 'reflect-metadata';
-
-export const storage = new Map();
+export const storage = new Map<string, IPageObjectMetadata>();
 
 export interface IPageObjectFieldDescription {
     invokable: boolean;
     type: PageObjectFieldType
+}
+
+export interface IPageObjectMetadata {
+    getFieldDescriptor(key: string): IPageObjectFieldDescription
 }
 
 const metadataTypeKey: string = 'PageObjectFieldType';
@@ -13,16 +15,19 @@ const metadataInvokableKey: string = 'PageObjectFieldInvokable';
 // Keys should be the same as values to allow following typecheck: keyof typeof PageObjectFieldType
 export enum PageObjectFieldType {
     Selector = 'Selector',
+    Contains = 'Contains',
     // TODO implement
     Xpath = 'Xpath',
+    Navigation = 'Navigation',
     // Cypress chainable
-    Action = 'Action'
+    Action = 'Action',
+
 }
 
 export function registerPageObject<T extends {new(...args:any[]):{}}>(name: string) {
     // TODO replace any with valid type
     return (constructor: T) =>  {
-        const classInstance = new class C extends constructor {
+        const classInstance = new class C extends constructor implements IPageObjectMetadata{
             public getFieldDescriptor(key: keyof C): IPageObjectFieldDescription {
                 return {
                     invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
