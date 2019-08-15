@@ -2,11 +2,15 @@
 
 > Based on [cypress-cucumber-example](https://github.com/TheBrainFamily/cypress-cucumber-example)
 
-## Starting
+## Starting tests examples
 * Clone this project
 * Run `npm install`
 * Run `npm run test:open` or `npm run test:run`
 
+## Installation
+* Install cypress `npm i -D cypress`
+* Run it for the first time with `cypress open`,
+* Install this repo
 
 
 ## Project structure
