@@ -9,6 +9,7 @@ export interface IPageObjectMetadata {
     getFieldDescriptor(key: string): IPageObjectFieldDescription
 }
 
+
 const metadataTypeKey: string = 'PageObjectFieldType';
 const metadataInvokableKey: string = 'PageObjectFieldInvokable';
 
@@ -21,7 +22,7 @@ export enum PageObjectFieldType {
     Navigation = 'Navigation',
     // Cypress chainable
     Action = 'Action',
-
+    RoleCredentials = 'RoleCredentials'
 }
 
 export function registerPageObject<T extends {new(...args:any[]):{}}>(name: string) {
@@ -35,6 +36,8 @@ export function registerPageObject<T extends {new(...args:any[]):{}}>(name: stri
                 }
             }
         };
+
+        cy.log(`Added ${name}`);
 
         if (storage.has(name)) {
             throw new Error(`Detected page object with duplicate name ${ name }`);

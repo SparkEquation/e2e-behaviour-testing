@@ -1,6 +1,6 @@
 import { Then } from "cypress-cucumber-preprocessor/steps";
 import { PageObjectSelector } from '../types';
-import { getNavigationUrl } from '../util';
+import { getNavigationUrl } from '../../util/functions';
 
 export function register () {
     Then(`URL is {string}`, (selectorString: string) => {
