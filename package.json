@@ -1,6 +1,6 @@
 {
   "name": "ui-testing-template-cypress",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "BDD UI testing framework with cypress and cucumber",
   "main": "",
   "scripts": {
