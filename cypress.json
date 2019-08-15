@@ -1,6 +1,6 @@
 {
-  "ignoreTestFiles": ["*.js", "*.ts"],
   "baseUrl": "https://www.google.com",
+  "testFiles": "**/*.feature",
   "viewportWidth": 1600,
   "viewportHeight": 900
 }

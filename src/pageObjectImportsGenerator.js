@@ -14,7 +14,7 @@ const filesMap = filename => filename.slice(0, -3).replace(`'`, `\\'`);
 // Create file with imports
 const filesReduce = (acc, filename) => acc + `import './${filename}';\n`;
 
-const pageObjectDirPath = path.resolve('cypress', 'integration', 'pageObject');
+const pageObjectDirPath = path.resolve('cypress', 'integration', 'pageObjects');
 
 const fileNames = fs.readdirSync(pageObjectDirPath)
     .filter(filesFilter)

@@ -1,3 +1,3 @@
 before(() => {
-  import('../pageObject/index');
+  import('../pageObjects/index');
 });

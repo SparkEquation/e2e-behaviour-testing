@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "BDD UI testing framework with cypress and cucumber",
   "scripts": {
-    "test": "cypress run",
-    "open": "cypress open"
+    "pretest": "node src/pageObjectImportsGenerator.js",
+    "test:run": "npm run pretest && cypress run",
+    "test:open": "npm run pretest && cypress open"
   },
   "repository": {
     "type": "git",

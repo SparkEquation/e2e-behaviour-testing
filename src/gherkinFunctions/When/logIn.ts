@@ -1,7 +1,7 @@
 import { When } from "cypress-cucumber-preprocessor/steps";
 import { PageObjectSelector } from '../types';
 import { CypressSavedElement, getElement } from '../../util/functions';
-import { IRoleCredentials, LogInRole } from '../../util/models';
+import { LogInRole } from '../../util/models';
 
 export function register() {
     When(`I log in at {string} as {string}`, async (selectorString: string, roleSelectorString: string) => {
