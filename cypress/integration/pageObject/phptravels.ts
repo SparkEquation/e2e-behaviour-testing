@@ -13,6 +13,9 @@ export class PhpTravels {
     @registerSelector('Contains')
     public currentUserAdmin = 'Administrator';
 
+    @registerSelector('Navigation')
+    public adminLoginPage = 'admin/login';
+
     @registerSelector(PageObjectFieldType.RoleCredentials)
     public admin: LogInRole = [
         {
