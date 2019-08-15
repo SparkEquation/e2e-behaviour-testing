@@ -2,10 +2,11 @@ import { registerSelector, registerPageObject } from '../../../src/pageObjectReg
 
 @registerPageObject('Google')
 export class Google {
-    @registerSelector('Xpath')
-    public sayHello(): string {
-        return 'Hello from google class';
-    }
+    @registerSelector('Navigation')
+    public searchCypress = 'search?q=cypress';
+
+    @registerSelector('Navigation')
+    public page = '/';
 
     @registerSelector('Contains')
     public cypressLink = 'cypress.io';
@@ -13,8 +14,10 @@ export class Google {
     @registerSelector('Selector')
     public searchResults = 'div#search';
 
-    @registerSelector('Navigation')
-    public page = 'search?q=cypress';
+    @registerSelector('Selector')
+    public searchInput = 'input[name="q"]';
+
+
 
     @registerSelector('Action')
     public getLinkByTitle() {

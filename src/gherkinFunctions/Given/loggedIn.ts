@@ -1,6 +1,5 @@
 import { Given } from "cypress-cucumber-preprocessor/steps";
 import { PageObjectSelector } from '../types';
-import { PageObjectFieldType } from '../../pageObjectRegistrator';
 import { LogInRole } from '../../util/models';
 
 
@@ -24,6 +23,5 @@ export function register () {
                 'X-Requested-With': 'XMLHttpRequest'
             }
         });
-
     });
 }
