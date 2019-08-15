@@ -2,7 +2,9 @@
   "name": "ui-testing-template-cypress",
   "version": "1.0.0",
   "description": "BDD UI testing framework with cypress and cucumber",
+  "main": "",
   "scripts": {
+    "postinstall": "node postinstall.js",
     "pretest": "node src/pageObjectImportsGenerator.js",
     "test:run": "npm run pretest && cypress run",
     "test:open": "npm run pretest && cypress open"
@@ -20,9 +22,7 @@
   "dependencies": {
     "cypress": "^3.4.1",
     "cypress-cucumber-preprocessor": "^1.13.1",
-    "reflect-metadata": "^0.1.13"
-  },
-  "devDependencies": {
+    "reflect-metadata": "^0.1.13",
     "@cypress/browserify-preprocessor": "^2.1.1",
     "@types/cucumber": "^4.0.7",
     "@types/node": "^12.7.1",
@@ -30,6 +30,7 @@
     "tsify": "^4.0.1",
     "typescript": "^3.5.3"
   },
+  "devDependencies": {},
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
   }
