@@ -2,6 +2,13 @@
 
 > Based on [cypress-cucumber-example](https://github.com/TheBrainFamily/cypress-cucumber-example)
 
+## Starting
+* Clone this project
+* Run `npm install`
+* Run `npm run test:open` or `npm run test:run`
+
+
+
 ## Project structure
 * `cypress` directory contains examples of tests. 
 Real application would have the same directory in it's root.   

@@ -20,11 +20,10 @@
   "dependencies": {
     "cypress": "^3.4.1",
     "cypress-cucumber-preprocessor": "^1.13.1",
-    "reflect-metadata": "^0.1.13",
-    "ts-node": "^8.3.0"
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
-    "@cypress/browserify-preprocessor": "latest",
+    "@cypress/browserify-preprocessor": "^2.1.1",
     "@types/cucumber": "^4.0.7",
     "@types/node": "^12.7.1",
     "cucumber": "^5.1.0",
