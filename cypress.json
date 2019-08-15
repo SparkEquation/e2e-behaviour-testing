@@ -1,4 +1,4 @@
 {
   "ignoreTestFiles": ["*.js", "*.ts"],
-  "baseUrl": "http://google.com"
+  "baseUrl": "https://www.google.com"
 }

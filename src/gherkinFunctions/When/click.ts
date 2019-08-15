@@ -1,11 +1,16 @@
-import { storage } from '../../pageObjectRegistrator';
 import { When } from "cypress-cucumber-preprocessor/steps";
+import { PageObjectSelector } from '../types';
+import { CypressSavedElement, getElement } from '../util';
 
 export function register() {
-    When(`I click {string}`, async (element: string) => {
-        const [filename, method] = element.split('.');
-        const pageObject = storage.get(filename);
+    When(`I click {string}`, async (selectorString: string) => {
+        const selector = new PageObjectSelector(selectorString);
+        let element: CypressSavedElement = getElement(selector);
 
-        expect(pageObject[method]()).to.equal('Hello from google class');
+        if (element === null) {
+            return;
+        }
+
+        cy.get(element).click();
     });
 }

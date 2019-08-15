@@ -43,7 +43,7 @@ export function registerPageObject<T extends {new(...args:any[]):{}}>(name: stri
     };
 }
 
-export function register(type: PageObjectFieldType | keyof typeof PageObjectFieldType) {
+export function registerSelector(type: PageObjectFieldType | keyof typeof PageObjectFieldType) {
     return function (target: Object, key: string | symbol, descriptor?: PropertyDescriptor) {
         const invokable = descriptor !== undefined;
 

@@ -1,22 +1,22 @@
-import { register, registerPageObject } from '../../../src/pageObjectRegistrator';
+import { registerSelector, registerPageObject } from '../../../src/pageObjectRegistrator';
 
 @registerPageObject('Google')
 export class Google {
-    @register('Xpath')
+    @registerSelector('Xpath')
     public sayHello(): string {
         return 'Hello from google class';
     }
 
-    @register('Contains')
+    @registerSelector('Contains')
     public cypressLink = 'cypress.io';
 
-    @register('Selector')
+    @registerSelector('Selector')
     public searchResults = 'div#search';
 
-    @register('Navigation')
+    @registerSelector('Navigation')
     public page = 'search?q=cypress';
 
-    @register('Action')
+    @registerSelector('Action')
     public getLinkByTitle() {
         cy.get('div#search').within(el => {
             cy.get('h3').should('contain', 'JavaScript End to End Testing Framework | cypress.io');

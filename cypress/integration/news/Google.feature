@@ -4,9 +4,9 @@ Feature: The Google
 
   Scenario: Opening a Google network page
     Given I open "Google.page"
-    When I click "Google.sayHello"
-    Then I see "Google" in the title
+    Then I see title string "Google"
     And I see element "Google.cypressLink"
     And I see element "Google.searchResults"
     And I see element "Google.getLinkByTitle"
+    And URL is "Google.page"
 
