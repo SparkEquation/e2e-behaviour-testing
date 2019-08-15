@@ -6,7 +6,7 @@
     "page-objects-import": "./pageObjectImportsGenerator.js"
   },
   "scripts": {
-    "postinstall": "node postinstall.js",
+    "preinstall": "node preinstall.js",
     "pretest": "node pageObjectImportsGenerator.js",
     "test:run": "npm run pretest && cypress run",
     "test:open": "npm run pretest && cypress open"
