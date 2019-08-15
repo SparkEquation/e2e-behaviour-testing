@@ -2,8 +2,10 @@ Feature: The Google
 
   I want to open Google page
 
-  Scenario: Opening a Google page
+  Background:
     Given I open "Google.page"
+
+  Scenario: Opening a Google page
     When I type "cypress" into element "Google.searchInput"
     Then I see title string "Google"
     And I see element "Google.cypressLink"
@@ -14,4 +16,3 @@ Feature: The Google
     And I see element "Google.searchResults"
     And I see element "Google.getLinkByTitle"
     And URL is "Google.searchCypress"
-

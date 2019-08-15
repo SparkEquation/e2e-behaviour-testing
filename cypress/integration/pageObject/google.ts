@@ -17,8 +17,6 @@ export class Google {
     @registerSelector('Selector')
     public searchInput = 'input[name="q"]';
 
-
-
     @registerSelector('Action')
     public getLinkByTitle() {
         cy.get('div#search').within(el => {
