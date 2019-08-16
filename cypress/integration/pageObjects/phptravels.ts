@@ -1,5 +1,9 @@
-import { PageObjectFieldType, registerPageObject, registerSelector } from '../../../src/pageObjectRegistrator';
-import { LogInRole } from '../../../src/util/models';
+import {
+    LogInRole,
+    PageObjectFieldType,
+    registerPageObject,
+    registerSelector
+} from '../../../src/pageObjectRegistrator';
 
 @registerPageObject('PhpTravels')
 export class PhpTravels {

@@ -1,3 +1,3 @@
-import { register } from '../../../src/gherkinFunctions';
+import { register } from '../../../lib';
 
 register();

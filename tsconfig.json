@@ -3,20 +3,21 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "esnext",
-    "declaration": true,
     "outDir": "./dist",
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "sourceMap": true,
     "lib": [
       "es5",
       "es6",
       "es7",
       "dom"
     ],
-    "types": ["cypress", "node", "reflect-metadata"]
+    "types": ["cypress", "node", "reflect-metadata"],
+    "declaration": true,
+    "preserveConstEnums": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "sourceMap": true
   },
   "exclude": [
     "./node_modules"

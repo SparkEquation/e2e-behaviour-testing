@@ -1,4 +1,4 @@
-import { PageObjectSelector } from '../gherkinFunctions/types';
+import { PageObjectSelector } from '../../lib/types';
 import { PageObjectFieldType } from '../pageObjectRegistrator';
 
 export type CypressSavedElement = string;

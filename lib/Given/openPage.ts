@@ -1,6 +1,6 @@
 import { Given } from "cypress-cucumber-preprocessor/steps";
 import { PageObjectSelector } from '../types';
-import { PageObjectFieldType } from '../../pageObjectRegistrator';
+import { PageObjectFieldType } from '../../src/pageObjectRegistrator';
 
 
 export function register () {

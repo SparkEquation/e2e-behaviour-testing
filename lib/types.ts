@@ -4,7 +4,7 @@ import {
     IPageObjectMetadata,
     PageObjectFieldType,
     storage
-} from '../pageObjectRegistrator';
+} from '../src/pageObjectRegistrator';
 
 export class PageObjectSelector {
     public classInstance: IPageObjectMetadata;

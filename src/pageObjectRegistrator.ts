@@ -58,3 +58,10 @@ export function registerSelector(type: PageObjectFieldType | keyof typeof PageOb
         );
     };
 }
+
+export interface IRoleCredentials {
+    fieldName: string;
+    value: string;
+}
+
+export type LogInRole = Array<IRoleCredentials>;

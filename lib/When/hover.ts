@@ -1,9 +1,9 @@
 import { When } from 'cypress-cucumber-preprocessor/steps';
 import { PageObjectSelector } from '../types';
-import { CypressSavedElement, getElement } from '../../util/functions';
+import { CypressSavedElement, getElement } from '../../src/util/functions';
 
 export function register() {
-    When(`I type {string} into element {string}`, (text: string, selectorString: string) => {
+    When(`I hover element {string} without sub hovers`, (selectorString: string) => {
         const selector = new PageObjectSelector(selectorString);
         let element: CypressSavedElement = getElement(selector);
 
@@ -11,9 +11,6 @@ export function register() {
             return;
         }
 
-        cy.get(element)
-            .scrollIntoView()
-            .should('be.visible')
-            .type(`${text}{enter}`)
+        cy.get(element).first().trigger('mouseover')
     })
 }

@@ -96,10 +96,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/gherkinFunctions/Given/index.ts":
-/*!*********************************************!*\
-  !*** ./src/gherkinFunctions/Given/index.ts ***!
-  \*********************************************/
+/***/ "./lib/Given/index.ts":
+/*!****************************!*\
+  !*** ./lib/Given/index.ts ***!
+  \****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -113,8 +113,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const OpenPage = __importStar(__webpack_require__(/*! ./openPage */ "./src/gherkinFunctions/Given/openPage.ts"));
-const LoggedIn = __importStar(__webpack_require__(/*! ./loggedIn */ "./src/gherkinFunctions/Given/loggedIn.ts"));
+const OpenPage = __importStar(__webpack_require__(/*! ./openPage */ "./lib/Given/openPage.ts"));
+const LoggedIn = __importStar(__webpack_require__(/*! ./loggedIn */ "./lib/Given/loggedIn.ts"));
 function register() {
     OpenPage.register();
     LoggedIn.register();
@@ -124,10 +124,10 @@ exports.register = register;
 
 /***/ }),
 
-/***/ "./src/gherkinFunctions/Given/loggedIn.ts":
-/*!************************************************!*\
-  !*** ./src/gherkinFunctions/Given/loggedIn.ts ***!
-  \************************************************/
+/***/ "./lib/Given/loggedIn.ts":
+/*!*******************************!*\
+  !*** ./lib/Given/loggedIn.ts ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -135,9 +135,10 @@ exports.register = register;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+let seeString;
 function register() {
-    steps_1.Given(`I logged in at {string} as {string}`, (navigationSelectorString, roleSelectorString) => {
+    seeString = steps_1.Given(`I logged in at {string} as {string}`, (navigationSelectorString, roleSelectorString) => {
         const navigationSelector = new types_1.PageObjectSelector(navigationSelectorString);
         const roleSelector = new types_1.PageObjectSelector(roleSelectorString);
         const url = navigationSelector.getValue();
@@ -161,10 +162,10 @@ exports.register = register;
 
 /***/ }),
 
-/***/ "./src/gherkinFunctions/Given/openPage.ts":
-/*!************************************************!*\
-  !*** ./src/gherkinFunctions/Given/openPage.ts ***!
-  \************************************************/
+/***/ "./lib/Given/openPage.ts":
+/*!*******************************!*\
+  !*** ./lib/Given/openPage.ts ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -172,8 +173,8 @@ exports.register = register;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
-const pageObjectRegistrator_1 = __webpack_require__(/*! ../../pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+const pageObjectRegistrator_1 = __webpack_require__(/*! ../../src/pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
 function register() {
     steps_1.Given(`I open {string}`, (selectorString) => {
         const selector = new types_1.PageObjectSelector(selectorString);
@@ -194,10 +195,10 @@ exports.register = register;
 
 /***/ }),
 
-/***/ "./src/gherkinFunctions/Then/correctUrl.ts":
-/*!*************************************************!*\
-  !*** ./src/gherkinFunctions/Then/correctUrl.ts ***!
-  \*************************************************/
+/***/ "./lib/Then/correctUrl.ts":
+/*!********************************!*\
+  !*** ./lib/Then/correctUrl.ts ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -205,8 +206,8 @@ exports.register = register;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
-const functions_1 = __webpack_require__(/*! ../../util/functions */ "./src/util/functions.ts");
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+const functions_1 = __webpack_require__(/*! ../../src/util/functions */ "./src/util/functions.ts");
 function register() {
     steps_1.Then(`URL is {string}`, (selectorString) => {
         const selector = new types_1.PageObjectSelector(selectorString);
@@ -221,10 +222,10 @@ exports.register = register;
 
 /***/ }),
 
-/***/ "./src/gherkinFunctions/Then/index.ts":
-/*!********************************************!*\
-  !*** ./src/gherkinFunctions/Then/index.ts ***!
-  \********************************************/
+/***/ "./lib/Then/index.ts":
+/*!***************************!*\
+  !*** ./lib/Then/index.ts ***!
+  \***************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -238,8 +239,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SeeTitle = __importStar(__webpack_require__(/*! ./seeTitle */ "./src/gherkinFunctions/Then/seeTitle.ts"));
-const CorrectUrl = __importStar(__webpack_require__(/*! ./correctUrl */ "./src/gherkinFunctions/Then/correctUrl.ts"));
+const SeeTitle = __importStar(__webpack_require__(/*! ./seeTitle */ "./lib/Then/seeTitle.ts"));
+const CorrectUrl = __importStar(__webpack_require__(/*! ./correctUrl */ "./lib/Then/correctUrl.ts"));
 function register() {
     SeeTitle.register();
     CorrectUrl.register();
@@ -249,10 +250,10 @@ exports.register = register;
 
 /***/ }),
 
-/***/ "./src/gherkinFunctions/Then/seeTitle.ts":
-/*!***********************************************!*\
-  !*** ./src/gherkinFunctions/Then/seeTitle.ts ***!
-  \***********************************************/
+/***/ "./lib/Then/seeTitle.ts":
+/*!******************************!*\
+  !*** ./lib/Then/seeTitle.ts ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -270,10 +271,10 @@ exports.register = register;
 
 /***/ }),
 
-/***/ "./src/gherkinFunctions/When/click.ts":
-/*!********************************************!*\
-  !*** ./src/gherkinFunctions/When/click.ts ***!
-  \********************************************/
+/***/ "./lib/When/click.ts":
+/*!***************************!*\
+  !*** ./lib/When/click.ts ***!
+  \***************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -281,8 +282,8 @@ exports.register = register;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
-const functions_1 = __webpack_require__(/*! ../../util/functions */ "./src/util/functions.ts");
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+const functions_1 = __webpack_require__(/*! ../../src/util/functions */ "./src/util/functions.ts");
 function register() {
     steps_1.When(`I click {string}`, async (selectorString) => {
         const selector = new types_1.PageObjectSelector(selectorString);
@@ -298,10 +299,10 @@ exports.register = register;
 
 /***/ }),
 
-/***/ "./src/gherkinFunctions/When/hover.ts":
-/*!********************************************!*\
-  !*** ./src/gherkinFunctions/When/hover.ts ***!
-  \********************************************/
+/***/ "./lib/When/hover.ts":
+/*!***************************!*\
+  !*** ./lib/When/hover.ts ***!
+  \***************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -309,8 +310,8 @@ exports.register = register;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
-const functions_1 = __webpack_require__(/*! ../../util/functions */ "./src/util/functions.ts");
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+const functions_1 = __webpack_require__(/*! ../../src/util/functions */ "./src/util/functions.ts");
 function register() {
     steps_1.When(`I hover element {string} without sub hovers`, (selectorString) => {
         const selector = new types_1.PageObjectSelector(selectorString);
@@ -326,10 +327,10 @@ exports.register = register;
 
 /***/ }),
 
-/***/ "./src/gherkinFunctions/When/index.ts":
-/*!********************************************!*\
-  !*** ./src/gherkinFunctions/When/index.ts ***!
-  \********************************************/
+/***/ "./lib/When/index.ts":
+/*!***************************!*\
+  !*** ./lib/When/index.ts ***!
+  \***************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -343,11 +344,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Click = __importStar(__webpack_require__(/*! ./click */ "./src/gherkinFunctions/When/click.ts"));
-const See = __importStar(__webpack_require__(/*! ./see */ "./src/gherkinFunctions/When/see.ts"));
-const LogIn = __importStar(__webpack_require__(/*! ./logIn */ "./src/gherkinFunctions/When/logIn.ts"));
-const TypingIn = __importStar(__webpack_require__(/*! ./typingIn */ "./src/gherkinFunctions/When/typingIn.ts"));
-const Hover = __importStar(__webpack_require__(/*! ./hover */ "./src/gherkinFunctions/When/hover.ts"));
+const Click = __importStar(__webpack_require__(/*! ./click */ "./lib/When/click.ts"));
+const See = __importStar(__webpack_require__(/*! ./see */ "./lib/When/see.ts"));
+const LogIn = __importStar(__webpack_require__(/*! ./logIn */ "./lib/When/logIn.ts"));
+const TypingIn = __importStar(__webpack_require__(/*! ./typingIn */ "./lib/When/typingIn.ts"));
+const Hover = __importStar(__webpack_require__(/*! ./hover */ "./lib/When/hover.ts"));
 function register() {
     Click.register();
     See.register();
@@ -360,10 +361,10 @@ exports.register = register;
 
 /***/ }),
 
-/***/ "./src/gherkinFunctions/When/logIn.ts":
-/*!********************************************!*\
-  !*** ./src/gherkinFunctions/When/logIn.ts ***!
-  \********************************************/
+/***/ "./lib/When/logIn.ts":
+/*!***************************!*\
+  !*** ./lib/When/logIn.ts ***!
+  \***************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -371,8 +372,8 @@ exports.register = register;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
-const functions_1 = __webpack_require__(/*! ../../util/functions */ "./src/util/functions.ts");
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+const functions_1 = __webpack_require__(/*! ../../src/util/functions */ "./src/util/functions.ts");
 function register() {
     steps_1.When(`I log in at {string} as {string}`, async (selectorString, roleSelectorString) => {
         const elementSelector = new types_1.PageObjectSelector(selectorString);
@@ -393,10 +394,10 @@ exports.register = register;
 
 /***/ }),
 
-/***/ "./src/gherkinFunctions/When/see.ts":
-/*!******************************************!*\
-  !*** ./src/gherkinFunctions/When/see.ts ***!
-  \******************************************/
+/***/ "./lib/When/see.ts":
+/*!*************************!*\
+  !*** ./lib/When/see.ts ***!
+  \*************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -404,8 +405,8 @@ exports.register = register;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
-const functions_1 = __webpack_require__(/*! ../../util/functions */ "./src/util/functions.ts");
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+const functions_1 = __webpack_require__(/*! ../../src/util/functions */ "./src/util/functions.ts");
 function register() {
     steps_1.When(`I see element {string}`, (selectorString) => {
         const selector = new types_1.PageObjectSelector(selectorString);
@@ -423,10 +424,10 @@ exports.register = register;
 
 /***/ }),
 
-/***/ "./src/gherkinFunctions/When/typingIn.ts":
-/*!***********************************************!*\
-  !*** ./src/gherkinFunctions/When/typingIn.ts ***!
-  \***********************************************/
+/***/ "./lib/When/typingIn.ts":
+/*!******************************!*\
+  !*** ./lib/When/typingIn.ts ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -434,8 +435,8 @@ exports.register = register;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
-const functions_1 = __webpack_require__(/*! ../../util/functions */ "./src/util/functions.ts");
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+const functions_1 = __webpack_require__(/*! ../../src/util/functions */ "./src/util/functions.ts");
 function register() {
     steps_1.When(`I type {string} into element {string}`, (text, selectorString) => {
         const selector = new types_1.PageObjectSelector(selectorString);
@@ -454,10 +455,10 @@ exports.register = register;
 
 /***/ }),
 
-/***/ "./src/gherkinFunctions/index.ts":
-/*!***************************************!*\
-  !*** ./src/gherkinFunctions/index.ts ***!
-  \***************************************/
+/***/ "./lib/index.ts":
+/*!**********************!*\
+  !*** ./lib/index.ts ***!
+  \**********************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -472,10 +473,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(/*! reflect-metadata */ "reflect-metadata");
-const Types = __importStar(__webpack_require__(/*! ./types */ "./src/gherkinFunctions/types.ts"));
-const Then = __importStar(__webpack_require__(/*! ./Then */ "./src/gherkinFunctions/Then/index.ts"));
-const When = __importStar(__webpack_require__(/*! ./When */ "./src/gherkinFunctions/When/index.ts"));
-const Given = __importStar(__webpack_require__(/*! ./Given */ "./src/gherkinFunctions/Given/index.ts"));
+const Types = __importStar(__webpack_require__(/*! ./types */ "./lib/types.ts"));
+const Then = __importStar(__webpack_require__(/*! ./Then */ "./lib/Then/index.ts"));
+const When = __importStar(__webpack_require__(/*! ./When */ "./lib/When/index.ts"));
+const Given = __importStar(__webpack_require__(/*! ./Given */ "./lib/Given/index.ts"));
 function register() {
     Types.register();
     Given.register();
@@ -487,17 +488,17 @@ exports.register = register;
 
 /***/ }),
 
-/***/ "./src/gherkinFunctions/types.ts":
-/*!***************************************!*\
-  !*** ./src/gherkinFunctions/types.ts ***!
-  \***************************************/
+/***/ "./lib/types.ts":
+/*!**********************!*\
+  !*** ./lib/types.ts ***!
+  \**********************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const pageObjectRegistrator_1 = __webpack_require__(/*! ../pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
+const pageObjectRegistrator_1 = __webpack_require__(/*! ../src/pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
 class PageObjectSelector {
     constructor(pageObjectSelector) {
         const [className, fieldName] = pageObjectSelector.split('.');
@@ -554,8 +555,8 @@ var pageObjectRegistrator_1 = __webpack_require__(/*! ./pageObjectRegistrator */
 exports.registerSelector = pageObjectRegistrator_1.registerSelector;
 exports.registerPageObject = pageObjectRegistrator_1.registerPageObject;
 exports.PageObjectFieldType = pageObjectRegistrator_1.PageObjectFieldType;
-var gherkinFunctions_1 = __webpack_require__(/*! ./gherkinFunctions */ "./src/gherkinFunctions/index.ts");
-exports.register = gherkinFunctions_1.register;
+var lib_1 = __webpack_require__(/*! ../lib */ "./lib/index.ts");
+exports.register = lib_1.register;
 __export(__webpack_require__(/*! util */ "util"));
 
 
