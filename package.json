@@ -1,6 +1,6 @@
 {
   "name": "ui-testing-template-cypress",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "BDD UI testing framework with cypress and cucumber",
   "bin": {
     "page-objects-import": "./pageObjectImportsGenerator.js"
@@ -11,7 +11,7 @@
   "main": "dist/main.js",
   "types": "dist/src/index.d.ts",
   "files": [
-    "dist/",
+    "dist",
     "cypress",
     "preinstall",
     "cypress.json",
