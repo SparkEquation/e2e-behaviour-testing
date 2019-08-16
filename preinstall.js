@@ -45,7 +45,7 @@ function createGitignore() {
 function copyTsConfig() {
 	const filename = 'tsconfig.json';
 	copyIfNotExist(
-		path.resolve(localCypressPath, filename),
+		path.resolve('.', filename),
 		path.resolve(integratedCypressPath, filename)
 	)
 }
