@@ -2,7 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 const integratedRepoBasePath = path.resolve(__dirname, '..', '..');
-const cypressUIPath = path.resolve(integratedRepoBasePath, 'cypress', 'integration');
+const localCypressPath = path.resolve('.', 'cypress');
+const integratedCypressPath = path.resolve(integratedRepoBasePath, 'cypress');
+const cypressUIPath = path.resolve(integratedCypressPath, 'integration');
 const cypressPageObjectsPath = path.resolve(cypressUIPath, 'pageObjects');
 
 checkCypressIsInstalled();
@@ -15,8 +17,10 @@ createGitignore();
 
 copyPluginsFile();
 
+copyTsConfig();
 
-function setCypressConfigIfEmpty () {
+
+function setCypressConfigIfEmpty() {
 	const cypressConfigPath = path.resolve(integratedRepoBasePath, 'cypress.json');
 	let cypressConfig;
 
@@ -31,21 +35,30 @@ function setCypressConfigIfEmpty () {
 	}
 }
 
-function createGitignore () {
+function createGitignore() {
 	copyIfNotExist(
 		path.resolve('.', 'preinstall', 'example.gitignore'),
 		path.resolve(cypressPageObjectsPath, '.gitignore'),
 	);
 }
 
-function copyPluginsFile() {
+function copyTsConfig() {
+	const filename = 'tsconfig.json';
 	copyIfNotExist(
-		path.resolve('.', 'cypress', 'plugins', 'generated.js'),
-		path.resolve(cypressUIPath, '..', 'plugins')
+		path.resolve(localCypressPath, filename),
+		path.resolve(integratedCypressPath, filename)
+	)
+}
+
+function copyPluginsFile() {
+	const filename = 'generated.js';
+	copyIfNotExist(
+		path.resolve(localCypressPath, 'plugins', filename),
+		path.resolve(integratedCypressPath, 'plugins', filename)
 	);
 }
 
-function checkCypressIsInstalled () {
+function checkCypressIsInstalled() {
 	if (!fs.existsSync(cypressUIPath)) {
 		throw new Error('Install and run cypress first');
 	}
@@ -61,7 +74,11 @@ function copyIfNotExist(from, to) {
 	try {
 		fs.copyFileSync(from, to, fs.constants.COPYFILE_EXCL);
 	} catch (e) {
-		console.warn(e);
+		if (e.code !== 'EEXIST') {
+			console.warn(`UI-TESTING-CYPRESS: Warning:
+			Cannot copy file, details:
+			${e}`);
+		}
 	}
 }
 

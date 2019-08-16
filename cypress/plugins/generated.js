@@ -13,7 +13,7 @@
 // the project's config changing)
 
 const cucumber = require('cypress-cucumber-preprocessor').default;
-const browserify = require("@cypress/browserify-preprocessor");
+const browserify = require('@cypress/browserify-preprocessor');
 
 module.exports = (on) => {
   const options = browserify.defaultOptions;
