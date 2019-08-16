@@ -1,5 +1,6 @@
 // ***********************************************************
-// This example plugins/index.js can be used to load plugins
+// This file is provided by ui-testing-template-cypress
+// This example can be used to load plugins
 //
 // You can change the location of this file or turn off loading
 // the plugins file with the 'pluginsFile' configuration option.
@@ -16,7 +17,7 @@ const browserify = require("@cypress/browserify-preprocessor");
 
 module.exports = (on) => {
   const options = browserify.defaultOptions;
-  options.browserifyOptions.plugin.unshift(['tsify', { project: '../../tsconfig.json' }]);
+  options.browserifyOptions.plugin.unshift(['tsify', { project: '../tsconfig.json' }]);
 
   on('file:preprocessor', cucumber(options));
 };

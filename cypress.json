@@ -2,5 +2,6 @@
   "baseUrl": "https://www.google.com",
   "testFiles": "**/*.feature",
   "viewportWidth": 1600,
-  "viewportHeight": 900
+  "viewportHeight": 900,
+  "pluginsFile": "cypress/plugins/generated.js"
 }

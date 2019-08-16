@@ -1,16 +1,24 @@
 {
   "name": "ui-testing-template-cypress",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "BDD UI testing framework with cypress and cucumber",
   "bin": {
     "page-objects-import": "./pageObjectImportsGenerator.js"
   },
+  "engines": {
+    "node": ">=10"
+  },
+  "main": "dist/main.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "preinstall": "node preinstall.js",
     "pretest": "node pageObjectImportsGenerator.js",
+    "prepublishOnly": "npm run build",
     "test:run": "npm run pretest && cypress run",
-    "test:open": "npm run pretest && cypress open"
+    "test:open": "npm run pretest && cypress open",
+    "build": "webpack"
   },
+  "homepage": "https://github.com/SparkEquation/ui-testing-template-cypress#readme",
   "repository": {
     "type": "git",
     "url": "git+ssh:git@github.com:SparkEquation/ui-testing-template-cypress.git"
@@ -22,17 +30,24 @@
     "bdd"
   ],
   "dependencies": {
-    "cypress": "^3.4.1",
-    "cypress-cucumber-preprocessor": "^1.13.1",
     "reflect-metadata": "^0.1.13",
+    "cypress-cucumber-preprocessor": "^1.13.1",
     "@cypress/browserify-preprocessor": "^2.1.1",
-    "@types/cucumber": "^4.0.7",
-    "@types/node": "^12.7.1",
     "cucumber": "^5.1.0",
     "tsify": "^4.0.1",
     "typescript": "^3.5.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.6",
+    "webpack-node-externals": "^1.7.2",
+    "@types/cucumber": "^4.0.7",
+    "@types/node": "^12.7.1"
+  },
+  "peerDependencies": {
+    "cypress": "^3.4.1"
+  },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
   }

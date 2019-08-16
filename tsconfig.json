@@ -3,6 +3,8 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "esnext",
+    "declaration": true,
+    "outDir": "./dist",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -14,9 +16,9 @@
       "es7",
       "dom"
     ],
-    "types": ["cypress", "node"]
+    "types": ["cypress", "node", "reflect-metadata"]
   },
   "exclude": [
-    "node_modules"
+    "./node_modules"
   ]
 }
