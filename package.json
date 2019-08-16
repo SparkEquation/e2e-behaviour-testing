@@ -11,7 +11,13 @@
   "main": "dist/main.js",
   "types": "dist/src/index.d.ts",
   "files": [
-    "dist/"
+    "dist/",
+    "cypress",
+    "preinstall",
+    "cypress.json",
+    "pageObjectImportsGenerator.js",
+    "tsconfig.json",
+    "preinstall.js"
   ],
   "scripts": {
     "preinstall": "node preinstall.js",
