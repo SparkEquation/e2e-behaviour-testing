@@ -1,1 +1,703 @@
-!function(e){var t={};function r(n){if(t[n])return t[n].exports;var i=t[n]={i:n,l:!1,exports:{}};return e[n].call(i.exports,i,i.exports,r),i.l=!0,i.exports}r.m=e,r.c=t,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},r.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var i in e)r.d(n,i,function(t){return e[t]}.bind(null,i));return n},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="",r(r.s=4)}([function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=r(3);t.PageObjectSelector=class{constructor(e){const[t,r]=e.split(".");this.fieldName=r,this.className=t,this.classInstance=n.storage.get(t),this.fieldDescriptor=this.classInstance.getFieldDescriptor(this.fieldName)}getValue(){if(this.fieldDescriptor.invokable)return this.classInstance[this.fieldName]();if(this.fieldDescriptor.type===n.PageObjectFieldType.Action)throw new Error("Action cannot be non-invokable");return this.classInstance[this.fieldName]}toString(){return`${this.className}.${this.fieldName}`}},t.register=function(){}},function(e,t){e.exports=require("cypress-cucumber-preprocessor/steps")},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=r(3),i="getElement";t.getElement=function(e){let t="@"+i;switch(e.fieldDescriptor.type){case n.PageObjectFieldType.Contains:cy.contains(e.getValue()).as(i);break;case n.PageObjectFieldType.Selector:cy.get(e.getValue()).as(i);break;case n.PageObjectFieldType.Action:e.getValue(),t=null;break;default:throw new Error(`Incorrect field type: '${e.fieldDescriptor.type}' when trying to see element by selector '${e.toString()}' `)}return t},t.getNavigationUrl=function(e){let t;switch(e.fieldDescriptor.type){case n.PageObjectFieldType.Navigation:case n.PageObjectFieldType.Action:t=e.getValue();break;default:throw new Error(`Incorrect field type: '${e.fieldDescriptor.type}' when trying to get URL by selector '${e.toString()}' `)}return t}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.storage=new Map;const n="PageObjectFieldType",i="PageObjectFieldInvokable";!function(e){e.Selector="Selector",e.Contains="Contains",e.Xpath="Xpath",e.Navigation="Navigation",e.Action="Action",e.RoleCredentials="RoleCredentials"}(t.PageObjectFieldType||(t.PageObjectFieldType={})),t.registerPageObject=function(e){return r=>{const o=new class extends r{getFieldDescriptor(e){return{invokable:Reflect.getMetadata(i,this,e),type:Reflect.getMetadata(n,this,e)}}};if(cy.log(`Added ${e}`),t.storage.has(e))throw new Error(`Detected page object with duplicate name ${e}`);t.storage.set(e,o)}},t.registerSelector=function(e){return function(t,r,o){const c=void 0!==o;Reflect.defineMetadata(n,e,t,r),Reflect.defineMetadata(i,c,t,r)}}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=r(3);t.registerSelector=n.registerSelector,t.registerPageObject=n.registerPageObject,t.PageObjectFieldType=n.PageObjectFieldType;var i=r(5);t.register=i.register},function(e,t,r){"use strict";var n=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var r in e)Object.hasOwnProperty.call(e,r)&&(t[r]=e[r]);return t.default=e,t};Object.defineProperty(t,"__esModule",{value:!0}),r(6);const i=n(r(0)),o=n(r(7)),c=n(r(10)),s=n(r(16));t.register=function(){i.register(),s.register(),c.register(),o.register()}},function(e,t){e.exports=require("reflect-metadata")},function(e,t,r){"use strict";var n=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var r in e)Object.hasOwnProperty.call(e,r)&&(t[r]=e[r]);return t.default=e,t};Object.defineProperty(t,"__esModule",{value:!0});const i=n(r(8)),o=n(r(9));t.register=function(){i.register(),o.register()}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=r(1);t.register=function(){n.Then("I see title string {string}",e=>{cy.title().should("include",e)})}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=r(1),i=r(0),o=r(2);t.register=function(){n.Then("URL is {string}",e=>{const t=new i.PageObjectSelector(e),r=o.getNavigationUrl(t);r&&cy.url().should("include",`${Cypress.config().baseUrl}/${r}`)})}},function(e,t,r){"use strict";var n=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var r in e)Object.hasOwnProperty.call(e,r)&&(t[r]=e[r]);return t.default=e,t};Object.defineProperty(t,"__esModule",{value:!0});const i=n(r(11)),o=n(r(12)),c=n(r(13)),s=n(r(14)),l=n(r(15));t.register=function(){i.register(),o.register(),c.register(),s.register(),l.register()}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=r(1),i=r(0),o=r(2);t.register=function(){n.When("I click {string}",async e=>{const t=new i.PageObjectSelector(e);let r=o.getElement(t);null!==r&&cy.get(r).click()})}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=r(1),i=r(0),o=r(2);t.register=function(){n.When("I see element {string}",e=>{const t=new i.PageObjectSelector(e);let r=o.getElement(t);null!==r&&cy.get(r).scrollIntoView().should("be.visible")})}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=r(1),i=r(0),o=r(2);t.register=function(){n.When("I log in at {string} as {string}",async(e,t)=>{const r=new i.PageObjectSelector(e),n=new i.PageObjectSelector(t);let c=o.getElement(r);cy.get(c).within(()=>{cy.root().should("be.visible");const e=n.getValue();for(let t of e)cy.get(`input[name="${t.fieldName}"]`).type(t.value);cy.root().submit()})})}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=r(1),i=r(0),o=r(2);t.register=function(){n.When("I type {string} into element {string}",(e,t)=>{const r=new i.PageObjectSelector(t);let n=o.getElement(r);null!==n&&cy.get(n).scrollIntoView().should("be.visible").type(`${e}{enter}`)})}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=r(1),i=r(0),o=r(2);t.register=function(){n.When("I hover element {string} without sub hovers",e=>{const t=new i.PageObjectSelector(e);let r=o.getElement(t);null!==r&&cy.get(r).first().trigger("mouseover")})}},function(e,t,r){"use strict";var n=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var r in e)Object.hasOwnProperty.call(e,r)&&(t[r]=e[r]);return t.default=e,t};Object.defineProperty(t,"__esModule",{value:!0});const i=n(r(17)),o=n(r(18));t.register=function(){i.register(),o.register()}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=r(1),i=r(0),o=r(3);t.register=function(){n.Given("I open {string}",e=>{const t=new i.PageObjectSelector(e);switch(t.fieldDescriptor.type){case o.PageObjectFieldType.Navigation:cy.visit(t.getValue());break;case o.PageObjectFieldType.Action:t.getValue();break;default:throw new Error(`Incorrect page object selector '${t.toString()}' cannot be used to open page `)}})}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=r(1),i=r(0);t.register=function(){n.Given("I logged in at {string} as {string}",(e,t)=>{const r=new i.PageObjectSelector(e),n=new i.PageObjectSelector(t),o=r.getValue(),c={};for(let e of n.getValue())c[e.fieldName]=e.value;cy.request({method:"POST",url:o,form:!0,body:c,headers:{"X-Requested-With":"XMLHttpRequest"}})})}}]);
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["ui-testing-template"] = factory();
+	else
+		root["ui-testing-template"] = factory();
+})(global, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.ts");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/gherkinFunctions/Given/index.ts":
+/*!*********************************************!*\
+  !*** ./src/gherkinFunctions/Given/index.ts ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const OpenPage = __importStar(__webpack_require__(/*! ./openPage */ "./src/gherkinFunctions/Given/openPage.ts"));
+const LoggedIn = __importStar(__webpack_require__(/*! ./loggedIn */ "./src/gherkinFunctions/Given/loggedIn.ts"));
+function register() {
+    OpenPage.register();
+    LoggedIn.register();
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/gherkinFunctions/Given/loggedIn.ts":
+/*!************************************************!*\
+  !*** ./src/gherkinFunctions/Given/loggedIn.ts ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
+function register() {
+    steps_1.Given(`I logged in at {string} as {string}`, (navigationSelectorString, roleSelectorString) => {
+        const navigationSelector = new types_1.PageObjectSelector(navigationSelectorString);
+        const roleSelector = new types_1.PageObjectSelector(roleSelectorString);
+        const url = navigationSelector.getValue();
+        const requestBody = {};
+        for (let field of roleSelector.getValue()) {
+            requestBody[field.fieldName] = field.value;
+        }
+        cy.request({
+            method: 'POST',
+            url,
+            form: true,
+            body: requestBody,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+    });
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/gherkinFunctions/Given/openPage.ts":
+/*!************************************************!*\
+  !*** ./src/gherkinFunctions/Given/openPage.ts ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
+const pageObjectRegistrator_1 = __webpack_require__(/*! ../../pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
+function register() {
+    steps_1.Given(`I open {string}`, (selectorString) => {
+        const selector = new types_1.PageObjectSelector(selectorString);
+        switch (selector.fieldDescriptor.type) {
+            case pageObjectRegistrator_1.PageObjectFieldType.Navigation:
+                cy.visit(selector.getValue());
+                break;
+            case pageObjectRegistrator_1.PageObjectFieldType.Action:
+                selector.getValue();
+                break;
+            default:
+                throw new Error(`Incorrect page object selector '${selector.toString()}' cannot be used to open page `);
+        }
+    });
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/gherkinFunctions/Then/correctUrl.ts":
+/*!*************************************************!*\
+  !*** ./src/gherkinFunctions/Then/correctUrl.ts ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
+const functions_1 = __webpack_require__(/*! ../../util/functions */ "./src/util/functions.ts");
+function register() {
+    steps_1.Then(`URL is {string}`, (selectorString) => {
+        const selector = new types_1.PageObjectSelector(selectorString);
+        const url = functions_1.getNavigationUrl(selector);
+        if (url) {
+            cy.url().should('include', `${Cypress.config().baseUrl}/${url}`);
+        }
+    });
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/gherkinFunctions/Then/index.ts":
+/*!********************************************!*\
+  !*** ./src/gherkinFunctions/Then/index.ts ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SeeTitle = __importStar(__webpack_require__(/*! ./seeTitle */ "./src/gherkinFunctions/Then/seeTitle.ts"));
+const CorrectUrl = __importStar(__webpack_require__(/*! ./correctUrl */ "./src/gherkinFunctions/Then/correctUrl.ts"));
+function register() {
+    SeeTitle.register();
+    CorrectUrl.register();
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/gherkinFunctions/Then/seeTitle.ts":
+/*!***********************************************!*\
+  !*** ./src/gherkinFunctions/Then/seeTitle.ts ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+function register() {
+    steps_1.Then(`I see title string {string}`, (title) => {
+        cy.title().should("include", title);
+    });
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/gherkinFunctions/When/click.ts":
+/*!********************************************!*\
+  !*** ./src/gherkinFunctions/When/click.ts ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
+const functions_1 = __webpack_require__(/*! ../../util/functions */ "./src/util/functions.ts");
+function register() {
+    steps_1.When(`I click {string}`, async (selectorString) => {
+        const selector = new types_1.PageObjectSelector(selectorString);
+        let element = functions_1.getElement(selector);
+        if (element === null) {
+            return;
+        }
+        cy.get(element).click();
+    });
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/gherkinFunctions/When/hover.ts":
+/*!********************************************!*\
+  !*** ./src/gherkinFunctions/When/hover.ts ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
+const functions_1 = __webpack_require__(/*! ../../util/functions */ "./src/util/functions.ts");
+function register() {
+    steps_1.When(`I hover element {string} without sub hovers`, (selectorString) => {
+        const selector = new types_1.PageObjectSelector(selectorString);
+        let element = functions_1.getElement(selector);
+        if (element === null) {
+            return;
+        }
+        cy.get(element).first().trigger('mouseover');
+    });
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/gherkinFunctions/When/index.ts":
+/*!********************************************!*\
+  !*** ./src/gherkinFunctions/When/index.ts ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const Click = __importStar(__webpack_require__(/*! ./click */ "./src/gherkinFunctions/When/click.ts"));
+const See = __importStar(__webpack_require__(/*! ./see */ "./src/gherkinFunctions/When/see.ts"));
+const LogIn = __importStar(__webpack_require__(/*! ./logIn */ "./src/gherkinFunctions/When/logIn.ts"));
+const TypingIn = __importStar(__webpack_require__(/*! ./typingIn */ "./src/gherkinFunctions/When/typingIn.ts"));
+const Hover = __importStar(__webpack_require__(/*! ./hover */ "./src/gherkinFunctions/When/hover.ts"));
+function register() {
+    Click.register();
+    See.register();
+    LogIn.register();
+    TypingIn.register();
+    Hover.register();
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/gherkinFunctions/When/logIn.ts":
+/*!********************************************!*\
+  !*** ./src/gherkinFunctions/When/logIn.ts ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
+const functions_1 = __webpack_require__(/*! ../../util/functions */ "./src/util/functions.ts");
+function register() {
+    steps_1.When(`I log in at {string} as {string}`, async (selectorString, roleSelectorString) => {
+        const elementSelector = new types_1.PageObjectSelector(selectorString);
+        const roleSelector = new types_1.PageObjectSelector(roleSelectorString);
+        let element = functions_1.getElement(elementSelector);
+        cy.get(element).within(() => {
+            cy.root().should('be.visible');
+            const credentials = roleSelector.getValue();
+            for (let field of credentials) {
+                cy.get(`input[name="${field.fieldName}"]`).type(field.value);
+            }
+            cy.root().submit();
+        });
+    });
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/gherkinFunctions/When/see.ts":
+/*!******************************************!*\
+  !*** ./src/gherkinFunctions/When/see.ts ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
+const functions_1 = __webpack_require__(/*! ../../util/functions */ "./src/util/functions.ts");
+function register() {
+    steps_1.When(`I see element {string}`, (selectorString) => {
+        const selector = new types_1.PageObjectSelector(selectorString);
+        let element = functions_1.getElement(selector);
+        if (element === null) {
+            return;
+        }
+        cy.get(element)
+            .scrollIntoView()
+            .should('be.visible');
+    });
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/gherkinFunctions/When/typingIn.ts":
+/*!***********************************************!*\
+  !*** ./src/gherkinFunctions/When/typingIn.ts ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+const types_1 = __webpack_require__(/*! ../types */ "./src/gherkinFunctions/types.ts");
+const functions_1 = __webpack_require__(/*! ../../util/functions */ "./src/util/functions.ts");
+function register() {
+    steps_1.When(`I type {string} into element {string}`, (text, selectorString) => {
+        const selector = new types_1.PageObjectSelector(selectorString);
+        let element = functions_1.getElement(selector);
+        if (element === null) {
+            return;
+        }
+        cy.get(element)
+            .scrollIntoView()
+            .should('be.visible')
+            .type(`${text}{enter}`);
+    });
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/gherkinFunctions/index.ts":
+/*!***************************************!*\
+  !*** ./src/gherkinFunctions/index.ts ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(/*! reflect-metadata */ "reflect-metadata");
+const Types = __importStar(__webpack_require__(/*! ./types */ "./src/gherkinFunctions/types.ts"));
+const Then = __importStar(__webpack_require__(/*! ./Then */ "./src/gherkinFunctions/Then/index.ts"));
+const When = __importStar(__webpack_require__(/*! ./When */ "./src/gherkinFunctions/When/index.ts"));
+const Given = __importStar(__webpack_require__(/*! ./Given */ "./src/gherkinFunctions/Given/index.ts"));
+function register() {
+    Types.register();
+    Given.register();
+    When.register();
+    Then.register();
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/gherkinFunctions/types.ts":
+/*!***************************************!*\
+  !*** ./src/gherkinFunctions/types.ts ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const pageObjectRegistrator_1 = __webpack_require__(/*! ../pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
+class PageObjectSelector {
+    constructor(pageObjectSelector) {
+        const [className, fieldName] = pageObjectSelector.split('.');
+        this.fieldName = fieldName;
+        this.className = className;
+        this.classInstance = pageObjectRegistrator_1.storage.get(className);
+        this.fieldDescriptor = this.classInstance.getFieldDescriptor(this.fieldName);
+    }
+    getValue() {
+        if (this.fieldDescriptor.invokable) {
+            return this.classInstance[this.fieldName]();
+        }
+        else {
+            if (this.fieldDescriptor.type === pageObjectRegistrator_1.PageObjectFieldType.Action) {
+                throw new Error('Action cannot be non-invokable');
+            }
+            return this.classInstance[this.fieldName];
+        }
+    }
+    toString() {
+        return `${this.className}.${this.fieldName}`;
+    }
+}
+exports.PageObjectSelector = PageObjectSelector;
+function register() {
+    // TODO uncomment it as soon as https://github.com/cucumber/cucumber-js/issues/1221 is resolved
+    /*defineParameterType({
+        name: 'pageObjectSelector',
+        preferForRegexpMatch: true,
+        useForSnippets: true,
+        regexp: /.*!/,
+        transformer: selector => new PageObjectSelector(selector)
+    });*/
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/index.ts":
+/*!**********************!*\
+  !*** ./src/index.ts ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+var pageObjectRegistrator_1 = __webpack_require__(/*! ./pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
+exports.registerSelector = pageObjectRegistrator_1.registerSelector;
+exports.registerPageObject = pageObjectRegistrator_1.registerPageObject;
+exports.PageObjectFieldType = pageObjectRegistrator_1.PageObjectFieldType;
+var gherkinFunctions_1 = __webpack_require__(/*! ./gherkinFunctions */ "./src/gherkinFunctions/index.ts");
+exports.register = gherkinFunctions_1.register;
+__export(__webpack_require__(/*! util */ "util"));
+
+
+/***/ }),
+
+/***/ "./src/pageObjectRegistrator.ts":
+/*!**************************************!*\
+  !*** ./src/pageObjectRegistrator.ts ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.storage = new Map();
+const metadataTypeKey = 'PageObjectFieldType';
+const metadataInvokableKey = 'PageObjectFieldInvokable';
+// Keys should be the same as values to allow following typecheck: keyof typeof PageObjectFieldType
+var PageObjectFieldType;
+(function (PageObjectFieldType) {
+    PageObjectFieldType["Selector"] = "Selector";
+    PageObjectFieldType["Contains"] = "Contains";
+    // TODO implement
+    PageObjectFieldType["Xpath"] = "Xpath";
+    PageObjectFieldType["Navigation"] = "Navigation";
+    // Cypress chainable
+    PageObjectFieldType["Action"] = "Action";
+    PageObjectFieldType["RoleCredentials"] = "RoleCredentials";
+})(PageObjectFieldType = exports.PageObjectFieldType || (exports.PageObjectFieldType = {}));
+function registerPageObject(name) {
+    // TODO replace any with valid type
+    return (constructor) => {
+        const classInstance = new class C extends constructor {
+            getFieldDescriptor(key) {
+                return {
+                    invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
+                    type: Reflect.getMetadata(metadataTypeKey, this, key)
+                };
+            }
+        };
+        cy.log(`Added ${name}`);
+        if (exports.storage.has(name)) {
+            throw new Error(`Detected page object with duplicate name ${name}`);
+        }
+        exports.storage.set(name, classInstance);
+    };
+}
+exports.registerPageObject = registerPageObject;
+function registerSelector(type) {
+    return function (target, key, descriptor) {
+        const invokable = descriptor !== undefined;
+        Reflect.defineMetadata(metadataTypeKey, type, target, key);
+        Reflect.defineMetadata(metadataInvokableKey, invokable, target, key);
+    };
+}
+exports.registerSelector = registerSelector;
+
+
+/***/ }),
+
+/***/ "./src/util/functions.ts":
+/*!*******************************!*\
+  !*** ./src/util/functions.ts ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const pageObjectRegistrator_1 = __webpack_require__(/*! ../pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
+const getElementAlias = 'getElement';
+function getElement(selector) {
+    let element = '@' + getElementAlias;
+    switch (selector.fieldDescriptor.type) {
+        case pageObjectRegistrator_1.PageObjectFieldType.Contains:
+            cy.contains(selector.getValue()).as(getElementAlias);
+            break;
+        case pageObjectRegistrator_1.PageObjectFieldType.Selector:
+            cy.get(selector.getValue()).as(getElementAlias);
+            break;
+        case pageObjectRegistrator_1.PageObjectFieldType.Action:
+            selector.getValue();
+            element = null;
+            break;
+        default:
+            throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to see element by selector '${selector.toString()}' `);
+    }
+    return element;
+}
+exports.getElement = getElement;
+function getNavigationUrl(selector) {
+    let url;
+    switch (selector.fieldDescriptor.type) {
+        case pageObjectRegistrator_1.PageObjectFieldType.Navigation:
+        case pageObjectRegistrator_1.PageObjectFieldType.Action:
+            url = selector.getValue();
+            break;
+        default:
+            throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to get URL by selector '${selector.toString()}' `);
+    }
+    return url;
+}
+exports.getNavigationUrl = getNavigationUrl;
+
+
+/***/ }),
+
+/***/ "cypress-cucumber-preprocessor/steps":
+/*!******************************************************!*\
+  !*** external "cypress-cucumber-preprocessor/steps" ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("cypress-cucumber-preprocessor/steps");
+
+/***/ }),
+
+/***/ "reflect-metadata":
+/*!***********************************!*\
+  !*** external "reflect-metadata" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("reflect-metadata");
+
+/***/ }),
+
+/***/ "util":
+/*!***********************!*\
+  !*** external "util" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("util");
+
+/***/ })
+
+/******/ });
+});
+//# sourceMappingURL=main.js.map
