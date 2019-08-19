@@ -141,6 +141,7 @@ function register() {
     steps_1.Given(`I logged in at {string} as {string}`, (navigationSelectorString, roleSelectorString) => {
         const navigationSelector = new types_1.PageObjectSelector(navigationSelectorString);
         const roleSelector = new types_1.PageObjectSelector(roleSelectorString);
+        cy.visit('/');
         const url = navigationSelector.getValue();
         const requestBody = {};
         for (let field of roleSelector.getValue()) {

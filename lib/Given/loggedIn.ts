@@ -9,6 +9,8 @@ export function register () {
         const navigationSelector = new PageObjectSelector(navigationSelectorString);
         const roleSelector = new PageObjectSelector(roleSelectorString);
 
+        cy.visit('/');
+
         const url = navigationSelector.getValue();
         const requestBody = {};
         for (let field of roleSelector.getValue() as LogInRole) {
