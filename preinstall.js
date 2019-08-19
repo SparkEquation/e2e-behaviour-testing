@@ -1,6 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
+// TODO deal with preinstall script being run on local install
+const isDependency = path.basename(path.resolve(__dirname, '..')) === 'node_modules';
+if (!isDependency) {
+	process.exit(0);
+}
+
 const integratedRepoBasePath = path.resolve(__dirname, '..', '..');
 const localCypressPath = path.resolve('.', 'cypress');
 const integratedCypressPath = path.resolve(integratedRepoBasePath, 'cypress');

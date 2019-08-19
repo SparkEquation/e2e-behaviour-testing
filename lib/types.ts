@@ -1,10 +1,12 @@
-import { defineParameterType } from 'cucumber';
 import {
     IPageObjectFieldDescription,
     IPageObjectMetadata,
     PageObjectFieldType,
     storage
 } from '../src/pageObjectRegistrator';
+import { Transform } from 'cucumber';
+
+declare const defineParameterType: (transform: Transform) => void;
 
 export class PageObjectSelector {
     public classInstance: IPageObjectMetadata;
@@ -37,14 +39,10 @@ export class PageObjectSelector {
 }
 
 export function register() {
-    // TODO uncomment it as soon as https://github.com/cucumber/cucumber-js/issues/1221 is resolved
-
-    /*defineParameterType({
+    defineParameterType({
         name: 'pageObjectSelector',
-        preferForRegexpMatch: true,
-        useForSnippets: true,
-        regexp: /.*!/,
+        regexp: /[a-zA-Z]+\.[a-zA-Z]+/,
         transformer: selector => new PageObjectSelector(selector)
-    });*/
+    });
 }
 

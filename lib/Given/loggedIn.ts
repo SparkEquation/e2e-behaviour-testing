@@ -1,11 +1,11 @@
 import { Given } from "cypress-cucumber-preprocessor/steps";
 import { PageObjectSelector } from '../types';
-import { LogInRole } from '../../src/pageObjectRegistrator';
+import { LogInRole } from '../../src';
 
 let seeString;
 
 export function register () {
-    seeString =  Given(`I logged in at {string} as {string}`, (navigationSelectorString: string, roleSelectorString: string) => {
+    Given(`I logged in at {string} as {string}`, (navigationSelectorString: string, roleSelectorString: string) => {
         const navigationSelector = new PageObjectSelector(navigationSelectorString);
         const roleSelector = new PageObjectSelector(roleSelectorString);
 
@@ -23,6 +23,9 @@ export function register () {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }
+        }).then(response => {
+            expect(response.status).to.eq(200);
+            expect(response).to.have.property('headers');
         });
     });
 }

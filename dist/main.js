@@ -138,7 +138,7 @@ const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "
 const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
 let seeString;
 function register() {
-    seeString = steps_1.Given(`I logged in at {string} as {string}`, (navigationSelectorString, roleSelectorString) => {
+    steps_1.Given(`I logged in at {string} as {string}`, (navigationSelectorString, roleSelectorString) => {
         const navigationSelector = new types_1.PageObjectSelector(navigationSelectorString);
         const roleSelector = new types_1.PageObjectSelector(roleSelectorString);
         const url = navigationSelector.getValue();
@@ -154,6 +154,9 @@ function register() {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }
+        }).then(response => {
+            expect(response.status).to.eq(200);
+            expect(response).to.have.property('headers');
         });
     });
 }
@@ -524,14 +527,11 @@ class PageObjectSelector {
 }
 exports.PageObjectSelector = PageObjectSelector;
 function register() {
-    // TODO uncomment it as soon as https://github.com/cucumber/cucumber-js/issues/1221 is resolved
-    /*defineParameterType({
+    defineParameterType({
         name: 'pageObjectSelector',
-        preferForRegexpMatch: true,
-        useForSnippets: true,
-        regexp: /.*!/,
+        regexp: /[a-zA-Z]+\.[a-zA-Z]+/,
         transformer: selector => new PageObjectSelector(selector)
-    });*/
+    });
 }
 exports.register = register;
 
