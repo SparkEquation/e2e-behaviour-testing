@@ -289,16 +289,22 @@ const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "
 const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
 const functions_1 = __webpack_require__(/*! ../../src/util/functions */ "./src/util/functions.ts");
 function register() {
-    const clickElement = async (force, selectorString) => {
+    const clickElement = async (options, selectorString) => {
         const selector = new types_1.PageObjectSelector(selectorString);
         let element = functions_1.getElement(selector);
         if (element === null) {
             return;
         }
-        cy.get(element).click({ force });
+        if (options.first) {
+            cy.get(element).first().click({ force: options.force });
+        }
+        else {
+            cy.get(element).click({ force: options.force });
+        }
     };
-    steps_1.When(`I click {string}`, clickElement.bind(null, false));
-    steps_1.When(`I force click {string}`, clickElement.bind(null, true));
+    steps_1.When(`I click {string}`, clickElement.bind(null, { force: false, first: false }));
+    steps_1.When(`I force click {string}`, clickElement.bind(null, { force: true, first: false }));
+    steps_1.When(`I click first {string}`, clickElement.bind(null, { force: false, first: true }));
 }
 exports.register = register;
 
