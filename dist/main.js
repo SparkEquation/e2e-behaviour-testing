@@ -289,14 +289,16 @@ const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "
 const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
 const functions_1 = __webpack_require__(/*! ../../src/util/functions */ "./src/util/functions.ts");
 function register() {
-    steps_1.When(`I click {string}`, async (selectorString) => {
+    const clickElement = async (force, selectorString) => {
         const selector = new types_1.PageObjectSelector(selectorString);
         let element = functions_1.getElement(selector);
         if (element === null) {
             return;
         }
-        cy.get(element).click();
-    });
+        cy.get(element).click({ force });
+    };
+    steps_1.When(`I click {string}`, clickElement.bind(null, false));
+    steps_1.When(`I force click {string}`, clickElement.bind(null, true));
 }
 exports.register = register;
 
@@ -412,7 +414,7 @@ const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "
 const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
 const functions_1 = __webpack_require__(/*! ../../src/util/functions */ "./src/util/functions.ts");
 function register() {
-    steps_1.When(`I see element {string}`, (selectorString) => {
+    steps_1.When(`I see (element ){string}`, (selectorString) => {
         const selector = new types_1.PageObjectSelector(selectorString);
         let element = functions_1.getElement(selector);
         if (element === null) {

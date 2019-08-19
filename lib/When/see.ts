@@ -3,7 +3,7 @@ import { PageObjectSelector } from '../types';
 import { CypressSavedElement, getElement } from '../../src/util/functions';
 
 export function register() {
-    When(`I see element {string}`, (selectorString: string) => {
+    When(`I see (element ){string}`, (selectorString: string) => {
         const selector = new PageObjectSelector(selectorString);
         let element: CypressSavedElement = getElement(selector);
 

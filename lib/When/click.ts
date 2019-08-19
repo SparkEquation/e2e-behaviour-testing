@@ -3,7 +3,7 @@ import { PageObjectSelector } from '../types';
 import { CypressSavedElement, getElement } from '../../src/util/functions';
 
 export function register() {
-    When(`I click {string}`, async (selectorString: string) => {
+    const clickElement = async (force: boolean, selectorString: string) => {
         const selector = new PageObjectSelector(selectorString);
         let element: CypressSavedElement = getElement(selector);
 
@@ -11,6 +11,10 @@ export function register() {
             return;
         }
 
-        cy.get(element).click();
-    });
+        cy.get(element).click({ force });
+    };
+
+    When(`I click {string}`, clickElement.bind(null, false));
+
+    When(`I force click {string}`, clickElement.bind(null, true));
 }
