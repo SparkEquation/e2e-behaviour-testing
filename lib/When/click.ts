@@ -1,14 +1,11 @@
-import { When } from "cypress-cucumber-preprocessor/steps";
-import { PageObjectSelector } from '../types';
-import { CypressSavedElement, getElement } from '../../src/util/functions';
-
-interface IClickOptions {
-    force: boolean;
-    first: boolean;
-}
+import { When } from 'cypress-cucumber-preprocessor/steps';
+import { ClickOptions, PageObjectSelector } from '../types';
+import { CypressSavedElement, extractCommonGetOptions, getElement } from '../../src/util';
+import { TableDefinition } from 'cucumber';
 
 export function register() {
-    const clickElement = async (options: IClickOptions, selectorString: string) => {
+    When(`I click {string}`, async (selectorString: string, table: TableDefinition) => {
+        const options = table ? new ClickOptions(table.rowsHash()) : new ClickOptions({});
         const selector = new PageObjectSelector(selectorString);
         let element: CypressSavedElement = getElement(selector);
 
@@ -16,16 +13,12 @@ export function register() {
             return;
         }
 
+        const getOptions = extractCommonGetOptions(options);
+
         if (options.first) {
-            cy.get(element).first().click({ force: options.force })
+            cy.get(element, getOptions).first().click({ force: options.force })
         } else {
-            cy.get(element).click({ force: options.force });
+            cy.get(element, getOptions).click({ force: options.force });
         }
-    };
-
-    When(`I click {string}`, clickElement.bind(null, {force: false, first: false}));
-
-    When(`I force click {string}`, clickElement.bind(null, {force: true, first: false}));
-
-    When(`I click first {string}`, clickElement.bind(null, {force: false, first: true}));
+    });
 }

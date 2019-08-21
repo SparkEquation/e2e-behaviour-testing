@@ -32,7 +32,7 @@ function getFiles (pageObjectsPath, nestedPath = '.') {
         .flat(MAX_DEPTH);
 }
 
-const pageObjectDirPath = path.resolve('cypress', 'integration', 'pageObjects');
+const pageObjectDirPath = path.resolve('integration', 'pageObjects');
 
 const files = getFiles(pageObjectDirPath)
     .filter(

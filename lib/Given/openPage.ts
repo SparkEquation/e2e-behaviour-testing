@@ -1,6 +1,6 @@
-import { Given } from "cypress-cucumber-preprocessor/steps";
+import { Given } from 'cypress-cucumber-preprocessor/steps';
 import { PageObjectSelector } from '../types';
-import { PageObjectFieldType } from '../../src/pageObjectRegistrator';
+import { PageObjectFieldType } from '../../src';
 
 
 export function register () {
@@ -11,9 +11,11 @@ export function register () {
             case PageObjectFieldType.Navigation:
                 cy.visit(selector.getValue());
                 break;
+            /*
             case PageObjectFieldType.Action:
                 selector.getValue();
                 break;
+            */
             default:
                 throw new Error(`Incorrect page object selector '${selector.toString()}' cannot be used to open page `)
         }

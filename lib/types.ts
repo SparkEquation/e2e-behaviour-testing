@@ -1,9 +1,4 @@
-import {
-    IPageObjectFieldDescription,
-    IPageObjectMetadata,
-    PageObjectFieldType,
-    storage
-} from '../src/pageObjectRegistrator';
+import { IPageObjectFieldDescription, IPageObjectMetadata, storage } from '../src/pageObjectRegistrator';
 import { Transform } from 'cucumber';
 
 declare const defineParameterType: (transform: Transform) => void;
@@ -26,15 +21,44 @@ export class PageObjectSelector {
         if (this.fieldDescriptor.invokable) {
             return this.classInstance[this.fieldName]();
         } else {
-            if (this.fieldDescriptor.type === PageObjectFieldType.Action) {
-                throw new Error('Action cannot be non-invokable')
-            }
             return this.classInstance[this.fieldName];
         }
     }
 
     public toString(): string {
         return `${this.className}.${this.fieldName}`;
+    }
+}
+
+export type DataTableRowsHash = { [key: string]: string };
+
+export abstract class ElementGetOptions {
+    public wait: number = null;
+
+    protected constructor(props: DataTableRowsHash) {
+        this.wait = Number(props.wait) || this.wait;
+    }
+}
+
+export type GetOptions = Partial<Cypress.Timeoutable>;
+
+export class ClickOptions extends ElementGetOptions{
+    public first: boolean = false;
+    public force: boolean = false;
+
+    constructor(props: DataTableRowsHash) {
+        super(props);
+        this.first = Boolean(props.first) || this.first;
+        this.force = Boolean(props.force) || this.force;
+    }
+}
+
+export class SeeOptions extends ElementGetOptions {
+    public amount: number = null;
+
+    constructor(props: DataTableRowsHash) {
+        super(props);
+        this.amount = Number(props.amount) || this.amount;
     }
 }
 

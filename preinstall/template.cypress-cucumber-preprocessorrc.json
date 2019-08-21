@@ -1,0 +1,8 @@
+{
+  "nonGlobalStepDefinitions": true,
+  "cucumberJson": {
+    "generate": true,
+    "outputFolder": "cypress/cucumber-json",
+    "fileSuffix": ""
+  }
+}

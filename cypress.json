@@ -1,7 +1,8 @@
 {
-  "baseUrl": "https://www.google.com",
   "testFiles": "**/*.feature",
+  "integrationFolder": "integration/features",
+  "pluginsFile": "integration/plugins/generated.js",
+  "baseUrl": "",
   "viewportWidth": 1600,
-  "viewportHeight": 900,
-  "pluginsFile": "cypress/plugins/generated.js"
+  "viewportHeight": 900
 }

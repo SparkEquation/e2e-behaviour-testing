@@ -1,34 +1,7 @@
 {
   "name": "ui-testing-template-cypress",
-  "version": "1.1.10",
+  "version": "1.2.0",
   "description": "BDD UI testing framework with cypress and cucumber",
-  "bin": {
-    "page-objects-import": "./pageObjectImportsGenerator.js"
-  },
-  "engines": {
-    "node": ">=12"
-  },
-  "main": "dist/main.js",
-  "types": "dist/src/index.d.ts",
-  "files": [
-    "lib",
-    "dist",
-    "cypress",
-    "preinstall",
-    "cypress.json",
-    "pageObjectImportsGenerator.js",
-    "tsconfig.json",
-    "preinstall.js"
-  ],
-  "scripts": {
-    "preinstall": "node preinstall.js",
-    "pretest": "node pageObjectImportsGenerator.js",
-    "prepublishOnly": "npm run build",
-    "test:run": "npm run pretest && cypress run",
-    "test:open": "npm run pretest && cypress open",
-    "build": "webpack",
-    "postbuild": "git add dist"
-  },
   "homepage": "https://github.com/SparkEquation/ui-testing-template-cypress#readme",
   "repository": {
     "type": "git",
@@ -37,9 +10,41 @@
   "keywords": [
     "cypress",
     "cucumber",
-    "testing",
+    "e2e",
     "bdd"
   ],
+  "engines": {
+    "node": ">=10.10"
+  },
+  "bin": {
+    "page-objects-import": "scripts/pageObjectImportsGenerator.js",
+    "parse-json-results": "scripts/jsonResultsParser.js"
+  },
+  "main": "dist/main.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "lib",
+    "dist",
+    "integration",
+    "preinstall",
+    "cypress.json",
+    "scripts",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "preinstall": "node scripts/preinstall.js",
+    "pretest": "node scripts/pageObjectImportsGenerator.js",
+    "prepublishOnly": "npm run build",
+    "test:run": "npm run pretest && cypress run",
+    "test:open": "npm run pretest && cypress open",
+    "build": "webpack",
+    "postbuild": "git add dist"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run build && npm --no-git-tag-version version patch && git add package*.json"
+    }
+  },
   "dependencies": {
     "reflect-metadata": "^0.1.13",
     "cypress-cucumber-preprocessor": "^1.13.1",
@@ -49,11 +54,12 @@
     "typescript": "^3.5.3"
   },
   "devDependencies": {
-    "cypress": "^3.4.1",
     "@types/cucumber": "^4.0.7",
     "@types/node": "^12.7.1",
     "awesome-typescript-loader": "^5.2.1",
+    "cypress": "^3.4.1",
     "husky": "^3.0.4",
+    "mocha": "^6.2.0",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6",
     "webpack-node-externals": "^1.7.2"
@@ -61,12 +67,13 @@
   "peerDependencies": {
     "cypress": "^3.4.1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run build && npm --no-git-tag-version version patch && git add package*.json"
-    }
-  },
   "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
+    "nonGlobalStepDefinitions": true,
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "cypress/cucumber-json",
+      "filePrefix": "",
+      "fileSuffix": ".cucumber"
+    }
   }
 }

@@ -9,9 +9,7 @@ export interface IPageObjectMetadata {
 export declare enum PageObjectFieldType {
     Selector = "Selector",
     Contains = "Contains",
-    Xpath = "Xpath",
     Navigation = "Navigation",
-    Action = "Action",
     RoleCredentials = "RoleCredentials"
 }
 export declare function registerPageObject<T extends {

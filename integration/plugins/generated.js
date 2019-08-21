@@ -11,13 +11,14 @@
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
-
+const path = require('path');
 const cucumber = require('cypress-cucumber-preprocessor').default;
 const browserify = require('@cypress/browserify-preprocessor');
 
 module.exports = (on) => {
   const options = browserify.defaultOptions;
-  options.browserifyOptions.plugin.unshift(['tsify', { project: '../tsconfig.json' }]);
+  const tsConfigPath = path.resolve('cypress', 'tsconfig.json');
+  options.browserifyOptions.plugin.unshift(['tsify', { project: tsConfigPath }]);
 
   on('file:preprocessor', cucumber(options));
 };

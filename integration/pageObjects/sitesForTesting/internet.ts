@@ -1,4 +1,4 @@
-import { registerPageObject, registerSelector } from '../../../src/pageObjectRegistrator';
+import { registerPageObject, registerSelector } from '../../../src';
 
 @registerPageObject('Internet')
 export class Internet {

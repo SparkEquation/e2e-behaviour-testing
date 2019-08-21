@@ -17,11 +17,7 @@ const metadataInvokableKey: string = 'PageObjectFieldInvokable';
 export enum PageObjectFieldType {
     Selector = 'Selector',
     Contains = 'Contains',
-    // TODO implement
-    Xpath = 'Xpath',
     Navigation = 'Navigation',
-    // Cypress chainable
-    Action = 'Action',
     RoleCredentials = 'RoleCredentials'
 }
 
@@ -36,7 +32,6 @@ export function registerPageObject<T extends {new(...args:any[]):{}}>(name: stri
                 }
             }
         };
-
         cy.log(`Added ${name}`);
 
         if (storage.has(name)) {

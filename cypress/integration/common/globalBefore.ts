@@ -1,3 +1,0 @@
-before(() => {
-  import('../pageObjects/index');
-});
