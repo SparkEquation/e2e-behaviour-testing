@@ -136,13 +136,12 @@ exports.register = register;
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
 const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-let seeString;
+const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
 function register() {
-    steps_1.Given(`I logged in at {string} as {string}`, (navigationSelectorString, roleSelectorString) => {
-        const navigationSelector = new types_1.PageObjectSelector(navigationSelectorString);
+    const loggedInAsFunction = (apiSelectorString, roleSelectorString, redirectSelectorString) => {
+        const navigationSelector = new types_1.PageObjectSelector(apiSelectorString);
         const roleSelector = new types_1.PageObjectSelector(roleSelectorString);
-        cy.visit('/');
-        const url = navigationSelector.getValue();
+        const url = functions_1.getNavigationUrl(navigationSelector);
         const requestBody = {};
         for (let field of roleSelector.getValue()) {
             requestBody[field.fieldName] = field.value;
@@ -159,7 +158,13 @@ function register() {
             expect(response.status).to.eq(200);
             expect(response).to.have.property('headers');
         });
-    });
+        if (redirectSelectorString) {
+            const redirectSelector = new types_1.PageObjectSelector(redirectSelectorString);
+            cy.visit(functions_1.getNavigationUrl(redirectSelector));
+        }
+    };
+    steps_1.Given(`I logged in at {string} as {string}`, loggedInAsFunction);
+    steps_1.Given(`I logged in at {string} as {string} and visit {string}`, loggedInAsFunction);
 }
 exports.register = register;
 
@@ -178,22 +183,11 @@ exports.register = register;
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
 const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const pageObjectRegistrator_1 = __webpack_require__(/*! ../../src/pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
+const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
 function register() {
     steps_1.Given(`I open {string}`, (selectorString) => {
         const selector = new types_1.PageObjectSelector(selectorString);
-        switch (selector.fieldDescriptor.type) {
-            case pageObjectRegistrator_1.PageObjectFieldType.Navigation:
-                cy.visit(selector.getValue());
-                break;
-            /*
-            case PageObjectFieldType.Action:
-                selector.getValue();
-                break;
-            */
-            default:
-                throw new Error(`Incorrect page object selector '${selector.toString()}' cannot be used to open page `);
-        }
+        cy.visit(functions_1.getNavigationUrl(selector));
     });
 }
 exports.register = register;
@@ -213,11 +207,11 @@ exports.register = register;
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
 const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const util_1 = __webpack_require__(/*! ../../src/util */ "./src/util/index.ts");
+const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
 function register() {
     steps_1.Then(`URL is {string}`, (selectorString) => {
         const selector = new types_1.PageObjectSelector(selectorString);
-        const url = util_1.getNavigationUrl(selector);
+        const url = functions_1.getNavigationUrl(selector);
         if (url) {
             cy.url().should('include', `${Cypress.config().baseUrl}/${url}`);
         }
@@ -268,7 +262,7 @@ exports.register = register;
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
 function register() {
-    steps_1.Then(`I see title string {string}`, (title) => {
+    steps_1.Then(`I see {string} in title`, (title) => {
         cy.title().should("include", title);
     });
 }
@@ -289,21 +283,52 @@ exports.register = register;
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
 const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const functions_1 = __webpack_require__(/*! ../../src/util/functions */ "./src/util/functions.ts");
+const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
 function register() {
     steps_1.When(`I click {string}`, async (selectorString, table) => {
         const options = table ? new types_1.ClickOptions(table.rowsHash()) : new types_1.ClickOptions({});
         const selector = new types_1.PageObjectSelector(selectorString);
         let element = functions_1.getElement(selector);
-        if (element === null) {
-            return;
-        }
         const getOptions = functions_1.extractCommonGetOptions(options);
         if (options.first) {
             cy.get(element, getOptions).first().click({ force: options.force });
         }
         else {
             cy.get(element, getOptions).click({ force: options.force });
+        }
+    });
+    steps_1.When(`I click blank link {string}`, (selectorString, table) => {
+        const selector = new types_1.PageObjectSelector(selectorString);
+        const options = table ? new types_1.BlankLinkClickOptions(table.rowsHash()) : new types_1.BlankLinkClickOptions({});
+        let element = functions_1.getElement(selector);
+        const getOptions = functions_1.extractCommonGetOptions(options);
+        const callback = el => {
+            if (el.attr('target') === '_blank' && el.attr('href') && !options.customClick) {
+                const url = el.attr('href');
+                if (!options.force) {
+                    cy.root().should('be.visible');
+                }
+                cy.visit(url);
+            }
+            else {
+                let href;
+                let stub;
+                cy.window().then(win => {
+                    stub = cy.stub(win, 'open').callsFake(passedHref => {
+                        href = passedHref;
+                    });
+                });
+                cy.root().click({ force: options.force }).then(() => {
+                    expect(stub).to.be.called;
+                    cy.visit(href);
+                });
+            }
+        };
+        if (options.first) {
+            cy.get(element, getOptions).first().within(callback);
+        }
+        else {
+            cy.get(element, getOptions).within(callback);
         }
     });
 }
@@ -324,7 +349,7 @@ exports.register = register;
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
 const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const functions_1 = __webpack_require__(/*! ../../src/util/functions */ "./src/util/functions.ts");
+const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
 function register() {
     steps_1.When(`I hover element {string} without sub hovers`, (selectorString) => {
         const selector = new types_1.PageObjectSelector(selectorString);
@@ -386,19 +411,19 @@ exports.register = register;
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
 const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const util_1 = __webpack_require__(/*! ../../src/util */ "./src/util/index.ts");
+const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
 function register() {
     steps_1.When(`I log in at {string} as {string}`, async (selectorString, roleSelectorString) => {
         const elementSelector = new types_1.PageObjectSelector(selectorString);
         const roleSelector = new types_1.PageObjectSelector(roleSelectorString);
-        let element = util_1.getElement(elementSelector);
-        cy.get(element).within(() => {
+        let element = functions_1.getElement(elementSelector);
+        cy.get(element).within(form => {
             cy.root().should('be.visible');
             const credentials = roleSelector.getValue();
             for (let field of credentials) {
                 cy.get(`input[name="${field.fieldName}"]`).type(field.value);
             }
-            cy.root().submit();
+            cy.wrap(form).submit();
         });
     });
 }
@@ -419,18 +444,13 @@ exports.register = register;
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
 const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const functions_1 = __webpack_require__(/*! ../../src/util/functions */ "./src/util/functions.ts");
+const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
 function register() {
-    steps_1.When(`I see (element|elements ){string}`, (selectorString, table) => {
+    steps_1.When(`I see (element ){string}`, (selectorString, table) => {
         const options = table ? new types_1.SeeOptions(table.rowsHash()) : new types_1.SeeOptions({});
         const selector = new types_1.PageObjectSelector(selectorString);
         const getOptions = functions_1.extractCommonGetOptions(options);
-        cy.log(JSON.stringify(getOptions));
-        cy.log(JSON.stringify(options));
         let element = functions_1.getElement(selector, getOptions);
-        if (element === null) {
-            return;
-        }
         if (options.amount === 1) {
             cy.get(element)
                 .should('have.length', 1)
@@ -468,7 +488,7 @@ exports.register = register;
 Object.defineProperty(exports, "__esModule", { value: true });
 const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
 const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const functions_1 = __webpack_require__(/*! ../../src/util/functions */ "./src/util/functions.ts");
+const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
 function register() {
     steps_1.When(`I type {string} into element {string}`, (text, selectorString) => {
         const selector = new types_1.PageObjectSelector(selectorString);
@@ -480,6 +500,58 @@ function register() {
             .scrollIntoView()
             .should('be.visible')
             .type(`${text}{enter}`);
+    });
+}
+exports.register = register;
+
+
+/***/ }),
+
+/***/ "./lib/globalHooks.ts":
+/*!****************************!*\
+  !*** ./lib/globalHooks.ts ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const src_1 = __webpack_require__(/*! ../src */ "./src/index.ts");
+function extractCredentials(credentials) {
+    let Credentials = class Credentials {
+        constructor() {
+            if (credentials) {
+                Object.entries(credentials).forEach(([key, value]) => {
+                    this[key] = value;
+                });
+            }
+        }
+    };
+    Credentials = __decorate([
+        src_1.registerPageObject({ name: 'Credentials', type: src_1.PageObjectField.RoleCredentials }),
+        __metadata("design:paramtypes", [])
+    ], Credentials);
+}
+function register() {
+    before(() => {
+        cy.log('Before hook to add credentials');
+        const credentials = Cypress.env('credentials') || {};
+        extractCredentials(credentials);
+    });
+    beforeEach(() => {
+        cy.log('Before each navigating to blank page');
+        const urlToVisit = Cypress.env('startUrl') || '/';
+        cy.visit(urlToVisit);
     });
 }
 exports.register = register;
@@ -506,11 +578,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(/*! reflect-metadata */ "reflect-metadata");
 const Types = __importStar(__webpack_require__(/*! ./types */ "./lib/types.ts"));
+const GlobalHooks = __importStar(__webpack_require__(/*! ./globalHooks */ "./lib/globalHooks.ts"));
 const Then = __importStar(__webpack_require__(/*! ./Then */ "./lib/Then/index.ts"));
 const When = __importStar(__webpack_require__(/*! ./When */ "./lib/When/index.ts"));
 const Given = __importStar(__webpack_require__(/*! ./Given */ "./lib/Given/index.ts"));
 function register() {
     Types.register();
+    GlobalHooks.register();
     Given.register();
     When.register();
     Then.register();
@@ -536,7 +610,11 @@ class PageObjectSelector {
         const [className, fieldName] = pageObjectSelector.split('.');
         this.fieldName = fieldName;
         this.className = className;
-        this.classInstance = pageObjectRegistrator_1.storage.get(className);
+        const classInstance = pageObjectRegistrator_1.storage.get(className);
+        if (classInstance === undefined) {
+            throw new Error(`Cannot find page object class ${className}`);
+        }
+        this.classInstance = classInstance;
         this.fieldDescriptor = this.classInstance.getFieldDescriptor(this.fieldName);
     }
     getValue() {
@@ -569,6 +647,14 @@ class ClickOptions extends ElementGetOptions {
     }
 }
 exports.ClickOptions = ClickOptions;
+class BlankLinkClickOptions extends ClickOptions {
+    constructor(props) {
+        super(props);
+        this.customClick = false;
+        this.customClick = Boolean(props.customClick) || this.customClick;
+    }
+}
+exports.BlankLinkClickOptions = BlankLinkClickOptions;
 class SeeOptions extends ElementGetOptions {
     constructor(props) {
         super(props);
@@ -578,13 +664,72 @@ class SeeOptions extends ElementGetOptions {
 }
 exports.SeeOptions = SeeOptions;
 function register() {
+    /* Use this across project as soon as
+    https://youtrack.jetbrains.com/issue/WEB-39983?_ga=2.137121712.1268965974.1566197839-869244565.1565073645
+    is resolved
+
     defineParameterType({
         name: 'pageObjectSelector',
         regexp: /[a-zA-Z]+\.[a-zA-Z]+/,
         transformer: selector => new PageObjectSelector(selector)
     });
+     */
 }
 exports.register = register;
+
+
+/***/ }),
+
+/***/ "./src/functions.ts":
+/*!**************************!*\
+  !*** ./src/functions.ts ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const pageObjectRegistrator_1 = __webpack_require__(/*! ./pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
+const getElementAlias = 'getElement';
+function getElement(selector, getOptions = {}) {
+    let element = '@' + getElementAlias;
+    switch (selector.fieldDescriptor.type) {
+        case pageObjectRegistrator_1.PageObjectField.Xpath:
+            // @ts-ignore
+            cy.xpath(selector.getValue(), getOptions).as(getElementAlias);
+            break;
+        case pageObjectRegistrator_1.PageObjectField.Selector:
+            const value = selector.getValue();
+            if (Array.isArray(value) && typeof value[1] === 'string') {
+                const [element, contains] = value;
+                cy.contains(element, contains, getOptions).as(getElementAlias);
+            }
+            else {
+                cy.get(selector.getValue(), getOptions).as(getElementAlias);
+            }
+            break;
+        default:
+            throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to see element by selector '${selector.toString()}' `);
+    }
+    return element;
+}
+exports.getElement = getElement;
+function getNavigationUrl(selector) {
+    if (selector.fieldDescriptor.type !== pageObjectRegistrator_1.PageObjectField.Navigation) {
+        throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to get URL by selector '${selector.toString()}' `);
+    }
+    return selector.getValue();
+}
+exports.getNavigationUrl = getNavigationUrl;
+function extractCommonGetOptions(options) {
+    const result = {};
+    if (options.wait !== null && !isNaN(options.wait)) {
+        result.timeout = options.wait;
+    }
+    return result;
+}
+exports.extractCommonGetOptions = extractCommonGetOptions;
 
 
 /***/ }),
@@ -598,17 +743,13 @@ exports.register = register;
 
 "use strict";
 
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
 var pageObjectRegistrator_1 = __webpack_require__(/*! ./pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
 exports.registerSelector = pageObjectRegistrator_1.registerSelector;
 exports.registerPageObject = pageObjectRegistrator_1.registerPageObject;
-exports.PageObjectFieldType = pageObjectRegistrator_1.PageObjectFieldType;
+exports.PageObjectField = pageObjectRegistrator_1.PageObjectField;
 var lib_1 = __webpack_require__(/*! ../lib */ "./lib/index.ts");
 exports.register = lib_1.register;
-__export(__webpack_require__(/*! util */ "util"));
 
 
 /***/ }),
@@ -623,28 +764,47 @@ __export(__webpack_require__(/*! util */ "util"));
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.storage = new Map();
+// Keys should be the same as values to allow following typecheck: keyof typeof PageObjectFieldType
+var PageObjectField;
+(function (PageObjectField) {
+    PageObjectField["Selector"] = "Selector";
+    PageObjectField["Xpath"] = "Xpath";
+    PageObjectField["Navigation"] = "Navigation";
+    PageObjectField["RoleCredentials"] = "RoleCredentials";
+})(PageObjectField = exports.PageObjectField || (exports.PageObjectField = {}));
 const metadataTypeKey = 'PageObjectFieldType';
 const metadataInvokableKey = 'PageObjectFieldInvokable';
-// Keys should be the same as values to allow following typecheck: keyof typeof PageObjectFieldType
-var PageObjectFieldType;
-(function (PageObjectFieldType) {
-    PageObjectFieldType["Selector"] = "Selector";
-    PageObjectFieldType["Contains"] = "Contains";
-    PageObjectFieldType["Navigation"] = "Navigation";
-    PageObjectFieldType["RoleCredentials"] = "RoleCredentials";
-})(PageObjectFieldType = exports.PageObjectFieldType || (exports.PageObjectFieldType = {}));
-function registerPageObject(name) {
+function registerPageObject(params) {
     // TODO replace any with valid type
+    const name = typeof params === 'string' ? params : params.name;
+    const type = params.hasOwnProperty('type') ? params.type : null;
     return (constructor) => {
-        const classInstance = new class C extends constructor {
+        class MetadataProvider extends constructor {
             getFieldDescriptor(key) {
-                return {
-                    invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
-                    type: Reflect.getMetadata(metadataTypeKey, this, key)
-                };
+                if (Reflect.hasMetadata(metadataTypeKey, this, key)) {
+                    return {
+                        invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
+                        type: Reflect.getMetadata(metadataTypeKey, this, key)
+                    };
+                }
+                else if (Reflect.hasMetadata(metadataTypeKey, this)) {
+                    return {
+                        type: Reflect.getMetadata(metadataTypeKey, this),
+                        invokable: false
+                    };
+                }
+                else {
+                    return {
+                        type: null,
+                        invokable: false
+                    };
+                }
             }
-        };
+        }
+        const classInstance = new MetadataProvider();
+        if (type !== null) {
+            Reflect.defineMetadata(metadataTypeKey, type, MetadataProvider.prototype);
+        }
         cy.log(`Added ${name}`);
         if (exports.storage.has(name)) {
             throw new Error(`Detected page object with duplicate name ${name}`);
@@ -661,75 +821,7 @@ function registerSelector(type) {
     };
 }
 exports.registerSelector = registerSelector;
-
-
-/***/ }),
-
-/***/ "./src/util/functions.ts":
-/*!*******************************!*\
-  !*** ./src/util/functions.ts ***!
-  \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const pageObjectRegistrator_1 = __webpack_require__(/*! ../pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
-const getElementAlias = 'getElement';
-function getElement(selector, getOptions = {}) {
-    let element = '@' + getElementAlias;
-    switch (selector.fieldDescriptor.type) {
-        case pageObjectRegistrator_1.PageObjectFieldType.Contains:
-            cy.contains(selector.getValue(), getOptions).as(getElementAlias);
-            break;
-        case pageObjectRegistrator_1.PageObjectFieldType.Selector:
-            cy.get(selector.getValue(), getOptions).as(getElementAlias);
-            break;
-        default:
-            throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to see element by selector '${selector.toString()}' `);
-    }
-    return element;
-}
-exports.getElement = getElement;
-function getNavigationUrl(selector) {
-    let url;
-    switch (selector.fieldDescriptor.type) {
-        case pageObjectRegistrator_1.PageObjectFieldType.Navigation:
-            url = selector.getValue();
-            break;
-        default:
-            throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to get URL by selector '${selector.toString()}' `);
-    }
-    return url;
-}
-exports.getNavigationUrl = getNavigationUrl;
-function extractCommonGetOptions(options) {
-    const result = {};
-    if (options.wait !== null && !isNaN(options.wait)) {
-        result.timeout = options.wait;
-    }
-    return result;
-}
-exports.extractCommonGetOptions = extractCommonGetOptions;
-
-
-/***/ }),
-
-/***/ "./src/util/index.ts":
-/*!***************************!*\
-  !*** ./src/util/index.ts ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(/*! ./functions */ "./src/util/functions.ts"));
+exports.storage = new Map();
 
 
 /***/ }),
@@ -753,17 +845,6 @@ module.exports = require("cypress-cucumber-preprocessor/steps");
 /***/ (function(module, exports) {
 
 module.exports = require("reflect-metadata");
-
-/***/ }),
-
-/***/ "util":
-/*!***********************!*\
-  !*** external "util" ***!
-  \***********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("util");
 
 /***/ })
 

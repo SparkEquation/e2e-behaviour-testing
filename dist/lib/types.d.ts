@@ -13,7 +13,7 @@ export declare type DataTableRowsHash = {
     [key: string]: string;
 };
 export declare abstract class ElementGetOptions {
-    wait: number;
+    wait: number | null;
     protected constructor(props: DataTableRowsHash);
 }
 export declare type GetOptions = Partial<Cypress.Timeoutable>;
@@ -22,8 +22,12 @@ export declare class ClickOptions extends ElementGetOptions {
     force: boolean;
     constructor(props: DataTableRowsHash);
 }
+export declare class BlankLinkClickOptions extends ClickOptions {
+    customClick: boolean;
+    constructor(props: DataTableRowsHash);
+}
 export declare class SeeOptions extends ElementGetOptions {
-    amount: number;
+    amount: number | null;
     constructor(props: DataTableRowsHash);
 }
 export declare function register(): void;

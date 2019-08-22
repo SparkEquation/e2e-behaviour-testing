@@ -33,7 +33,7 @@ const TSCONFIG_FILE = 'tsconfig.json';
 const filesToCopy = [
 	// GitIgnore file
 	{
-		from: path.resolve(ownPageObjectsPath, `template${GITIGNORE_FILE}`),
+		from: path.resolve(ownPreInstallPath, `template${GITIGNORE_FILE}`),
 		to: path.resolve(projectPageObjectsPath, GITIGNORE_FILE)
 	},
 	// Plugin file
