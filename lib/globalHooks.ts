@@ -15,8 +15,11 @@ function extractCredentials(credentials: CredentialsObject) {
 }
 
 export function register() {
-    const credentials: CredentialsObject = Cypress.env('credentials') || {};
-    extractCredentials(credentials);
+    before(() => {
+        cy.log('Before hook to add credentials');
+        const credentials: CredentialsObject = Cypress.env('credentials') || {};
+        extractCredentials(credentials);
+    });
 
     beforeEach(() => {
         cy.log('Before each navigating to blank page');

@@ -1,4 +1,7 @@
 import { register } from '../../../lib';
-import '../../pageObjects/index';
 
 register();
+
+before(() => {
+  import('../../pageObjects/index');
+});

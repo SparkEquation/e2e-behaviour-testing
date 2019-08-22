@@ -63,6 +63,9 @@ export function registerPageObject<T extends {new(...args:any[]):{}}>(params: IP
         if (type !== null) {
             Reflect.defineMetadata(metadataTypeKey, type, MetadataProvider.prototype);
         }
+
+        cy.log(`Added ${name}`);
+
         if (storage.has(name)) {
             throw new Error(`Detected page object with duplicate name ${ name }`);
         }
