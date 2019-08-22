@@ -1,6 +1,6 @@
 import { When } from 'cypress-cucumber-preprocessor/steps';
 import { PageObjectSelector, SeeOptions } from '../types';
-import { CypressSavedElement, extractCommonGetOptions, getElement } from '../../src/util';
+import { CypressSavedElement, extractCommonGetOptions, getElement } from '../../src/functions';
 import { TableDefinition } from 'cucumber';
 
 export function register() {
@@ -9,15 +9,7 @@ export function register() {
         const selector = new PageObjectSelector(selectorString);
         const getOptions = extractCommonGetOptions(options);
 
-        cy.log(JSON.stringify(getOptions));
-        cy.log(JSON.stringify(options));
-
         let element: CypressSavedElement = getElement(selector, getOptions);
-
-        if (element === null) {
-            return;
-        }
-
         if (options.amount === 1) {
             cy.get(element)
                 .should('have.length', 1)
@@ -35,5 +27,5 @@ export function register() {
                 })
             })
         }
-    })
+    });
 }

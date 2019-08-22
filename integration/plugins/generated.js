@@ -17,7 +17,7 @@ const browserify = require('@cypress/browserify-preprocessor');
 
 module.exports = (on) => {
   const options = browserify.defaultOptions;
-  const tsConfigPath = path.resolve('cypress', 'tsconfig.json');
+  const tsConfigPath = path.resolve('integration', 'tsconfig.json');
   options.browserifyOptions.plugin.unshift(['tsify', { project: tsConfigPath }]);
 
   on('file:preprocessor', cucumber(options));

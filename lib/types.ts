@@ -1,7 +1,4 @@
 import { IPageObjectFieldDescription, IPageObjectMetadata, storage } from '../src/pageObjectRegistrator';
-import { Transform } from 'cucumber';
-
-declare const defineParameterType: (transform: Transform) => void;
 
 export class PageObjectSelector {
     public classInstance: IPageObjectMetadata;
@@ -13,7 +10,11 @@ export class PageObjectSelector {
         const [className, fieldName] = pageObjectSelector.split('.');
         this.fieldName = fieldName;
         this.className = className;
-        this.classInstance = storage.get(className);
+        const classInstance = storage.get(className);
+        if (classInstance === undefined) {
+            throw new Error(`Cannot find page object class ${className}`);
+        }
+        this.classInstance = classInstance;
         this.fieldDescriptor = this.classInstance.getFieldDescriptor(this.fieldName);
     }
 
@@ -33,7 +34,7 @@ export class PageObjectSelector {
 export type DataTableRowsHash = { [key: string]: string };
 
 export abstract class ElementGetOptions {
-    public wait: number = null;
+    public wait: number | null = null;
 
     protected constructor(props: DataTableRowsHash) {
         this.wait = Number(props.wait) || this.wait;
@@ -53,8 +54,17 @@ export class ClickOptions extends ElementGetOptions{
     }
 }
 
+export class BlankLinkClickOptions extends ClickOptions {
+    public customClick: boolean = false;
+
+    constructor(props: DataTableRowsHash) {
+        super(props);
+        this.customClick = Boolean(props.customClick) || this.customClick;
+    }
+}
+
 export class SeeOptions extends ElementGetOptions {
-    public amount: number = null;
+    public amount: number | null = null;
 
     constructor(props: DataTableRowsHash) {
         super(props);
@@ -63,10 +73,15 @@ export class SeeOptions extends ElementGetOptions {
 }
 
 export function register() {
+    /* Use this across project as soon as
+    https://youtrack.jetbrains.com/issue/WEB-39983?_ga=2.137121712.1268965974.1566197839-869244565.1565073645
+    is resolved
+
     defineParameterType({
         name: 'pageObjectSelector',
         regexp: /[a-zA-Z]+\.[a-zA-Z]+/,
         transformer: selector => new PageObjectSelector(selector)
     });
+     */
 }
 

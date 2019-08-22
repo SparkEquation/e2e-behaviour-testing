@@ -1,7 +1,7 @@
-import { Then } from "cypress-cucumber-preprocessor/steps";
+import { Then } from 'cypress-cucumber-preprocessor/steps';
 
 export function register () {
-    Then(`I see title string {string}`, (title: string) => {
+    Then(`I see {string} in title`, (title: string) => {
         cy.title().should("include", title);
     });
 }

@@ -1,4 +1,4 @@
-import { LogInRole, PageObjectFieldType, registerPageObject, registerSelector } from '../../../src';
+import { LogInRole, PageObjectField, registerPageObject, registerSelector } from '../../../src';
 
 @registerPageObject('PhpTravels')
 export class PhpTravels {
@@ -9,13 +9,13 @@ export class PhpTravels {
     @registerSelector('Selector')
     public logInForm = 'form.form-signin';
 
-    @registerSelector('Contains')
-    public currentUserAdmin = 'Administrator';
+    @registerSelector('Selector')
+    public currentUserAdmin = [ '*', 'Administrator'];
 
     @registerSelector('Navigation')
     public adminLoginPage = 'admin/login';
 
-    @registerSelector(PageObjectFieldType.RoleCredentials)
+    @registerSelector(PageObjectField.RoleCredentials)
     public admin: LogInRole = [
         {
             fieldName: 'email',

@@ -1,6 +1,6 @@
 import { When } from 'cypress-cucumber-preprocessor/steps';
 import { PageObjectSelector } from '../types';
-import { CypressSavedElement, getElement } from '../../src/util/functions';
+import { CypressSavedElement, getElement } from '../../src/functions';
 
 export function register() {
     When(`I type {string} into element {string}`, (text: string, selectorString: string) => {

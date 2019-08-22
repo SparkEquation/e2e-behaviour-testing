@@ -13,29 +13,32 @@ const projectIntegrationPath = path.resolve(projectPath, 'integration');
 const projectPluginsPath = path.resolve(projectIntegrationPath, 'plugins');
 const projectPageObjectsPath = path.resolve(projectIntegrationPath, 'pageObjects');
 const projectTestsCommonPath = path.resolve(projectIntegrationPath, 'features', 'common');
+const projectSupportPath = path.resolve(projectIntegrationPath, 'support');
 
 // Paths for local copy of this library in node_modules
-const ownIntegrationFolder = path.resolve('integration');
+const ownIntegrationPath = path.resolve('integration');
 const ownPreInstallPath = path.resolve('preinstall');
-const ownPageObjectsPath = path.resolve(ownIntegrationFolder, 'pageObjects');
+const ownPageObjectsPath = path.resolve(ownIntegrationPath, 'pageObjects');
+const ownSupportPath = path.resolve(ownIntegrationPath, 'support');
 
 // Filenames constants
 const PLUGIN_FILE = 'generated.js';
 const GITIGNORE_FILE = '.gitignore';
 const CYPRESS_CONFIG = 'cypress.json';
-const CYPRESS_CUCUMBER_CONFIG = '.cypress-cucumber-preprocessorrc.json';
+const SUPPORT_FILE = 'index.js';
+const CYPRESS_CUCUMBER_CONFIG = '.cypress-cucumber-preprocessorrc';
 const TESTS_COMMON = 'globalBefore.ts';
 const TSCONFIG_FILE = 'tsconfig.json';
 
 const filesToCopy = [
 	// GitIgnore file
 	{
-		from: path.resolve(ownPageObjectsPath, GITIGNORE_FILE),
+		from: path.resolve(ownPageObjectsPath, `template${GITIGNORE_FILE}`),
 		to: path.resolve(projectPageObjectsPath, GITIGNORE_FILE)
 	},
 	// Plugin file
 	{
-		from: path.resolve(ownIntegrationFolder, 'plugins', PLUGIN_FILE),
+		from: path.resolve(ownIntegrationPath, 'plugins', PLUGIN_FILE),
 		to: path.resolve(projectPluginsPath, PLUGIN_FILE)
 	},
 	// Common file to run before tests
@@ -57,6 +60,11 @@ const filesToCopy = [
 	{
 		from: path.resolve(TSCONFIG_FILE),
 		to: path.resolve(projectIntegrationPath, TSCONFIG_FILE)
+	},
+	// support/index
+	{
+		from: path.resolve(ownSupportPath, SUPPORT_FILE),
+		to: path.resolve(projectSupportPath, SUPPORT_FILE)
 	}
 ];
 
@@ -71,7 +79,7 @@ function copyNecessaryFiles() {
 }
 
 function createNecessaryDirectories () {
-	[projectPluginsPath, projectPageObjectsPath, projectTestsCommonPath].forEach(directory => {
+	[projectPluginsPath, projectPageObjectsPath, projectTestsCommonPath, projectSupportPath].forEach(directory => {
 		createDirectoryIfNotExists(directory);
 	})
 }

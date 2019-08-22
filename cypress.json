@@ -1,6 +1,7 @@
 {
   "testFiles": "**/*.feature",
   "integrationFolder": "integration/features",
+  "supportFile": "integration/support",
   "pluginsFile": "integration/plugins/generated.js",
   "baseUrl": "",
   "viewportWidth": 1600,

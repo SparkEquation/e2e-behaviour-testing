@@ -1,17 +1,14 @@
-import { Given } from "cypress-cucumber-preprocessor/steps";
+import { Given } from 'cypress-cucumber-preprocessor/steps';
 import { PageObjectSelector } from '../types';
 import { LogInRole } from '../../src';
-
-let seeString;
+import { getNavigationUrl } from '../../src/functions';
 
 export function register () {
-    Given(`I logged in at {string} as {string}`, (navigationSelectorString: string, roleSelectorString: string) => {
-        const navigationSelector = new PageObjectSelector(navigationSelectorString);
+    const loggedInAsFunction = (apiSelectorString: string, roleSelectorString: string, redirectSelectorString?: string) => {
+        const navigationSelector = new PageObjectSelector(apiSelectorString);
         const roleSelector = new PageObjectSelector(roleSelectorString);
+        const url = getNavigationUrl(navigationSelector);
 
-        cy.visit('/');
-
-        const url = navigationSelector.getValue();
         const requestBody = {};
         for (let field of roleSelector.getValue() as LogInRole) {
             requestBody[field.fieldName] = field.value;
@@ -29,5 +26,14 @@ export function register () {
             expect(response.status).to.eq(200);
             expect(response).to.have.property('headers');
         });
-    });
+
+        if (redirectSelectorString) {
+            const redirectSelector = new PageObjectSelector(redirectSelectorString);
+            cy.visit(getNavigationUrl(redirectSelector));
+        }
+    };
+
+
+    Given(`I logged in at {string} as {string}`, loggedInAsFunction);
+    Given(`I logged in at {string} as {string} and visit {string}`, loggedInAsFunction);
 }

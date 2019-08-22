@@ -1,6 +1,6 @@
 import { When } from 'cypress-cucumber-preprocessor/steps';
 import { PageObjectSelector } from '../types';
-import { CypressSavedElement, getElement } from '../../src/util';
+import { CypressSavedElement, getElement } from '../../src/functions';
 import { LogInRole } from '../../src';
 
 export function register() {
@@ -9,14 +9,14 @@ export function register() {
         const roleSelector = new PageObjectSelector(roleSelectorString);
 
         let element: CypressSavedElement = getElement(elementSelector);
-        cy.get(element).within(() => {
+        cy.get(element).within(form => {
             cy.root().should('be.visible');
             const credentials: LogInRole = roleSelector.getValue();
             for (let field of credentials) {
                 cy.get(`input[name="${field.fieldName}"]`).type(field.value);
             }
 
-            cy.root().submit();
+            cy.wrap(form).submit();
         });
     });
 }

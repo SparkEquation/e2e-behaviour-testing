@@ -5,9 +5,9 @@ export class Internet {
     @registerSelector('Navigation')
     public mouseoverPage = 'jqueryui/menu';
 
-    @registerSelector('Contains')
-    public firstHover = 'Enabled';
+    @registerSelector('Selector')
+    public firstHover = [ '*', 'Enabled'];
 
-    @registerSelector('Contains')
-    public downloadMenuItem = 'Downloads';
+    @registerSelector('Selector')
+    public downloadMenuItem = [ '*', 'Downloads'];
 }
