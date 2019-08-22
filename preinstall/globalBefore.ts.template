@@ -1,7 +1,4 @@
 import { register } from 'ui-testing-template-cypress';
+import '../../pageObjects/index';
 
 register();
-
-before(() => {
-    import('../../pageObjects/index');
-});

@@ -543,11 +543,8 @@ function extractCredentials(credentials) {
     ], Credentials);
 }
 function register() {
-    before(() => {
-        cy.log('Before hook to add credentials');
-        const credentials = Cypress.env('credentials') || {};
-        extractCredentials(credentials);
-    });
+    const credentials = Cypress.env('credentials') || {};
+    extractCredentials(credentials);
     beforeEach(() => {
         cy.log('Before each navigating to blank page');
         const urlToVisit = Cypress.env('startUrl') || '/';
@@ -805,7 +802,6 @@ function registerPageObject(params) {
         if (type !== null) {
             Reflect.defineMetadata(metadataTypeKey, type, MetadataProvider.prototype);
         }
-        cy.log(`Added ${name}`);
         if (exports.storage.has(name)) {
             throw new Error(`Detected page object with duplicate name ${name}`);
         }
