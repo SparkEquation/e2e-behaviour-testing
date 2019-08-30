@@ -13,7 +13,6 @@
     ```
      npm i -D git+ssh://git@github.com/SparkEquation/ui-testing-template-cypress.git#feature/initial-config
     ```
-* Install cypress `npm i -D cypress`
 * Check that there are no errors after installation
 * Set `baseUrl` in `cypress.config` file with url of your project
 * Add script to your package.json with following content
