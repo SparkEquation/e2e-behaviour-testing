@@ -23,6 +23,13 @@
 * Initial loading takes some time as code should transpile from ts
     > TODO add build step with webpack 
 
+## Dependencies 
+**Attention** this project requires nodejs version not lower than
+`node 11.0.0`.    
+This happens because we uses some advanced features
+in postinstall script, e.g. `Array.flat`      
+
+
 ## Writing gherkin
     Check lib directory for available steps and cypress folder for examples
     Most steps expect selector as "RegisteredPageObjectName.classFieldName"
@@ -33,10 +40,9 @@ and plugin configuration to support gherkin features.
 Real application would have the same directory in it's root.   
 * `dist` provides bundled code
 * `lib` will be downloaded to provide autocomplete for gherkin steps
-* `preinstall` contains templates of files we will import before installation
-    > TODO decide if can move it to postinstall
+* `postinstall` contains templates of files we will import before installation
 * `scripts` include some files which will be executables for your project
-and preinstall script
+and postinstall script
 * `src` contains functions and classes that works 'under hood'
 
 ## Environment variables
