@@ -17,7 +17,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// TODO deal with preinstall script being run on local install
+// TODO deal with postinstall script being run on local install
 const isDependency = path.basename(path.resolve('..')) === 'node_modules';
 if (!isDependency) {
 	process.exit(0);
@@ -32,16 +32,13 @@ const projectTestsCommonPath = path.resolve(projectIntegrationPath, 'features', 
 const projectSupportPath = path.resolve(projectIntegrationPath, 'support');
 
 // Paths for local copy of this library in node_modules
-const ownIntegrationPath = path.resolve('integration');
-const ownPreInstallPath = path.resolve('preinstall');
-const ownPageObjectsPath = path.resolve(ownIntegrationPath, 'pageObjects');
-const ownSupportPath = path.resolve(ownIntegrationPath, 'support');
+const ownPreInstallPath = path.resolve('postinstall');
 
 // Filenames constants
-const PLUGIN_FILE = 'generated.js';
+const PLUGIN_FILE = 'plugins.js';
 const GITIGNORE_FILE = '.gitignore';
 const CYPRESS_CONFIG = 'cypress.json';
-const SUPPORT_FILE = 'index.js';
+const SUPPORT_FILE = 'support.js';
 const CYPRESS_CUCUMBER_CONFIG = '.cypress-cucumber-preprocessorrc';
 const TESTS_COMMON = 'globalBefore.ts';
 const TSCONFIG_FILE = 'tsconfig.json';
@@ -54,7 +51,7 @@ const filesToCopy = [
 	},
 	// Plugin file
 	{
-		from: path.resolve(ownIntegrationPath, 'plugins', PLUGIN_FILE),
+		from: path.resolve(ownPreInstallPath, `${PLUGIN_FILE}.template`),
 		to: path.resolve(projectPluginsPath, PLUGIN_FILE)
 	},
 	// Common file to run before tests
@@ -79,7 +76,7 @@ const filesToCopy = [
 	},
 	// support/index
 	{
-		from: path.resolve(ownSupportPath, SUPPORT_FILE),
+		from: path.resolve(ownPreInstallPath, `${SUPPORT_FILE}.template`),
 		to: path.resolve(projectSupportPath, SUPPORT_FILE)
 	}
 ];

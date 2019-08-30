@@ -1,4 +1,11 @@
 const nodeExternals = require('webpack-node-externals');
+const CopyPlugin = require('copy-webpack-plugin');
+const path = require('path');
+const INTEGRATION_FOLDER = path.resolve('integration')
+const POSTINSTALL_FOLDER = path.resolve('postinstall');
+const PLUGIN_FILE = 'plugins.js';
+const SUPPORT_FILE = 'support.js';
+
 
 module.exports = {
     target: "node",
@@ -12,14 +19,26 @@ module.exports = {
         libraryTarget: 'umd',
     },
     resolve: {
-        extensions: [".js", ".ts"]
+        extensions: [".js", ".ts"],
     },
     module: {
         rules: [
             {
                 test: /\.ts$/,
-                use: 'awesome-typescript-loader'
+                use: 'awesome-typescript-loader',
             }
         ]
-    }
+    },
+    plugins: [
+        new CopyPlugin([
+            {
+                from: path.resolve(INTEGRATION_FOLDER, 'plugins', PLUGIN_FILE),
+                to: path.resolve(POSTINSTALL_FOLDER, `${PLUGIN_FILE}.template`)
+            },
+            {
+                from: path.resolve(INTEGRATION_FOLDER, 'support', SUPPORT_FILE),
+                to: path.resolve(POSTINSTALL_FOLDER, `${SUPPORT_FILE}.template`)
+            },
+        ]),
+    ],
 };
