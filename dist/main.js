@@ -739,12 +739,10 @@ function extractCredentials(credentials) {
 }
 function register() {
     before(() => {
-        cy.log('Before hook to add credentials');
         const credentials = Cypress.env('credentials') || {};
         extractCredentials(credentials);
     });
     beforeEach(() => {
-        cy.log('Before each navigating to blank page');
         const urlToVisit = Cypress.env('startUrl') || '/';
         cy.visit(urlToVisit);
     });
