@@ -1,0 +1,14 @@
+{
+  "extends": "./integration/tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "declaration": true,
+    "strictNullChecks": true,
+    "preserveConstEnums": true,
+    "sourceMap": true
+  },
+  "exclude": [
+    "./node_modules",
+    "integration"
+  ]
+}
