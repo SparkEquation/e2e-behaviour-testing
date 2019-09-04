@@ -5,6 +5,7 @@ const INTEGRATION_FOLDER = path.resolve('integration')
 const POSTINSTALL_FOLDER = path.resolve('postinstall');
 const PLUGIN_FILE = 'plugins.js';
 const SUPPORT_FILE = 'support.js';
+const TSCONFIG_FILE = 'tsconfig.json';
 
 
 module.exports = {
@@ -39,6 +40,10 @@ module.exports = {
                 from: path.resolve(INTEGRATION_FOLDER, 'support', SUPPORT_FILE),
                 to: path.resolve(POSTINSTALL_FOLDER, `${SUPPORT_FILE}.template`)
             },
+            {
+                from: path.resolve(INTEGRATION_FOLDER, TSCONFIG_FILE),
+                to: path.resolve(POSTINSTALL_FOLDER, `${TSCONFIG_FILE}.template`)
+            }
         ]),
     ],
 };

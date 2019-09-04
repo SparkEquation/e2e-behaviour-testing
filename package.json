@@ -1,6 +1,6 @@
 {
   "name": "ui-testing-template-cypress",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "BDD UI testing framework with cypress and cucumber",
   "homepage": "https://github.com/SparkEquation/ui-testing-template-cypress#readme",
   "repository": {
@@ -40,9 +40,8 @@
     "lib",
     "dist",
     "postinstall",
-    "cypress.json",
     "scripts",
-    "tsconfig.json",
+    "cypress.json",
     "LICENSE",
     "NOTICE",
     "README.md"
@@ -54,7 +53,8 @@
     "test:run": "npm run pretest && cypress run",
     "test:open": "npm run pretest && cypress open",
     "build": "webpack",
-    "postbuild": "git add dist"
+    "postbuild": "git add dist && git add postinstall",
+    "checkLicense": "legally"
   },
   "husky": {
     "hooks": {
@@ -78,6 +78,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "copy-webpack-plugin": "^5.0.4",
     "husky": "^3.0.4",
+    "legally": "^3.3.7",
     "mocha": "^6.2.0",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6",

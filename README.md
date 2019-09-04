@@ -14,7 +14,7 @@
      npm i -D git+ssh://git@github.com/SparkEquation/ui-testing-template-cypress.git#feature/initial-config
     ```
 * Check that there are no errors after installation
-* Set `baseUrl` in `cypress.config` file with url of your project
+* Set `baseUrl` in `cypress.json` file with url of your project
 * Add script to your package.json with following content
 `page-objects-import && cypress open` 
 * Create feature file in `integration/features` folder

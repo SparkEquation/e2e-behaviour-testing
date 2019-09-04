@@ -42,6 +42,7 @@ const SUPPORT_FILE = 'support.js';
 const CYPRESS_CUCUMBER_CONFIG = '.cypress-cucumber-preprocessorrc';
 const TESTS_COMMON = 'globalBefore.ts';
 const TSCONFIG_FILE = 'tsconfig.json';
+const CYPRESS_ENV_FILE = 'cypress.env.json.template'
 
 const filesToCopy = [
 	// GitIgnore file
@@ -71,14 +72,19 @@ const filesToCopy = [
 	},
 	// TS config
 	{
-		from: path.resolve(TSCONFIG_FILE),
+		from: path.resolve(ownPreInstallPath, `${TSCONFIG_FILE}.template`),
 		to: path.resolve(projectIntegrationPath, TSCONFIG_FILE)
 	},
 	// support/index
 	{
 		from: path.resolve(ownPreInstallPath, `${SUPPORT_FILE}.template`),
 		to: path.resolve(projectSupportPath, SUPPORT_FILE)
-	}
+	},
+	// credentials template
+	{
+		from: path.resolve(ownPreInstallPath, CYPRESS_ENV_FILE),
+		to: path.resolve(projectPath, CYPRESS_ENV_FILE),
+	},
 ];
 
 createNecessaryDirectories();

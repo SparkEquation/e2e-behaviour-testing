@@ -1,27 +1,14 @@
 {
+  "extends": "./integration/tsconfig",
   "compilerOptions": {
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "target": "esnext",
     "outDir": "./dist",
-    "lib": [
-      "es5",
-      "es6",
-      "es7",
-      "dom"
-    ],
-    "types": ["cypress", "node", "reflect-metadata"],
     "declaration": true,
     "strictNullChecks": true,
     "preserveConstEnums": true,
-    "emitDecoratorMetadata": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "esModuleInterop": true,
-    "sourceMap": true,
-    "skipLibCheck": true
+    "sourceMap": true
   },
   "exclude": [
-    "./node_modules"
+    "./node_modules",
+    "integration"
   ]
 }
