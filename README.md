@@ -46,19 +46,45 @@ in postinstall script, e.g. `Array.flat`
 
 
 ## Writing gherkin
+### Disclaimer
+Due to poor support of Gherkin custom types in IntelliJ IDEA,
+we use `{string}` parameter instead of `{pageObjectSelector}` in our steps definitions.   
+In the [available statements list](#available-statements), however, we will use
+the following syntax:    
+`{POS:Type}`   
+to improve semantics, reduce step definitions length and show constraints.    
+Available types are listed in page object's details [section](#page-object-details).
+
 ### Available statements
-* Given
-    * `I logged in at {string} as {string}`
-    * `I logged in at {string} as {string} and visit {string}`
+* Given 
+    * `I logged in at {ApiUrl} as {Role} and visit {PageUrl}`
+        * Api url: `POS:Navigation` - log in post endpoint
+        * Role: `POS:RoleCredentials` - credentials for desired role
+        * Page url: `POS:Navigation` - page to visit after authorization   
+        Sends post request to endpoint to obtain credentials for current test case    
+            > TODO: add limitations list 
+    * `I logged in at {ApiUrl} as {Role}`  
+        Same as above but do not navigate, stays at the start page
+    * `I open page {PageUrl}`
+        * Page url: `POS:Navigation` - page to visit
 * When
-    * `I click {string}`
-    * `I click blank link {string}`
-    * `I hover element {string} without sub hovers`
-    * `I log in at {string} as {string}`
-    * `I see (element) {string}`
-    * `I type {string} into element {string}`
+    * `I click {Element}`
+        * Element: `POS:Selector | POS:Xpath` - selector of element on the page
+    * `I click blank link {LinkElement}`
+        * LinkElement: `POS:Selector | POS:Xpath` - clickable element which opens blank page  
+        This action moved to a separate step definition because of the way how
+        cypress handles opening new tab
+    * `I hover element {HoverableElement} without sub hovers`
+        * Hoverable Element: `POS:Selector | POS:Xpath`  
+        Right now hover cannot be invoked on element which is shown
+        as a result of another hover action 
+    * `I log in at {Form} as {Role}`
+        * Form: `POS:Selector | POS:Xpath` - selector of form element    
+        Finds form, fills it in with given credentials and submits it
+    * `I see (element) {Element}`
+    * `I type {string} into element {Element}`
 * Then
-    * `URL is {string}`
+    * `URL is {PageUrl}`
     * `I see {string} in title`
 
 ```
@@ -66,7 +92,7 @@ Check lib directory for available steps and cypress folder for examples
 Most steps expect selector as "RegisteredPageObjectName.classFieldName"
 ```
 
-> This list will expand over time.
+> This list will expand and may change over time.
 
 ## Project structure
 * `integration` directory contains examples of tests, page objects
