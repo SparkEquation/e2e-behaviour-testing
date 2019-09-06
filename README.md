@@ -5,13 +5,16 @@
 This project is designed to quickly start e2e testing. It includes the integration of
 `Cypress` with `Cucumber` and the implementation of the PageObect pattern. You just 
 need to add 'Page Objects' following the [instruction below](#page-object-details).
-After that, you can use `Gherkin` [statements](#writing-gherkin) which generates based 
-on added Page Objects. Thus, writing and supporting tests becomes more convenient.
+After that, you can use `Gherkin` [statements](#writing-gherkin) After that, you can 
+use Gherkin statements which are generated based on added Page Objects. Thus, writing 
+and supporting tests becomes more convenient.
 
 ## Tools
 The following basic tools are used in this project:
-- [Cypress](https://github.com/cypress-io/cypress) - a JavaScript-based web testing framework that makes asynchronous testing simple, built for the modern web.
-- [Cucumber](https://github.com/cucumber/cucumber-js) - a tool for running automated tests written in plain language.
+- [Cypress](https://github.com/cypress-io/cypress) - a JavaScript-based web testing 
+framework that makes asynchronous testing simple, built for the modern web.
+- [Cucumber](https://github.com/cucumber/cucumber-js) - a tool for running automated 
+tests written in plain language.
 
 ## Starting tests examples
 * Clone this project
