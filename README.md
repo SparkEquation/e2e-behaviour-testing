@@ -33,7 +33,7 @@ tests written in plain language.
 `page-objects-import && cypress open` 
 * Create [page object file](#page-object-details)
 * Create feature file in `integration/features` folder based on `Gherkin` 
-[statements](#writing-gherkin)
+[statements](#writing-gherkin) using created page objects
 * Run script and choose feature file from list
 * Initial loading takes some time as code should transpile from ts
     > TODO add build step with webpack 
