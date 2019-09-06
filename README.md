@@ -31,8 +31,9 @@ tests written in plain language.
 * Set `baseUrl` in `cypress.json` file with url of your project
 * Add script to your package.json with following content
 `page-objects-import && cypress open` 
-* Create feature file in `integration/features` folder
 * Create [page object file](#page-object-details)
+* Create feature file in `integration/features` folder based on `Gherkin` 
+[statements](#writing-gherkin)
 * Run script and choose feature file from list
 * Initial loading takes some time as code should transpile from ts
     > TODO add build step with webpack 
