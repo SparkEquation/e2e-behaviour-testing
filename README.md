@@ -2,6 +2,17 @@
 
 > Based on [cypress-cucumber-example](https://github.com/TheBrainFamily/cypress-cucumber-example)
 
+This project is designed to quickly start e2e testing. It includes the integration of
+`Cypress` with `Cucumber` and the implementation of the PageObect pattern. You just 
+need to add 'Page Objects' following the [instruction below](#page-object-details).
+After that, you can use `Gherkin` [statements](#writing-gherkin) which generates based 
+on added Page Objects. Thus, writing and supporting tests becomes more convenient.
+
+## Tools
+The following basic tools are used in this project:
+- [Cypress](https://github.com/cypress-io/cypress) - a JavaScript-based web testing framework that makes asynchronous testing simple, built for the modern web.
+- [Cucumber](https://github.com/cucumber/cucumber-js) - a tool for running automated tests written in plain language.
+
 ## Starting tests examples
 * Clone this project
 * Run `npm install`
@@ -31,8 +42,27 @@ in postinstall script, e.g. `Array.flat`
 
 
 ## Writing gherkin
-    Check lib directory for available steps and cypress folder for examples
-    Most steps expect selector as "RegisteredPageObjectName.classFieldName"
+### Available statements
+* Given
+    * `I logged in at {string} as {string}`
+    * `I logged in at {string} as {string} and visit {string}`
+* When
+    * `I click {string}`
+    * `I click blank link {string}`
+    * `I hover element {string} without sub hovers`
+    * `I log in at {string} as {string}`
+    * `I see (element) {string}`
+    * `I type {string} into element {string}`
+* Then
+    * `URL is {string}`
+    * `I see {string} in title`
+
+```
+Check lib directory for available steps and cypress folder for examples
+Most steps expect selector as "RegisteredPageObjectName.classFieldName"
+```
+
+> This list will expand over time.
 
 ## Project structure
 * `integration` directory contains examples of tests, page objects
