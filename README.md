@@ -3,7 +3,7 @@
 > Based on [cypress-cucumber-example](https://github.com/TheBrainFamily/cypress-cucumber-example)
 
 This project is designed to quickly start e2e testing. It includes the integration of
-`Cypress` with `Cucumber` and the implementation of the PageObect pattern. You just 
+`Cypress.io` with `Cucumber` and the implementation of the PageObect pattern. You just 
 need to add 'Page Objects' following the [instruction below](#page-object-details).
 After that, you can use `Gherkin` [statements](#writing-gherkin) After that, you can 
 use Gherkin statements which are generated based on added Page Objects. Thus, writing 
@@ -11,10 +11,12 @@ and supporting tests becomes more convenient.
 
 ## Tools
 The following basic tools are used in this project:
-- [Cypress](https://github.com/cypress-io/cypress) - a JavaScript-based web testing 
+- [Cypress.io](https://github.com/cypress-io/cypress) - a JavaScript-based web testing 
 framework that makes asynchronous testing simple, built for the modern web.
 - [Cucumber](https://github.com/cucumber/cucumber-js) - a tool for running automated 
-tests written in plain language.
+tests written in natural language.
+- [cypress-cucumber-preprocessor](https://github.com/TheBrainFamily/cypress-cucumber-preprocessor) -
+a library which parses feature files and creates test cases and suites from them.
 
 ## Starting tests examples
 * Clone this project
@@ -41,8 +43,8 @@ tests written in plain language.
 ## Dependencies 
 **Attention** this project requires nodejs version not lower than
 `node 11.0.0`.    
-This happens because we uses some advanced features
-in postinstall script, e.g. `Array.flat`      
+This happens because we uses some ES6+ features
+in postinstall script, e.g. `Array.flat`
 
 
 ## Writing gherkin
@@ -99,17 +101,19 @@ Most steps expect selector as "RegisteredPageObjectName.classFieldName"
 and plugin configuration to support gherkin features. 
 Real application would have the same directory in it's root.   
 * `dist` provides bundled code
+    > TODO delete from git when published to npm
 * `lib` will be downloaded to provide autocomplete for gherkin steps
 * `postinstall` contains templates of files we will import before installation
 * `scripts` include some files which will be executables for your project
 and postinstall script
-* `src` contains functions and classes that works 'under hood'
+* `src` contains functions and classes that works 'under the hood'
 
 ## Environment variables
 1. In order to provide application with credentials
 you need to set environment variable `credentials`. We recommend doing it with
-`cypress.env.json` file because it should contain JSON object of `CredentialsObject` type.
-As a result `Credentials` page object will be available during tests.
+`cypress.env.json` file because it should contain JSON object of `CredentialsObject` type
+and should never be pushed to any VCS.   
+As a result `Credentials` page object will be accessible in feature flies.
  1. In order for each test to be stateless we visit start page of your application 
  in `beforeEach` cypress hook. Default value is '/' but you can override it with
  `startPage` env variable. It should contain relative to basePath url. 
@@ -123,13 +127,13 @@ either `name` parameter or object with `name` and optional `type` fields.
 * When you are trying to resolve page object in your `.feature` files
 you address the class just as you name it.
 **Do not use same name for multiple classes**.
-* Do not forget that `Credentials` is built in page object,
+* Do not forget that `Credentials` is built-in page object,
 as [mentioned here](#environment-variables)  
 
-* All class fields you are going to use in your tests should have type
-which you can set for class with `type` field in params object or explicitly for
-the field with `registerSelector` decorator. 
-It overrides the global value if it is present 
+* All class fields you are going to use in your tests should have type.
+You can set class-global type with self-titled param of `registerPageObject` decorator
+or decorate your field \ method with `registerSelector` decorator, which overrides
+the global value if it is present.
 
 * Selector can either be simple field or function that returns an expected type.
 
@@ -161,7 +165,7 @@ It overrides the global value if it is present
   * RoleCredentials - Array of `<IRoleCredentials>` objects
     You should store your credentials in env file where we automatically
     grab them and add to `Credentials` [built-in page object](#environment-variables).  
-    However you can use this if you understand the risks:
+    However you can use the following example if you understand the risks:
     ```
     @registerSelector('RoleCredentials')
     public admin: = LogInRole = [
@@ -176,4 +180,26 @@ It overrides the global value if it is present
     ];
     ```
 
- 
+## Examples
+Let's assume you have [installed](#installation) the library and created the following feature file 
+
+```gherkin
+Feature: My first feature
+    Scenario: Visit start page
+      Given I open "ExampleDomain.IndexPage"
+      Then I see "Example Domain" in title
+      And URL is "ExampleDomain.IndexPage"
+```
+
+To successfully run it you need to do the following steps:
+* Set base url to `https://example.com`
+* [Create pageObject file](#page-object-details) with following content (without imports):
+```typescript
+    @registerPageObject('ExampleDomain')
+    export class ExampleDomainClass {
+        @registerSelector('Navigation')
+        IndexPage: string = ''
+    }
+```
+* Run`page-objects-create && cypress open`
+* Choose your file from list and click it
