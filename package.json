@@ -1,11 +1,11 @@
 {
-  "name": "ui-testing-template-cypress",
+  "name": "e2e-behaviour-testing",
   "version": "0.3.7",
   "description": "BDD UI testing framework with cypress and cucumber",
-  "homepage": "https://github.com/SparkEquation/ui-testing-template-cypress#readme",
+  "homepage": "https://github.com/SparkEquation/e2e-behaviour-testing#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh:git@github.com:SparkEquation/ui-testing-template-cypress.git"
+    "url": "git+ssh:git@github.com:SparkEquation/e2e-behaviour-testing.git"
   },
   "license": "Apache-2.0",
   "author": "Spark Equation",

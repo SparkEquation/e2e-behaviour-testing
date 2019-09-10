@@ -1,4 +1,4 @@
-# ui-testing-template-cypress
+# e2e-behaviour-testing
 
 > Based on [cypress-cucumber-example](https://github.com/TheBrainFamily/cypress-cucumber-example)
 
@@ -11,7 +11,7 @@
 * Install this repo:
     * From git
     ```
-     npm i -D git+ssh://git@github.com/SparkEquation/ui-testing-template-cypress.git#feature/initial-config
+     npm i -D git+ssh://git@github.com/SparkEquation/e2e-behaviour-testing.git
     ```
 * Check that there are no errors after installation
 * Set `baseUrl` in `cypress.json` file with url of your project

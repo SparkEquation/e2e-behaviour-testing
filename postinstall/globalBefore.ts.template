@@ -1,4 +1,4 @@
-import { register } from 'ui-testing-template-cypress';
+import { register } from 'e2e-behaviour-testing';
 
 register();
 

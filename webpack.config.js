@@ -15,7 +15,7 @@ module.exports = {
     entry: './src/index.ts',
     devtool: "cheap-source-map",
     output: {
-        library: 'ui-testing-template',
+        library: 'e2e-behaviour-testing',
         filename: './main.js',
         libraryTarget: 'umd',
     },
