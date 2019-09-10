@@ -12,7 +12,7 @@ Use `npm run checkLicense` to get the full list of licenses
 
 ## Style guide
 - Maximum line length: 160
-- Interfaces should begin with capital `i`
+- Interfaces should begin with capital `I`
 - All variables and functions should be names in camelCase
 - Multiline objects and array should have trailing comma
 - Only Unix line ending `\n`
