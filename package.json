@@ -1,6 +1,6 @@
 {
   "name": "e2e-behaviour-testing",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "BDD UI testing framework with cypress and cucumber",
   "homepage": "https://github.com/SparkEquation/e2e-behaviour-testing#readme",
   "repository": {
@@ -47,13 +47,15 @@
     "README.md"
   ],
   "scripts": {
+    "build": "webpack",
+    "lint": "eslint lib/**/*.ts src/**/*.ts",
+    "prebuild": "npm run lint",
+    "postbuild": "git add dist && git add postinstall",
     "postinstall": "node scripts/postinstall.js",
     "pretest": "node scripts/pageObjectImportsGenerator.js",
     "prepublishOnly": "npm run build",
     "test:run": "npm run pretest && cypress run",
     "test:open": "npm run pretest && cypress open",
-    "build": "webpack",
-    "postbuild": "git add dist && git add postinstall",
     "checkLicense": "legally"
   },
   "husky": {
@@ -75,8 +77,11 @@
     "@babel/core": "^7.5.5",
     "@types/cucumber": "^4.0.7",
     "@types/node": "^12.7.1",
+    "@typescript-eslint/eslint-plugin": "^2.2.0",
+    "@typescript-eslint/parser": "^2.2.0",
     "awesome-typescript-loader": "^5.2.1",
     "copy-webpack-plugin": "^5.0.4",
+    "eslint": "^6.3.0",
     "husky": "^3.0.4",
     "legally": "^3.3.7",
     "mocha": "^6.2.0",

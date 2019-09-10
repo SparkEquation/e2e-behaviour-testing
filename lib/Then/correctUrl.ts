@@ -18,13 +18,13 @@ import { Then } from 'cypress-cucumber-preprocessor/steps';
 import { PageObjectSelector } from '../types';
 import { getNavigationUrl } from '../../src/functions';
 
-export function register () {
-    Then(`URL is {string}`, (selectorString: string) => {
-        const selector = new PageObjectSelector(selectorString);
-        const url = getNavigationUrl(selector);
+export function register(): void {
+	Then(`URL is {string}`, (selectorString: string) => {
+		const selector = new PageObjectSelector(selectorString);
+		const url = getNavigationUrl(selector);
 
-        if (url) {
-            cy.url().should('include', `${Cypress.config().baseUrl}/${url}`);
-        }
-    });
+		if (url) {
+			cy.url().should('include', `${Cypress.config().baseUrl}/${url}`);
+		}
+	});
 }

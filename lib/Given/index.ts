@@ -17,7 +17,7 @@
 import * as OpenPage from './openPage';
 import * as LoggedIn from './loggedIn';
 
-export function register() {
-    OpenPage.register();
-    LoggedIn.register();
+export function register(): void {
+	OpenPage.register();
+	LoggedIn.register();
 }
