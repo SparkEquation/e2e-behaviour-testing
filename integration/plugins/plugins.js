@@ -1,5 +1,5 @@
 // ***********************************************************
-// This file is provided by ui-testing-template-cypress
+// This file is provided by e2e-behaviour-testing
 // This example can be used to load plugins
 //
 // You can change the location of this file or turn off loading

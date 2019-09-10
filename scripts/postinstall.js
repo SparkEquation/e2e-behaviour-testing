@@ -108,7 +108,7 @@ function createDirectoryIfNotExists (dirPath) {
 		try {
 			fs.mkdirSync(dirPath, {recursive: true});
 		} catch (e) {
-			console.warn(`UI-TESTING-CYPRESS: Warning:
+			console.warn(`E2E-BEHAVIOUR-TESTING: Warning:
 			Cannot create directory, details:
 			${e}`);
 		}
@@ -120,7 +120,7 @@ function copyIfNotExists(from, to) {
 		fs.copyFileSync(from, to, fs.constants.COPYFILE_EXCL);
 	} catch (e) {
 		if (e.code !== 'EEXIST') {
-			console.warn(`UI-TESTING-CYPRESS: Warning:
+			console.warn(`E2E-BEHAVIOUR-TESTING: Warning:
 			Cannot copy file, details:
 			${e}`);
 		}
