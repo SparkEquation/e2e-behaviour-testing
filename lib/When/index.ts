@@ -21,9 +21,9 @@ import * as TypingIn from './typingIn';
 import * as Hover from './hover';
 
 export function register(): void {
-	Click.register();
-	See.register();
-	LogIn.register();
-	TypingIn.register();
-	Hover.register();
+    Click.register();
+    See.register();
+    LogIn.register();
+    TypingIn.register();
+    Hover.register();
 }

@@ -1,62 +1,99 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "eslint:recommended"
-  ],
-  "env": {
-    "node": true
-  },
-  "parserOptions": {
-    "ecmaVersion": 2019,
-    "sourceType": "module"
-  },
-  "rules": {
-    "@typescript-eslint/interface-name-prefix": ["error", {
-      "prefixWithI": "always"
-    }],
-    "@typescript-eslint/no-explicit-any": "off",
-    "no-undef": "off",
-    "no-prototype-builtins": "off",
-    "no-unused-vars": "off",
-    "no-case-declarations": "off",
-    "no-duplicate-imports": "error",
-    "object-curly-spacing": ["error", "always"],
-    "prefer-object-spread": "error",
-    "sort-imports": "off",
-    "block-spacing": "error",
-    "brace-style": "error",
-    "camelcase": "error",
-    "comma-dangle": ["error", "always-multiline"],
-    "comma-spacing": ["error", {
-      "before": false,
-      "after": true
-    }],
-    "computed-property-spacing": "error",
-    "eol-last": "error",
-    "func-call-spacing": "error",
-    "key-spacing": ["error", {
-      "beforeColon": false,
-      "afterColon": true,
-      "mode": "strict"
-    }],
-    "linebreak-style": ["error", "unix"],
-    "max-len": ["error", {
-      "code": 160
-    }],
-    "newline-per-chained-call": "error",
-    "no-unneeded-ternary": "error",
-    "quotes": ["error", "single", {
-      "allowTemplateLiterals": true
-    }],
-    "semi": "error",
-    "space-before-function-paren": ["error", {
-      "named": "never",
-      "anonymous": "always",
-      "asyncArrow": "always"
-    }],
-    "space-infix-ops": "error",
-    "arrow-parens": ["error", "as-needed"],
-    "arrow-spacing": ["error"]
-  }
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "eslint:recommended"
+    ],
+    "env": {
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2019,
+        "sourceType": "module"
+    },
+    "rules": {
+        "@typescript-eslint/interface-name-prefix": [
+            "error",
+            {
+                "prefixWithI": "always"
+            }
+        ],
+        "@typescript-eslint/no-explicit-any": "off",
+        "no-undef": "off",
+        "no-prototype-builtins": "off",
+        "no-unused-vars": "off",
+        "no-case-declarations": "off",
+        "no-duplicate-imports": "error",
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "prefer-object-spread": "error",
+        "sort-imports": "off",
+        "block-spacing": "error",
+        "brace-style": "error",
+        "camelcase": "error",
+        "comma-dangle": [
+            "error",
+            "always-multiline"
+        ],
+        "comma-spacing": [
+            "error",
+            {
+                "before": false,
+                "after": true
+            }
+        ],
+        "computed-property-spacing": "error",
+        "eol-last": "error",
+        "func-call-spacing": "error",
+        "key-spacing": [
+            "error",
+            {
+                "beforeColon": false,
+                "afterColon": true,
+                "mode": "strict"
+            }
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 160
+            }
+        ],
+        "newline-per-chained-call": "error",
+        "no-unneeded-ternary": "error",
+        "quotes": [
+            "error",
+            "single",
+            {
+                "allowTemplateLiterals": true
+            }
+        ],
+        "semi": "error",
+        "space-before-function-paren": [
+            "error",
+            {
+                "named": "never",
+                "anonymous": "always",
+                "asyncArrow": "always"
+            }
+        ],
+        "space-infix-ops": "error",
+        "arrow-parens": [
+            "error",
+            "as-needed"
+        ],
+        "arrow-spacing": [
+            "error"
+        ],
+        "@typescript-eslint/indent": [
+            "error"
+        ],
+        "no-tabs": "error"
+    }
 }

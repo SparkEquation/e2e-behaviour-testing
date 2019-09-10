@@ -22,9 +22,9 @@ import * as When from './When';
 import * as Given from './Given';
 
 export function register(): void {
-	Types.register();
-	GlobalHooks.register();
-	Given.register();
-	When.register();
-	Then.register();
+    Types.register();
+    GlobalHooks.register();
+    Given.register();
+    When.register();
+    Then.register();
 }

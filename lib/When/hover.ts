@@ -19,16 +19,16 @@ import { PageObjectSelector } from '../types';
 import { CypressSavedElement, getElement } from '../../src/functions';
 
 export function register(): void {
-	When(`I hover element {string} without sub hovers`, (selectorString: string) => {
-		const selector = new PageObjectSelector(selectorString);
-		const element: CypressSavedElement = getElement(selector);
+    When(`I hover element {string} without sub hovers`, (selectorString: string) => {
+        const selector = new PageObjectSelector(selectorString);
+        const element: CypressSavedElement = getElement(selector);
 
-		if (element === null) {
-			return;
-		}
+        if (element === null) {
+            return;
+        }
 
-		cy.get(element)
-			.first()
-			.trigger('mouseover');
-	});
+        cy.get(element)
+            .first()
+            .trigger('mouseover');
+    });
 }
