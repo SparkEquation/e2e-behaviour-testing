@@ -48,7 +48,7 @@
   ],
   "scripts": {
     "build": "webpack",
-    "lint": "eslint lib/**/*.ts src/**/*.ts",
+    "lint": "eslint **/*.ts **/*.js",
     "prebuild": "npm run lint",
     "postbuild": "git add dist && git add postinstall",
     "postinstall": "node scripts/postinstall.js",
