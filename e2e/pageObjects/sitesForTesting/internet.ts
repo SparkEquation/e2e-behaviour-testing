@@ -1,4 +1,4 @@
-import { registerPageObject, registerSelector } from '../../../src';
+import { registerPageObject, registerSelector } from '../../../src/core';
 
 @registerPageObject('Internet')
 export class Internet {

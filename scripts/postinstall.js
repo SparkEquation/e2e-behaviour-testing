@@ -25,7 +25,7 @@ if (!isDependency) {
 
 // Paths for project where this library is being installed
 const projectPath = path.resolve('..', '..');
-const projectIntegrationPath = path.resolve(projectPath, 'integration');
+const projectIntegrationPath = path.resolve(projectPath, 'e2e');
 const projectPluginsPath = path.resolve(projectIntegrationPath, 'plugins');
 const projectPageObjectsPath = path.resolve(projectIntegrationPath, 'pageObjects');
 const projectTestsCommonPath = path.resolve(projectIntegrationPath, 'features', 'common');
@@ -41,51 +41,55 @@ const CYPRESS_CONFIG = 'cypress.json';
 const SUPPORT_FILE = 'support.js';
 const CYPRESS_CUCUMBER_CONFIG = '.cypress-cucumber-preprocessorrc';
 const TESTS_COMMON = 'globalBefore.ts';
-const TSCONFIG_FILE = 'tsconfig.json';
-const CYPRESS_ENV_FILE = 'cypress.env.json.template'
+const TSCONFIG_FILE = 'tsconfig.common.json';
+const CYPRESS_ENV_FILE = 'cypress.env.json';
 
 const filesToCopy = [
 	// GitIgnore file
 	{
-		from: path.resolve(ownPreInstallPath, `template${GITIGNORE_FILE}`),
-		to: path.resolve(projectPageObjectsPath, GITIGNORE_FILE)
+		resultDir: path.resolve(projectPageObjectsPath),
+		name: GITIGNORE_FILE,
 	},
 	// Plugin file
 	{
-		from: path.resolve(ownPreInstallPath, `${PLUGIN_FILE}.template`),
-		to: path.resolve(projectPluginsPath, PLUGIN_FILE)
+		resultDir: path.resolve(projectPluginsPath),
+		name: PLUGIN_FILE,
 	},
 	// Common file to run before tests
 	{
-		from: path.resolve(ownPreInstallPath, `${TESTS_COMMON}.template`),
-		to: path.resolve(projectTestsCommonPath, TESTS_COMMON)
+		resultDir: path.resolve(projectTestsCommonPath),
+		name: TESTS_COMMON,
 	},
 	// Cypress-cucumber-preprocessor config
 	{
-		from: path.resolve(ownPreInstallPath, `template${CYPRESS_CUCUMBER_CONFIG}`),
-		to: path.resolve(projectPath, CYPRESS_CUCUMBER_CONFIG)
+		resultDir: path.resolve(projectPath),
+		name: CYPRESS_CUCUMBER_CONFIG,
 	},
 	// Cypress config
 	{
-		from: path.resolve(CYPRESS_CONFIG),
-		to: path.resolve(projectPath, CYPRESS_CONFIG)
+		resultDir: path.resolve(projectPath),
+		name: CYPRESS_CONFIG,
 	},
 	// TS config
 	{
-		from: path.resolve(ownPreInstallPath, `${TSCONFIG_FILE}.template`),
-		to: path.resolve(projectIntegrationPath, TSCONFIG_FILE)
+		resultDir: path.resolve(projectIntegrationPath),
+		name: TSCONFIG_FILE,
+		outputName: 'tsconfig.json'
 	},
 	// support/index
 	{
-		from: path.resolve(ownPreInstallPath, `${SUPPORT_FILE}.template`),
-		to: path.resolve(projectSupportPath, SUPPORT_FILE)
+		resultDir: path.resolve(projectSupportPath),
+		name: SUPPORT_FILE,
 	},
 	// credentials template
 	{
-		from: path.resolve(ownPreInstallPath, CYPRESS_ENV_FILE),
-		to: path.resolve(projectPath, CYPRESS_ENV_FILE),
+		resultDir: path.resolve(projectPath),
+		name: CYPRESS_ENV_FILE,
 	},
-];
+].map(fileInfo => ({
+	from: path.resolve(ownPreInstallPath, `example.${fileInfo.name}.template`),
+	to: path.resolve(fileInfo.resultDir, (fileInfo.outputName || fileInfo.name))
+}));
 
 createNecessaryDirectories();
 

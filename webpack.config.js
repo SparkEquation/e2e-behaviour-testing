@@ -1,11 +1,11 @@
 const nodeExternals = require('webpack-node-externals');
 const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
-const INTEGRATION_FOLDER = path.resolve('integration')
+const INTEGRATION_FOLDER = path.resolve('features')
 const POSTINSTALL_FOLDER = path.resolve('postinstall');
 const PLUGIN_FILE = 'plugins.js';
 const SUPPORT_FILE = 'support.js';
-const TSCONFIG_FILE = 'tsconfig.json';
+const TSCONFIG_FILE = 'tsconfig.webpack.json';
 
 
 module.exports = {

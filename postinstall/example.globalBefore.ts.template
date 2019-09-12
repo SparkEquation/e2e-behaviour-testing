@@ -1,0 +1,7 @@
+import { register, makeCypressWaitForPromise } from 'e2e-behaviour-testing';
+
+register();
+
+before(() => {
+  return makeCypressWaitForPromise(import('../../pageObjects'));
+});

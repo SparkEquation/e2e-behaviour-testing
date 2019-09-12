@@ -1,4 +1,4 @@
-import { LogInRole, PageObjectField, registerPageObject, registerSelector } from '../../../src';
+import { LogInRole, PageObjectField, registerPageObject, registerSelector } from '../../../src/core';
 
 @registerPageObject('PhpTravels')
 export class PhpTravels {

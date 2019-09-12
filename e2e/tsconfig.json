@@ -1,4 +1,5 @@
 {
+  "extends": "../config/tsconfig.common",
   "compilerOptions": {
     "module": "commonjs",
     "moduleResolution": "node",

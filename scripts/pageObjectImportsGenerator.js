@@ -48,7 +48,7 @@ function getFiles (pageObjectsPath, nestedPath = '.') {
         .flat(MAX_DEPTH);
 }
 
-const pageObjectDirPath = path.resolve('integration', 'pageObjects');
+const pageObjectDirPath = path.resolve('e2e', 'pageObjects');
 
 const files = getFiles(pageObjectDirPath)
     .filter(

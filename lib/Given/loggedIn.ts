@@ -16,8 +16,8 @@
 
 import { Given } from 'cypress-cucumber-preprocessor/steps';
 import { PageObjectSelector } from '../types';
-import { LogInRole } from '../../src';
-import { getNavigationUrl } from '../../src/functions';
+import { LogInRole } from '../../src/core';
+import { getNavigationUrl } from '../../src/core/functions';
 
 export function register () {
     const loggedInAsFunction = (apiSelectorString: string, roleSelectorString: string, redirectSelectorString?: string) => {
