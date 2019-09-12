@@ -16,7 +16,7 @@
 
 import { When } from 'cypress-cucumber-preprocessor/steps';
 import { PageObjectSelector, SeeOptions } from '../types';
-import { CypressSavedElement, extractCommonGetOptions, getElement } from '../../src/functions';
+import { CypressSavedElement, extractCommonGetOptions, getElement } from '../../src/core/functions';
 import { TableDefinition } from 'cucumber';
 
 export function register(): void {

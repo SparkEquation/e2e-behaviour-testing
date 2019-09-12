@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { PageObjectField, registerPageObject } from '../src';
-import { CredentialsObject } from '../src/functions';
+import { PageObjectField, registerPageObject } from '../src/core';
+import { CredentialsObject } from '../src/core/functions';
 
 function extractCredentials(credentials: CredentialsObject): void {
     @registerPageObject({ name: 'Credentials', type: PageObjectField.RoleCredentials })

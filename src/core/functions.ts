@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import { ElementGetOptions, GetOptions, PageObjectSelector } from '../lib/types';
+import { ElementGetOptions, GetOptions, PageObjectSelector } from '../../lib/types';
 import { LogInRole, PageObjectField } from './pageObjectRegistrator';
+import Bluebird from 'cypress/types/bluebird';
 
 export type CypressSavedElement = string;
 export type CredentialsObject = { [key: string]: LogInRole };
@@ -61,4 +62,10 @@ export function extractCommonGetOptions(options: ElementGetOptions): Partial<Cyp
         result.timeout = options.wait;
     }
     return result;
+}
+
+export function makeCypressWaitForPromise(promiseToWait: Promise<any>): Bluebird<any> {
+    return new Cypress.Promise((resolve, reject) => {
+        promiseToWait.then(resolve).catch(reject);
+    });
 }

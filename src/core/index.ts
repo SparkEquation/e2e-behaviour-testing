@@ -14,13 +14,7 @@
  * limitations under the License.
  */
 
-import { Given } from 'cypress-cucumber-preprocessor/steps';
-import { PageObjectSelector } from '../types';
-import { getNavigationUrl } from '../../src/core/functions';
+export * from './pageObjectRegistrator';
+export { makeCypressWaitForPromise } from './functions';
+export { register } from '../../lib';
 
-export function register(): void {
-    Given(`I open {string}`, (selectorString: string) => {
-        const selector = new PageObjectSelector(selectorString);
-        cy.visit(getNavigationUrl(selector));
-    });
-}

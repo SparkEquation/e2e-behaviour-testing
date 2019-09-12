@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-export {
-    registerSelector, registerPageObject, PageObjectField, IRoleCredentials, LogInRole,
-} from './pageObjectRegistrator';
-export { register } from '../lib';
+import { register } from '../../../lib';
+import { makeCypressWaitForPromise } from '../../../src/core';
+
+register();
+
+before(() => {
+    return makeCypressWaitForPromise(import('../../pageObjects'));
+});

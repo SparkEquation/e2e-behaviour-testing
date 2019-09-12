@@ -1,14 +1,16 @@
 {
-  "extends": "./integration/tsconfig",
+  "extends": "./config/tsconfig.common",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./dist",
     "declaration": true,
     "strictNullChecks": true,
     "preserveConstEnums": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "isolatedModules": true
   },
   "exclude": [
     "./node_modules",
-    "integration"
+    "e2e/features"
   ]
 }
