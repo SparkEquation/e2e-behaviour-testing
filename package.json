@@ -1,6 +1,6 @@
 {
   "name": "e2e-behaviour-testing",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "BDD UI testing framework with cypress and cucumber",
   "homepage": "https://github.com/SparkEquation/e2e-behaviour-testing#readme",
   "repository": {
@@ -55,7 +55,7 @@
     "prepublishOnly": "npm run build:all",
     "test:run": "npm run pretest && cypress run",
     "test:open": "npm run pretest && cypress open",
-    "build:all": "npm run build:core && npm run build:definitions",
+    "build:all": "rimraf dist && npm run build:core && npm run build:definitions",
     "build:core": "cross-env TS_NODE_PROJECT='config/tsconfig.webpack.json' webpack --config config/webpack.core.ts",
     "build:definitions": "tsc --emitDeclarationOnly --declaration --isolatedModules false",
     "postbuild:all": "git add dist && git add postinstall",
@@ -96,6 +96,7 @@
     "husky": "^3.0.4",
     "legally": "^3.3.7",
     "mocha": "^6.2.0",
+    "rimraf": "^3.0.0",
     "ts-node": "^8.3.0",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "webpack": "^4.39.2",

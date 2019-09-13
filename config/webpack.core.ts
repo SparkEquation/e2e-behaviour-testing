@@ -13,7 +13,7 @@ export default merge(
     commonConfig,
     {
         entry: path.resolve(
-            ProjectNames.SOURCES_FOLDER, ProjectNames.SOURCES_CORE_SUBFOLDER, ProjectNames.CORE_ENTRY_FILE,
+            ProjectNames.SOURCES_FOLDER, ProjectNames.CORE_ENTRY_FILE,
         ),
         output: {
             path: path.resolve(ProjectNames.OUTPUT_FOLDER),
