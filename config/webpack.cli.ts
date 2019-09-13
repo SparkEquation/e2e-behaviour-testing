@@ -14,7 +14,6 @@ export default merge(
         entry: {
             'e2eBddStartup': path.resolve(SCRIPTS_FOLDER, 'e2eBddStartup.ts'),
             'copyFiles': path.resolve(SCRIPTS_FOLDER, 'copyFiles.ts'),
-            // 'postinstall': path.resolve(SCRIPTS_FOLDER, 'postinstall'),
         },
         output: {
             path: BIN_FOLDER,

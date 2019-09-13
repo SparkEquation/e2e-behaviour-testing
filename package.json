@@ -46,7 +46,7 @@
     "README.md"
   ],
   "scripts": {
-    "pretest": "node scripts/pageObjectImportsGenerator.js",
+    "pretest": "npm run build:cli && node dist/cli/e2eBddStartup.js -c e2e/config/cypress.integration.json",
     "version": "npm --no-git-tag-version version",
     "prepublishOnly": "npm run build:all",
     "test:run": "npm run pretest && cypress run",

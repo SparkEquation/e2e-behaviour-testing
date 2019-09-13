@@ -110,6 +110,7 @@ let ProjectNames;
   ProjectNames["E2E_FEATURES_SUBFOLER"] = "features";
   ProjectNames["E2E_FEATURES_COMMON_SUBFOLDER"] = "common";
   ProjectNames["E2E_FEATURES_COMMON_BEFORE_FILE"] = "globalBefore.ts";
+  ProjectNames["E2E_CONFIG_SUBFOLDER"] = "config";
   ProjectNames["GITIGNORE_FILE"] = ".gitignore";
   ProjectNames["CONFIG_FOLDER"] = "config";
   ProjectNames["OUTPUT_FOLDER"] = "dist";
@@ -123,7 +124,10 @@ let ProjectNames;
   ProjectNames["TESTS_INDEX_FILE"] = "index.ts";
   ProjectNames["LIBRARY_NAME"] = "e2e-behaviour-testing";
   ProjectNames["CYPRESS_CONFIG_FILE"] = "cypress.json";
+  ProjectNames["CYPRESS_INTEGRATION_CONFIG_FILE"] = "cypress.integration.json";
+  ProjectNames["CYPRESS_UNIT_CONFIG_FILE"] = "cypress.unit.json";
   ProjectNames["CYPRESS_ENV_FILE"] = "cypress.env.json";
+  ProjectNames["CYPRESS_CUCUMBER_CONFIG_FILE"] = ".cypress-cucumber-preprocessorrc";
 })(ProjectNames || (ProjectNames = {}));
 
 /***/ }),
@@ -212,30 +216,28 @@ function determinePageObjectsPath(cypressConfig) {
   return path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(integrationFolderPath, '..', DEFAULT_PAGE_OBJECTS_FOLDER_NAME);
 }
 
-commander__WEBPACK_IMPORTED_MODULE_2___default.a.version("0.4.5").name('e2e-bdd-startup').option('-c, --config <path>', 'path to cypress config').action(cmd => {
-  const config = cmd.config || _config_projectNames__WEBPACK_IMPORTED_MODULE_3__["ProjectNames"].CYPRESS_CONFIG_FILE;
+commander__WEBPACK_IMPORTED_MODULE_2___default.a.version("0.4.6").name('e2e-bdd-startup').option('-c, --config <path>', 'path to cypress config').parse(process.argv);
+const config = commander__WEBPACK_IMPORTED_MODULE_2___default.a.config || _config_projectNames__WEBPACK_IMPORTED_MODULE_3__["ProjectNames"].CYPRESS_CONFIG_FILE;
 
-  if (config !== _config_projectNames__WEBPACK_IMPORTED_MODULE_3__["ProjectNames"].CYPRESS_CONFIG_FILE) {
-    copyConfig(config);
+if (config !== _config_projectNames__WEBPACK_IMPORTED_MODULE_3__["ProjectNames"].CYPRESS_CONFIG_FILE) {
+  copyConfig(config);
+}
+
+const cypressConfig = readConfig();
+const pageObjectsFolderPath = determinePageObjectsPath(cypressConfig);
+
+try {
+  const stats = fs__WEBPACK_IMPORTED_MODULE_1___default.a.statSync(pageObjectsFolderPath);
+
+  if (!stats.isDirectory()) {
+    throw new Error('Page objects is not a directory');
   }
+} catch (e) {
+  console.error(e.message);
+  process.exit(FAULT_EXIT_CODE);
+}
 
-  const cypressConfig = readConfig();
-  const pageObjectsFolderPath = determinePageObjectsPath(cypressConfig);
-
-  try {
-    const stats = fs__WEBPACK_IMPORTED_MODULE_1___default.a.statSync(pageObjectsFolderPath);
-
-    if (!stats.isDirectory()) {
-      throw new Error('Page objects is not a directory');
-    }
-  } catch (e) {
-    console.error(e.message);
-    process.exit(FAULT_EXIT_CODE);
-  }
-
-  Object(_pageObjectsImportsGenerator__WEBPACK_IMPORTED_MODULE_4__["generatePageObjects"])(pageObjectsFolderPath);
-});
-commander__WEBPACK_IMPORTED_MODULE_2___default.a.parse(process.argv);
+Object(_pageObjectsImportsGenerator__WEBPACK_IMPORTED_MODULE_4__["generatePageObjects"])(pageObjectsFolderPath);
 
 /***/ }),
 
@@ -249,11 +251,24 @@ commander__WEBPACK_IMPORTED_MODULE_2___default.a.parse(process.argv);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generatePageObjects", function() { return generatePageObjects; });
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ "fs");
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _config_projectNames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../config/projectNames */ "./config/projectNames.ts");
+/* harmony import */ var core_js_modules_es_array_flat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.flat */ "core-js/modules/es.array.flat");
+/* harmony import */ var core_js_modules_es_array_flat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_flat__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_unscopables_flat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.unscopables.flat */ "core-js/modules/es.array.unscopables.flat");
+/* harmony import */ var core_js_modules_es_array_unscopables_flat__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_unscopables_flat__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "core-js/modules/es.string.replace");
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! fs */ "fs");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! path */ "path");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _config_projectNames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../config/projectNames */ "./config/projectNames.ts");
+
+
+
+
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -272,7 +287,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const posixPath = path__WEBPACK_IMPORTED_MODULE_1___default.a.posix; // Max depth of page objects files
+const posixPath = path__WEBPACK_IMPORTED_MODULE_5___default.a.posix; // Max depth of page objects files
 
 const MAX_DEPTH = 10;
 const AVAILABLE_EXTENSIONS = ['.js', '.ts']; //Remove extensions and encapsulate single quotes
@@ -283,24 +298,24 @@ const filesMap = filename => filename.slice(0, -3).replace(`'`, `\\'`); // Creat
 const filesReduce = (acc, filename) => acc + `import '${filename}';\n`;
 
 function getFiles(pageObjectsPath, nestedPath = '.') {
-  const files = fs__WEBPACK_IMPORTED_MODULE_0___default.a.readdirSync(path__WEBPACK_IMPORTED_MODULE_1___default.a.resolve(pageObjectsPath, nestedPath), {
+  const files = fs__WEBPACK_IMPORTED_MODULE_4___default.a.readdirSync(path__WEBPACK_IMPORTED_MODULE_5___default.a.resolve(pageObjectsPath, nestedPath), {
     withFileTypes: true
   });
   return files.map(dirent => {
     if (dirent.isDirectory()) {
-      return getFiles(pageObjectsPath, path__WEBPACK_IMPORTED_MODULE_1___default.a.join(nestedPath, dirent.name));
+      return getFiles(pageObjectsPath, path__WEBPACK_IMPORTED_MODULE_5___default.a.join(nestedPath, dirent.name));
     }
 
-    return path__WEBPACK_IMPORTED_MODULE_1___default.a.join(nestedPath, dirent.name);
+    return path__WEBPACK_IMPORTED_MODULE_5___default.a.join(nestedPath, dirent.name);
   }).flat(MAX_DEPTH);
 }
 
 const generatePageObjects = pageObjectDirPath => {
-  const files = getFiles(pageObjectDirPath).filter(filePath => AVAILABLE_EXTENSIONS.includes(path__WEBPACK_IMPORTED_MODULE_1___default.a.extname(filePath)) && filePath !== _config_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].TESTS_INDEX_FILE).map(filesMap).map(file => {
-    return `./${posixPath.join(...file.split(path__WEBPACK_IMPORTED_MODULE_1___default.a.sep))}`;
+  const files = getFiles(pageObjectDirPath).filter(filePath => AVAILABLE_EXTENSIONS.includes(path__WEBPACK_IMPORTED_MODULE_5___default.a.extname(filePath)) && filePath !== _config_projectNames__WEBPACK_IMPORTED_MODULE_6__["ProjectNames"].TESTS_INDEX_FILE).map(filesMap).map(file => {
+    return `./${posixPath.join(...file.split(path__WEBPACK_IMPORTED_MODULE_5___default.a.sep))}`;
   });
   const importContent = files.reduce(filesReduce, '');
-  fs__WEBPACK_IMPORTED_MODULE_0___default.a.writeFileSync(path__WEBPACK_IMPORTED_MODULE_1___default.a.resolve(pageObjectDirPath, 'index.ts'), importContent);
+  fs__WEBPACK_IMPORTED_MODULE_4___default.a.writeFileSync(path__WEBPACK_IMPORTED_MODULE_5___default.a.resolve(pageObjectDirPath, 'index.ts'), importContent);
 };
 
 /***/ }),
@@ -313,6 +328,50 @@ const generatePageObjects = pageObjectDirPath => {
 /***/ (function(module, exports) {
 
 module.exports = require("commander");
+
+/***/ }),
+
+/***/ "core-js/modules/es.array.flat":
+/*!************************************************!*\
+  !*** external "core-js/modules/es.array.flat" ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/es.array.flat");
+
+/***/ }),
+
+/***/ "core-js/modules/es.array.iterator":
+/*!****************************************************!*\
+  !*** external "core-js/modules/es.array.iterator" ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/es.array.iterator");
+
+/***/ }),
+
+/***/ "core-js/modules/es.array.unscopables.flat":
+/*!************************************************************!*\
+  !*** external "core-js/modules/es.array.unscopables.flat" ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/es.array.unscopables.flat");
+
+/***/ }),
+
+/***/ "core-js/modules/es.string.replace":
+/*!****************************************************!*\
+  !*** external "core-js/modules/es.string.replace" ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/es.string.replace");
 
 /***/ }),
 

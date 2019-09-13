@@ -69,23 +69,22 @@ program
     .version(PACKAGE_VERSION)
     .name('e2e-bdd-startup')
     .option('-c, --config <path>', 'path to cypress config')
-    .action(cmd => {
-        const config = cmd.config || ProjectNames.CYPRESS_CONFIG_FILE;
-        if (config !== ProjectNames.CYPRESS_CONFIG_FILE) {
-            copyConfig(config);
-        }
-        const cypressConfig = readConfig();
-        const pageObjectsFolderPath = determinePageObjectsPath(cypressConfig);
-        try {
-            const stats = fs.statSync(pageObjectsFolderPath);
-            if (!stats.isDirectory()) {
-                throw new Error('Page objects is not a directory');
-            }
-        } catch (e) {
-            console.error(e.message);
-            process.exit(FAULT_EXIT_CODE);
-        }
-        generatePageObjects(pageObjectsFolderPath)
-    });
+    .parse(process.argv);
 
-program.parse(process.argv);
+const config = program.config || ProjectNames.CYPRESS_CONFIG_FILE;
+
+if (config !== ProjectNames.CYPRESS_CONFIG_FILE) {
+    copyConfig(config);
+}
+const cypressConfig = readConfig();
+const pageObjectsFolderPath = determinePageObjectsPath(cypressConfig);
+try {
+    const stats = fs.statSync(pageObjectsFolderPath);
+    if (!stats.isDirectory()) {
+        throw new Error('Page objects is not a directory');
+    }
+} catch (e) {
+    console.error(e.message);
+    process.exit(FAULT_EXIT_CODE);
+}
+generatePageObjects(pageObjectsFolderPath)

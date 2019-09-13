@@ -123,45 +123,43 @@ function prepareFilesToSave() {
     path: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PAGE_OBJECTS_FOLDER),
     name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].GITIGNORE_FILE
   }, {
-    path: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_CONFIG_FILE
+    path: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_CONFIG_SUBFOLDER),
+    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_INTEGRATION_CONFIG_FILE
+  }, {
+    path: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_CONFIG_SUBFOLDER),
+    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_UNIT_CONFIG_FILE
   }].map(fileInfo => ({
     from: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(fileInfo.path, fileInfo.name),
     to: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].POSTINSTALL_FOLDER, Object(_src_util_postinstallFilenamesConvertor__WEBPACK_IMPORTED_MODULE_1__["filenameToPostInstallEntry"])(fileInfo.name))
   }));
 }
 function prepareSavedFilesToCopy(projectBasePath, libraryTemplatesPath) {
-  return [// GitIgnore file
-  {
+  return [{
     resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PAGE_OBJECTS_FOLDER),
     name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].GITIGNORE_FILE
-  }, // Plugin file
-  {
+  }, {
     resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PLUGINS_SUBFOLDER),
     name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PLUGINS_FILE
-  }, // Common file to run before tests
-  {
+  }, {
     resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_FEATURES_SUBFOLER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_FEATURES_COMMON_SUBFOLDER),
     name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_FEATURES_COMMON_BEFORE_FILE
-  }, // Cypress-cucumber-preprocessor config
-  {
+  }, {
     resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_CONFIG_FILE
-  }, // Cypress config
-  {
-    resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_CONFIG_FILE
-  }, // TS config
-  {
+    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_CUCUMBER_CONFIG_FILE
+  }, {
+    resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_CONFIG_SUBFOLDER),
+    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_INTEGRATION_CONFIG_FILE
+  }, {
+    resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_CONFIG_SUBFOLDER),
+    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_UNIT_CONFIG_FILE
+  }, {
     resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER),
     name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TSCONFIG_FILE,
     outputName: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].OUTPUT_TSCONFIG_FILE
-  }, // support/index
-  {
+  }, {
     resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_SUPPORT_SUBFOLER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_SUPPORT_SUBFOLER
-  }, // credentials template
-  {
+    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_SUPPORT_FILE
+  }, {
     resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath),
     name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_ENV_FILE
   }].map(fileInfo => ({
@@ -175,7 +173,8 @@ function prepareDirectoriesToCreate(projectBasePath) {
   const PROJECT_SUPPORT_PATH = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(PROJECT_E2E_PATH, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_SUPPORT_SUBFOLER);
   const PROJECT_PAGE_OBJECTS_PATH = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(PROJECT_E2E_PATH, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PAGE_OBJECTS_FOLDER);
   const PROJECT_TESTS_COMMON_PATH = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(PROJECT_E2E_PATH, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_FEATURES_SUBFOLER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_FEATURES_COMMON_SUBFOLDER);
-  return [PROJECT_PLUGINS_PATH, PROJECT_SUPPORT_PATH, PROJECT_PAGE_OBJECTS_PATH, PROJECT_TESTS_COMMON_PATH];
+  const PROJECT_E2E_CONFIG_PATH = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(PROJECT_E2E_PATH, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_CONFIG_SUBFOLDER);
+  return [PROJECT_PLUGINS_PATH, PROJECT_SUPPORT_PATH, PROJECT_PAGE_OBJECTS_PATH, PROJECT_TESTS_COMMON_PATH, PROJECT_E2E_CONFIG_PATH];
 }
 
 /***/ }),
@@ -203,6 +202,7 @@ let ProjectNames;
   ProjectNames["E2E_FEATURES_SUBFOLER"] = "features";
   ProjectNames["E2E_FEATURES_COMMON_SUBFOLDER"] = "common";
   ProjectNames["E2E_FEATURES_COMMON_BEFORE_FILE"] = "globalBefore.ts";
+  ProjectNames["E2E_CONFIG_SUBFOLDER"] = "config";
   ProjectNames["GITIGNORE_FILE"] = ".gitignore";
   ProjectNames["CONFIG_FOLDER"] = "config";
   ProjectNames["OUTPUT_FOLDER"] = "dist";
@@ -216,7 +216,10 @@ let ProjectNames;
   ProjectNames["TESTS_INDEX_FILE"] = "index.ts";
   ProjectNames["LIBRARY_NAME"] = "e2e-behaviour-testing";
   ProjectNames["CYPRESS_CONFIG_FILE"] = "cypress.json";
+  ProjectNames["CYPRESS_INTEGRATION_CONFIG_FILE"] = "cypress.integration.json";
+  ProjectNames["CYPRESS_UNIT_CONFIG_FILE"] = "cypress.unit.json";
   ProjectNames["CYPRESS_ENV_FILE"] = "cypress.env.json";
+  ProjectNames["CYPRESS_CUCUMBER_CONFIG_FILE"] = ".cypress-cucumber-preprocessorrc";
 })(ProjectNames || (ProjectNames = {}));
 
 /***/ }),

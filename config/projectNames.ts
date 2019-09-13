@@ -9,6 +9,7 @@ export enum ProjectNames {
     E2E_FEATURES_SUBFOLER = 'features',
     E2E_FEATURES_COMMON_SUBFOLDER = 'common',
     E2E_FEATURES_COMMON_BEFORE_FILE = 'globalBefore.ts',
+    E2E_CONFIG_SUBFOLDER = 'config',
     GITIGNORE_FILE = '.gitignore',
     CONFIG_FOLDER = 'config',
     OUTPUT_FOLDER = 'dist',
@@ -22,5 +23,8 @@ export enum ProjectNames {
     TESTS_INDEX_FILE = 'index.ts',
     LIBRARY_NAME = 'e2e-behaviour-testing',
     CYPRESS_CONFIG_FILE = 'cypress.json',
+    CYPRESS_INTEGRATION_CONFIG_FILE = 'cypress.integration.json',
+    CYPRESS_UNIT_CONFIG_FILE = 'cypress.unit.json',
     CYPRESS_ENV_FILE = 'cypress.env.json',
+    CYPRESS_CUCUMBER_CONFIG_FILE = '.cypress-cucumber-preprocessorrc'
 }
