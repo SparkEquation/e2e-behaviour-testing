@@ -142,10 +142,14 @@ function register() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
-/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
+/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -166,9 +170,9 @@ __webpack_require__.r(__webpack_exports__);
 
 function register() {
   const loggedInAsFunction = (apiSelectorString, roleSelectorString, redirectSelectorString) => {
-    const navigationSelector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](apiSelectorString);
-    const roleSelector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](roleSelectorString);
-    const url = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getNavigationUrl"])(navigationSelector);
+    const navigationSelector = new _types__WEBPACK_IMPORTED_MODULE_2__["PageObjectSelector"](apiSelectorString);
+    const roleSelector = new _types__WEBPACK_IMPORTED_MODULE_2__["PageObjectSelector"](roleSelectorString);
+    const url = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["getNavigationUrl"])(navigationSelector);
     const requestBody = {};
 
     for (let field of roleSelector.getValue()) {
@@ -189,13 +193,13 @@ function register() {
     });
 
     if (redirectSelectorString) {
-      const redirectSelector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](redirectSelectorString);
-      cy.visit(Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getNavigationUrl"])(redirectSelector));
+      const redirectSelector = new _types__WEBPACK_IMPORTED_MODULE_2__["PageObjectSelector"](redirectSelectorString);
+      cy.visit(Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["getNavigationUrl"])(redirectSelector));
     }
   };
 
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["Given"])(`I logged in at {string} as {string}`, loggedInAsFunction);
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["Given"])(`I logged in at {string} as {string} and visit {string}`, loggedInAsFunction);
+  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__["Given"])(`I logged in at {string} as {string}`, loggedInAsFunction);
+  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__["Given"])(`I logged in at {string} as {string} and visit {string}`, loggedInAsFunction);
 }
 
 /***/ }),
@@ -368,10 +372,14 @@ function register() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
-/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.promise */ "core-js/modules/es.promise");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
+/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -391,11 +399,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function register() {
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["When"])(`I click {string}`, async (selectorString, table) => {
-    const options = table ? new _types__WEBPACK_IMPORTED_MODULE_1__["ClickOptions"](table.rowsHash()) : new _types__WEBPACK_IMPORTED_MODULE_1__["ClickOptions"]({});
-    const selector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](selectorString);
-    let element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getElement"])(selector);
-    const getOptions = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["extractCommonGetOptions"])(options);
+  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__["When"])(`I click {string}`, async (selectorString, table) => {
+    const options = table ? new _types__WEBPACK_IMPORTED_MODULE_2__["ClickOptions"](table.rowsHash()) : new _types__WEBPACK_IMPORTED_MODULE_2__["ClickOptions"]({});
+    const selector = new _types__WEBPACK_IMPORTED_MODULE_2__["PageObjectSelector"](selectorString);
+    let element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["getElement"])(selector);
+    const getOptions = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["extractCommonGetOptions"])(options);
 
     if (options.first) {
       cy.get(element, getOptions).first().click({
@@ -407,11 +415,11 @@ function register() {
       });
     }
   });
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["When"])(`I click blank link {string}`, (selectorString, table) => {
-    const selector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](selectorString);
-    const options = table ? new _types__WEBPACK_IMPORTED_MODULE_1__["BlankLinkClickOptions"](table.rowsHash()) : new _types__WEBPACK_IMPORTED_MODULE_1__["BlankLinkClickOptions"]({});
-    let element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getElement"])(selector);
-    const getOptions = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["extractCommonGetOptions"])(options);
+  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__["When"])(`I click blank link {string}`, (selectorString, table) => {
+    const selector = new _types__WEBPACK_IMPORTED_MODULE_2__["PageObjectSelector"](selectorString);
+    const options = table ? new _types__WEBPACK_IMPORTED_MODULE_2__["BlankLinkClickOptions"](table.rowsHash()) : new _types__WEBPACK_IMPORTED_MODULE_2__["BlankLinkClickOptions"]({});
+    let element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["getElement"])(selector);
+    const getOptions = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["extractCommonGetOptions"])(options);
 
     const callback = el => {
       if (el.attr('target') === '_blank' && el.attr('href') && !options.customClick) {
@@ -551,10 +559,17 @@ function register() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
-/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.promise */ "core-js/modules/es.promise");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
+/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
+
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -574,10 +589,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function register() {
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["When"])(`I log in at {string} as {string}`, async (selectorString, roleSelectorString) => {
-    const elementSelector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](selectorString);
-    const roleSelector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](roleSelectorString);
-    let element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getElement"])(elementSelector);
+  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_2__["When"])(`I log in at {string} as {string}`, async (selectorString, roleSelectorString) => {
+    const elementSelector = new _types__WEBPACK_IMPORTED_MODULE_3__["PageObjectSelector"](selectorString);
+    const roleSelector = new _types__WEBPACK_IMPORTED_MODULE_3__["PageObjectSelector"](roleSelectorString);
+    let element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_4__["getElement"])(elementSelector);
     cy.get(element).within(form => {
       cy.root().should('be.visible');
       const credentials = roleSelector.getValue();
@@ -711,7 +726,11 @@ function register() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var _src_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/core */ "./src/core/index.ts");
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _src_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/core */ "./src/core/index.ts");
+
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -732,9 +751,9 @@ __webpack_require__.r(__webpack_exports__);
 function extractCredentials(credentials) {
   var _dec, _class;
 
-  let Credentials = (_dec = Object(_src_core__WEBPACK_IMPORTED_MODULE_0__["registerPageObject"])({
+  let Credentials = (_dec = Object(_src_core__WEBPACK_IMPORTED_MODULE_1__["registerPageObject"])({
     name: 'Credentials',
-    type: _src_core__WEBPACK_IMPORTED_MODULE_0__["PageObjectField"].RoleCredentials
+    type: _src_core__WEBPACK_IMPORTED_MODULE_1__["PageObjectField"].RoleCredentials
   }), _dec(_class = class Credentials {
     constructor() {
       if (credentials) {
@@ -823,7 +842,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BlankLinkClickOptions", function() { return BlankLinkClickOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SeeOptions", function() { return SeeOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var _src_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/core */ "./src/core/index.ts");
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _src_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/core */ "./src/core/index.ts");
+
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /*
@@ -855,7 +878,7 @@ class PageObjectSelector {
     const [className, fieldName] = pageObjectSelector.split('.');
     this.fieldName = fieldName;
     this.className = className;
-    const classInstance = _src_core__WEBPACK_IMPORTED_MODULE_0__["storage"].get(className);
+    const classInstance = _src_core__WEBPACK_IMPORTED_MODULE_1__["storage"].get(className);
 
     if (classInstance === undefined) {
       throw new Error(`Cannot find page object class ${className}`);
@@ -946,7 +969,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNavigationUrl", function() { return getNavigationUrl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "extractCommonGetOptions", function() { return extractCommonGetOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeCypressWaitForPromise", function() { return makeCypressWaitForPromise; });
-/* harmony import */ var _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pageObjectRegistrator */ "./src/core/pageObjectRegistrator.ts");
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pageObjectRegistrator */ "./src/core/pageObjectRegistrator.ts");
+
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -968,12 +995,12 @@ function getElement(selector, getOptions = {}) {
   let element = '@' + getElementAlias;
 
   switch (selector.fieldDescriptor.type) {
-    case _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__["PageObjectField"].Xpath:
+    case _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_1__["PageObjectField"].Xpath:
       // @ts-ignore
       cy.xpath(selector.getValue(), getOptions).as(getElementAlias);
       break;
 
-    case _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__["PageObjectField"].Selector:
+    case _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_1__["PageObjectField"].Selector:
       const value = selector.getValue();
 
       if (Array.isArray(value) && typeof value[1] === 'string') {
@@ -992,7 +1019,7 @@ function getElement(selector, getOptions = {}) {
   return element;
 }
 function getNavigationUrl(selector) {
-  if (selector.fieldDescriptor.type !== _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__["PageObjectField"].Navigation) {
+  if (selector.fieldDescriptor.type !== _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_1__["PageObjectField"].Navigation) {
     throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to get URL by selector '${selector.toString()}' `);
   }
 
@@ -1069,6 +1096,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerPageObject", function() { return registerPageObject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerSelector", function() { return registerSelector; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "storage", function() { return storage; });
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
+
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -1189,6 +1220,28 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+
+/***/ }),
+
+/***/ "core-js/modules/es.array.iterator":
+/*!****************************************************!*\
+  !*** external "core-js/modules/es.array.iterator" ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/es.array.iterator");
+
+/***/ }),
+
+/***/ "core-js/modules/es.promise":
+/*!*********************************************!*\
+  !*** external "core-js/modules/es.promise" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/es.promise");
 
 /***/ }),
 
