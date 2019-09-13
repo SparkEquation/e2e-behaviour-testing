@@ -20,7 +20,6 @@ export const babelOptions = {
                 'targets': {
                     'node': '8',
                 },
-                useBuiltIns: "usage",
                 corejs: 3,
             },
         ],

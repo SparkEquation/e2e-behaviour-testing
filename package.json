@@ -1,6 +1,6 @@
 {
   "name": "e2e-behaviour-testing",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "BDD UI testing framework with cypress and cucumber",
   "homepage": "https://github.com/SparkEquation/e2e-behaviour-testing#readme",
   "repository": {
