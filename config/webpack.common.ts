@@ -21,6 +21,7 @@ export const babelOptions = {
                     'node': '8',
                 },
                 corejs: 3,
+                useBuiltIns: 'usage',
             },
         ],
         "@babel/preset-typescript"

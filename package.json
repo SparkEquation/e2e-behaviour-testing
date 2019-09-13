@@ -1,6 +1,6 @@
 {
   "name": "e2e-behaviour-testing",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "description": "BDD UI testing framework with cypress and cucumber",
   "homepage": "https://github.com/SparkEquation/e2e-behaviour-testing#readme",
   "repository": {
@@ -66,6 +66,7 @@
   },
   "dependencies": {
     "@cypress/browserify-preprocessor": "^2.1.1",
+    "core-js": "^3.2.1",
     "cucumber": "^5.1.0",
     "cypress": "^3.4.1",
     "cypress-cucumber-preprocessor": "^1.16.0",
