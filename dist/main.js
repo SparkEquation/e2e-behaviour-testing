@@ -91,7 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/core/index.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1042,7 +1042,7 @@ function makeCypressWaitForPromise(promiseToWait) {
 /*!***************************!*\
   !*** ./src/core/index.ts ***!
   \***************************/
-/*! exports provided: makeCypressWaitForPromise, register, PageObjectField, registerPageObject, registerSelector, storage */
+/*! exports provided: makeCypressWaitForPromise, PageObjectField, registerPageObject, registerSelector, storage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1059,9 +1059,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./functions */ "./src/core/functions.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeCypressWaitForPromise", function() { return _functions__WEBPACK_IMPORTED_MODULE_1__["makeCypressWaitForPromise"]; });
 
-/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib */ "./lib/index.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "register", function() { return _lib__WEBPACK_IMPORTED_MODULE_2__["register"]; });
-
 /*
  * Copyright 2019 Spark Equation
  *
@@ -1077,7 +1074,6 @@ __webpack_require__.r(__webpack_exports__);
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 
 
 
@@ -1177,6 +1173,49 @@ function registerSelector(type) {
   };
 }
 const storage = new Map();
+
+/***/ }),
+
+/***/ "./src/index.ts":
+/*!**********************!*\
+  !*** ./src/index.ts ***!
+  \**********************/
+/*! exports provided: register, makeCypressWaitForPromise, PageObjectField, registerPageObject, registerSelector, storage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core */ "./src/core/index.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeCypressWaitForPromise", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["makeCypressWaitForPromise"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PageObjectField", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["PageObjectField"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerPageObject", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["registerPageObject"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerSelector", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["registerSelector"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "storage", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["storage"]; });
+
+/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib */ "./lib/index.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "register", function() { return _lib__WEBPACK_IMPORTED_MODULE_1__["register"]; });
+
+/*
+ * Copyright 2019 Spark Equation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
 
 /***/ }),
 

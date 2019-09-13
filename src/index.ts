@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
-export * from './pageObjectRegistrator';
-export { makeCypressWaitForPromise } from './functions';
+export * from './core';
+export { register } from '../lib';
+
 
