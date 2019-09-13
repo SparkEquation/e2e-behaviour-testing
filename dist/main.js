@@ -956,7 +956,7 @@ function register() {
 /*!*******************************!*\
   !*** ./src/core/functions.ts ***!
   \*******************************/
-/*! exports provided: getElement, getNavigationUrl, extractCommonGetOptions */
+/*! exports provided: getElement, getNavigationUrl, extractCommonGetOptions, makeCypressWaitForPromise */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -964,6 +964,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getElement", function() { return getElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNavigationUrl", function() { return getNavigationUrl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "extractCommonGetOptions", function() { return extractCommonGetOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeCypressWaitForPromise", function() { return makeCypressWaitForPromise; });
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pageObjectRegistrator */ "./src/core/pageObjectRegistrator.ts");
@@ -1029,6 +1030,11 @@ function extractCommonGetOptions(options) {
 
   return result;
 }
+function makeCypressWaitForPromise(promiseToWait) {
+  return new Cypress.Promise((resolve, reject) => {
+    promiseToWait.then(resolve).catch(reject);
+  });
+}
 
 /***/ }),
 
@@ -1036,7 +1042,7 @@ function extractCommonGetOptions(options) {
 /*!***************************!*\
   !*** ./src/core/index.ts ***!
   \***************************/
-/*! exports provided: register, PageObjectField, registerPageObject, registerSelector, storage */
+/*! exports provided: makeCypressWaitForPromise, register, PageObjectField, registerPageObject, registerSelector, storage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1050,8 +1056,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "storage", function() { return _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__["storage"]; });
 
-/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib */ "./lib/index.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "register", function() { return _lib__WEBPACK_IMPORTED_MODULE_1__["register"]; });
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./functions */ "./src/core/functions.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeCypressWaitForPromise", function() { return _functions__WEBPACK_IMPORTED_MODULE_1__["makeCypressWaitForPromise"]; });
+
+/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib */ "./lib/index.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "register", function() { return _lib__WEBPACK_IMPORTED_MODULE_2__["register"]; });
 
 /*
  * Copyright 2019 Spark Equation
@@ -1068,6 +1077,7 @@ __webpack_require__.r(__webpack_exports__);
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 
 
 
