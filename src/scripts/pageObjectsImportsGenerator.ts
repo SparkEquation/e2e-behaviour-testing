@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * Copyright 2019 Spark Equation
  *
@@ -16,13 +14,11 @@
  * limitations under the License.
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs'
+import path from 'path';
+import { ProjectNames } from '../../config/projectNames';
+
 const posixPath = path.posix;
-
-// TODO add chokidar to automatically rearrange imports on change https://github.com/paulmillr/chokidar
-
-const INDEX_FILENAME = 'index.ts';
 // Max depth of page objects files
 const MAX_DEPTH = 10;
 const AVAILABLE_EXTENSIONS = ['.js', '.ts'];
@@ -40,25 +36,27 @@ function getFiles (pageObjectsPath, nestedPath = '.') {
     );
 
     return files.map(dirent => {
-            if (dirent.isDirectory()) {
-                return getFiles(pageObjectsPath, path.join(nestedPath, dirent.name));
-            }
-            return path.join(nestedPath, dirent.name);
-        })
+        if (dirent.isDirectory()) {
+            return getFiles(pageObjectsPath, path.join(nestedPath, dirent.name));
+        }
+        return path.join(nestedPath, dirent.name);
+    })
         .flat(MAX_DEPTH);
 }
 
-const pageObjectDirPath = path.resolve('e2e', 'pageObjects');
+export const generatePageObjects = (pageObjectDirPath) => {
+    const files = getFiles(pageObjectDirPath)
+        .filter(
+            filePath => AVAILABLE_EXTENSIONS.includes(
+                path.extname(filePath)
+            ) && filePath !== ProjectNames.TESTS_INDEX_FILE
+        )
+        .map(filesMap)
+        .map(file => {
+            return `./${ posixPath.join(...file.split(path.sep)) }`;
+        });
 
-const files = getFiles(pageObjectDirPath)
-    .filter(
-        filePath => AVAILABLE_EXTENSIONS.includes(path.extname(filePath)) && filePath !== INDEX_FILENAME
-    )
-    .map(filesMap)
-    .map(file => {
-        return `./${posixPath.join(...file.split(path.sep))}`;
-    });
+    const importContent = files.reduce(filesReduce, '');
 
-const importContent = files.reduce(filesReduce, '');
-
-fs.writeFileSync(path.resolve(pageObjectDirPath, 'index.ts'), importContent);
+    fs.writeFileSync(path.resolve(pageObjectDirPath, 'index.ts'), importContent);
+};

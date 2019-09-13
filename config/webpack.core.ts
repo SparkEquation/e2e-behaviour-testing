@@ -2,11 +2,11 @@ import path from 'path';
 import merge from 'webpack-merge';
 import CopyPlugin from 'copy-webpack-plugin';
 import { commonConfig, babelOptions } from './webpack.common';
-import { prepareFilesToCopy } from './prepareFilesToCopy';
+import { prepareFilesToSave } from './prepareFilesToCopy';
 import { ProjectNames } from './projectNames';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
-const files = prepareFilesToCopy();
+const files = prepareFilesToSave();
 const tsconfigPath = path.resolve('tsconfig.json');
 
 export default merge(

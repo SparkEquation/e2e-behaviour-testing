@@ -1,0 +1,37 @@
+import path from 'path';
+import webpack from 'webpack';
+import merge from 'webpack-merge';
+
+import { ProjectNames } from './projectNames';
+import { commonConfig, babelOptions } from './webpack.common';
+
+const SCRIPTS_FOLDER = path.resolve(ProjectNames.SOURCES_FOLDER, ProjectNames.SOURCES_SCRIPTS_SUBFOLDER);
+const BIN_FOLDER = path.resolve(ProjectNames.OUTPUT_FOLDER, ProjectNames.OUTPUT_SCRIPTS_SUBFOLDER);
+
+export default merge(
+    commonConfig,
+    {
+        entry: {
+            'e2eBddStartup': path.resolve(SCRIPTS_FOLDER, 'e2eBddStartup.ts'),
+            'copyFiles': path.resolve(SCRIPTS_FOLDER, 'copyFiles.ts'),
+            // 'postinstall': path.resolve(SCRIPTS_FOLDER, 'postinstall'),
+        },
+        output: {
+            path: BIN_FOLDER,
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.ts$/,
+                    loader: 'babel-loader',
+                    options: babelOptions,
+                },
+            ],
+        },
+        plugins: [
+            new webpack.BannerPlugin({
+                banner: "#!/usr/bin/env node", raw: true
+            })
+        ],
+    }
+);
