@@ -25,7 +25,8 @@
       ],
       "parser": "@typescript-eslint/parser",
       "extends": [
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "eslint:recommended"
       ],
       "rules": {
         "@typescript-eslint/interface-name-prefix": ["error", {
