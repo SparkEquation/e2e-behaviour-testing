@@ -33,7 +33,7 @@ const filesMap = filename => filename.slice(0, -3).replace(`'`, `\\'`);
 // Create file with imports
 const filesReduce = (acc, filename) => acc + `import '${filename}';\n`;
 
-function getFiles (pageObjectsPath, nestedPath = '.') {
+function getFiles(pageObjectsPath, nestedPath = '.') {
     const files = fs.readdirSync(
         path.resolve(pageObjectsPath, nestedPath),
         { withFileTypes: true }

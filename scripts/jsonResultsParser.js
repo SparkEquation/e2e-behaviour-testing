@@ -31,7 +31,7 @@ const processTags = (tags, result) => {
             if (! testResults.has(tag)) {
                 testResults.set(tag, result);
             } else {
-                console.error(`Duplicate tag @${tag}`)
+                console.error(`Duplicate tag @${tag}`);
             }
         });
 };
@@ -42,14 +42,15 @@ fs.readdirSync(logsPath)
         fs.readFileSync(
             path.resolve(logsPath, filename), { encoding: 'utf-8' }
         ))
-    ).forEach(featuresArray => {
+    )
+    .forEach(featuresArray => {
         featuresArray.forEach(feature => {
             feature.elements.forEach(element => {
                 if (element.keyword !== 'Scenario') {
                     return;
                 }
                 element.result = {
-                    type: 'Scenario'
+                    type: 'Scenario',
                 };
                 if (element.steps.length === 0 || element.steps[0].result.status === 'skipped') {
                     element.result.status = 'skipped';
@@ -60,7 +61,7 @@ fs.readdirSync(logsPath)
                 }
                 processTags(element.tags, element.result);
             });
-        })
+        });
     });
 
 console.log(testResults);

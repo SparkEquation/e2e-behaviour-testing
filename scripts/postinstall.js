@@ -42,43 +42,43 @@ const SUPPORT_FILE = 'support.js';
 const CYPRESS_CUCUMBER_CONFIG = '.cypress-cucumber-preprocessorrc';
 const TESTS_COMMON = 'globalBefore.ts';
 const TSCONFIG_FILE = 'tsconfig.json';
-const CYPRESS_ENV_FILE = 'cypress.env.json.template'
+const CYPRESS_ENV_FILE = 'cypress.env.json.template';
 
 const filesToCopy = [
 	// GitIgnore file
 	{
 		from: path.resolve(ownPreInstallPath, `template${GITIGNORE_FILE}`),
-		to: path.resolve(projectPageObjectsPath, GITIGNORE_FILE)
+		to: path.resolve(projectPageObjectsPath, GITIGNORE_FILE),
 	},
 	// Plugin file
 	{
 		from: path.resolve(ownPreInstallPath, `${PLUGIN_FILE}.template`),
-		to: path.resolve(projectPluginsPath, PLUGIN_FILE)
+		to: path.resolve(projectPluginsPath, PLUGIN_FILE),
 	},
 	// Common file to run before tests
 	{
 		from: path.resolve(ownPreInstallPath, `${TESTS_COMMON}.template`),
-		to: path.resolve(projectTestsCommonPath, TESTS_COMMON)
+		to: path.resolve(projectTestsCommonPath, TESTS_COMMON),
 	},
 	// Cypress-cucumber-preprocessor config
 	{
 		from: path.resolve(ownPreInstallPath, `template${CYPRESS_CUCUMBER_CONFIG}`),
-		to: path.resolve(projectPath, CYPRESS_CUCUMBER_CONFIG)
+		to: path.resolve(projectPath, CYPRESS_CUCUMBER_CONFIG),
 	},
 	// Cypress config
 	{
 		from: path.resolve(CYPRESS_CONFIG),
-		to: path.resolve(projectPath, CYPRESS_CONFIG)
+		to: path.resolve(projectPath, CYPRESS_CONFIG),
 	},
 	// TS config
 	{
 		from: path.resolve(ownPreInstallPath, `${TSCONFIG_FILE}.template`),
-		to: path.resolve(projectIntegrationPath, TSCONFIG_FILE)
+		to: path.resolve(projectIntegrationPath, TSCONFIG_FILE),
 	},
 	// support/index
 	{
 		from: path.resolve(ownPreInstallPath, `${SUPPORT_FILE}.template`),
-		to: path.resolve(projectSupportPath, SUPPORT_FILE)
+		to: path.resolve(projectSupportPath, SUPPORT_FILE),
 	},
 	// credentials template
 	{
@@ -92,21 +92,21 @@ createNecessaryDirectories();
 copyNecessaryFiles();
 
 function copyNecessaryFiles() {
-	filesToCopy.forEach(({from, to}) => {
+	filesToCopy.forEach(({ from, to }) => {
 		copyIfNotExists(from, to);
-	})
+	});
 }
 
-function createNecessaryDirectories () {
+function createNecessaryDirectories() {
 	[projectPluginsPath, projectPageObjectsPath, projectTestsCommonPath, projectSupportPath].forEach(directory => {
 		createDirectoryIfNotExists(directory);
-	})
+	});
 }
 
-function createDirectoryIfNotExists (dirPath) {
+function createDirectoryIfNotExists(dirPath) {
 	if(!fs.existsSync(dirPath)) {
 		try {
-			fs.mkdirSync(dirPath, {recursive: true});
+			fs.mkdirSync(dirPath, { recursive: true });
 		} catch (e) {
 			console.warn(`E2E-BEHAVIOUR-TESTING: Warning:
 			Cannot create directory, details:
