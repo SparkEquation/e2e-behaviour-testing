@@ -20,7 +20,7 @@ import * as LogIn from './logIn';
 import * as TypingIn from './typingIn';
 import * as Hover from './hover';
 
-export function register() {
+export function register(): void {
     Click.register();
     See.register();
     LogIn.register();

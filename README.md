@@ -1,5 +1,5 @@
-# ui-testing-template-cypress
-
+# e2e-behaviour-testing
+Clear and scalable e2e tests written in plain English
 > Based on [cypress-cucumber-example](https://github.com/TheBrainFamily/cypress-cucumber-example)
 
 This project is designed to quickly start e2e testing. It includes the integration of
@@ -26,7 +26,7 @@ a library which parses feature files and creates test cases and suites from them
 * Install this repo:
     * From git
     ```
-     npm i -D git+ssh://git@github.com/SparkEquation/ui-testing-template-cypress.git
+      npm i -D git+ssh://git@github.com/SparkEquation/e2e-behaviour-testing.git
     ```
 * Check that there are no errors after installation
 * Set `baseUrl` in `cypress.json` file with url of your project

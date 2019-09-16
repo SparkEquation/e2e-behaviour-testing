@@ -34,7 +34,7 @@ export class PageObjectSelector {
         this.fieldDescriptor = this.classInstance.getFieldDescriptor(this.fieldName);
     }
 
-    public getValue() {
+    public getValue(): any {
         if (this.fieldDescriptor.invokable) {
             return this.classInstance[this.fieldName]();
         } else {
@@ -60,8 +60,8 @@ export abstract class ElementGetOptions {
 export type GetOptions = Partial<Cypress.Timeoutable>;
 
 export class ClickOptions extends ElementGetOptions{
-    public first: boolean = false;
-    public force: boolean = false;
+    public first = false;
+    public force = false;
 
     constructor(props: DataTableRowsHash) {
         super(props);
@@ -71,7 +71,7 @@ export class ClickOptions extends ElementGetOptions{
 }
 
 export class BlankLinkClickOptions extends ClickOptions {
-    public customClick: boolean = false;
+    public customClick = false;
 
     constructor(props: DataTableRowsHash) {
         super(props);
@@ -88,7 +88,7 @@ export class SeeOptions extends ElementGetOptions {
     }
 }
 
-export function register() {
+export function register(): void {
     /* Use this across project as soon as
     https://youtrack.jetbrains.com/issue/WEB-39983?_ga=2.137121712.1268965974.1566197839-869244565.1565073645
     is resolved
@@ -100,4 +100,3 @@ export function register() {
     });
      */
 }
-

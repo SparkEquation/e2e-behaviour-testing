@@ -1,5 +1,5 @@
 // ***********************************************************
-// This file is provided by ui-testing-template-cypress
+// This file is provided by e2e-behaviour-testing
 // This example can be used to load plugins
 //
 // You can change the location of this file or turn off loading
@@ -15,7 +15,7 @@ const path = require('path');
 const cucumber = require('cypress-cucumber-preprocessor').default;
 const browserify = require('@cypress/browserify-preprocessor');
 
-module.exports = (on) => {
+module.exports = on => {
   const options = browserify.defaultOptions;
   const tsConfigPath = path.resolve('integration', 'tsconfig.json');
   options.browserifyOptions.plugin.unshift(['tsify', { project: tsConfigPath }]);

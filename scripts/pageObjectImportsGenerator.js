@@ -33,31 +33,31 @@ const filesMap = filename => filename.slice(0, -3).replace(`'`, `\\'`);
 // Create file with imports
 const filesReduce = (acc, filename) => acc + `import '${filename}';\n`;
 
-function getFiles (pageObjectsPath, nestedPath = '.') {
-    const files = fs.readdirSync(
-        path.resolve(pageObjectsPath, nestedPath),
-        { withFileTypes: true }
-    );
+function getFiles(pageObjectsPath, nestedPath = '.') {
+  const files = fs.readdirSync(
+    path.resolve(pageObjectsPath, nestedPath),
+    { withFileTypes: true }
+  );
 
-    return files.map(dirent => {
-            if (dirent.isDirectory()) {
-                return getFiles(pageObjectsPath, path.join(nestedPath, dirent.name));
-            }
-            return path.join(nestedPath, dirent.name);
-        })
-        .flat(MAX_DEPTH);
+  return files.map(dirent => {
+    if (dirent.isDirectory()) {
+      return getFiles(pageObjectsPath, path.join(nestedPath, dirent.name));
+    }
+    return path.join(nestedPath, dirent.name);
+  })
+    .flat(MAX_DEPTH);
 }
 
 const pageObjectDirPath = path.resolve('integration', 'pageObjects');
 
 const files = getFiles(pageObjectDirPath)
-    .filter(
-        filePath => AVAILABLE_EXTENSIONS.includes(path.extname(filePath)) && filePath !== INDEX_FILENAME
-    )
-    .map(filesMap)
-    .map(file => {
-        return `./${posixPath.join(...file.split(path.sep))}`;
-    });
+  .filter(
+    filePath => AVAILABLE_EXTENSIONS.includes(path.extname(filePath)) && filePath !== INDEX_FILENAME
+  )
+  .map(filesMap)
+  .map(file => {
+    return `./${posixPath.join(...file.split(path.sep))}`;
+  });
 
 const importContent = files.reduce(filesReduce, '');
 

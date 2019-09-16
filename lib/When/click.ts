@@ -19,29 +19,32 @@ import { BlankLinkClickOptions, ClickOptions, PageObjectSelector } from '../type
 import { CypressSavedElement, extractCommonGetOptions, getElement } from '../../src/functions';
 import { TableDefinition } from 'cucumber';
 
-export function register() {
+export function register(): void {
     When(`I click {string}`, async (selectorString: string, table: TableDefinition) => {
         const options = table ? new ClickOptions(table.rowsHash()) : new ClickOptions({});
         const selector = new PageObjectSelector(selectorString);
-        let element: CypressSavedElement = getElement(selector);
+        const element: CypressSavedElement = getElement(selector);
 
         const getOptions = extractCommonGetOptions(options);
 
         if (options.first) {
-            cy.get(element, getOptions).first().click({ force: options.force })
+            cy.get(element, getOptions)
+                .first()
+                .click({ force: options.force });
         } else {
-            cy.get(element, getOptions).click({ force: options.force });
+            cy.get(element, getOptions)
+                .click({ force: options.force });
         }
     });
 
     When(`I click blank link {string}`, (selectorString: string, table: TableDefinition) => {
         const selector = new PageObjectSelector(selectorString);
         const options = table ? new BlankLinkClickOptions(table.rowsHash()) : new BlankLinkClickOptions({});
-        let element: CypressSavedElement = getElement(selector);
+        const element: CypressSavedElement = getElement(selector);
 
         const getOptions = extractCommonGetOptions(options);
 
-        const callback = el => {
+        const callback = (el): void => {
             if (el.attr('target') === '_blank' && el.attr('href') && !options.customClick) {
                 const url: string = el.attr('href') as string;
                 if (!options.force) {
@@ -54,17 +57,19 @@ export function register() {
                 cy.window().then(win => {
                     stub = cy.stub(win, 'open').callsFake(passedHref => {
                         href = passedHref;
-                    })
+                    });
                 });
-                cy.root().click({ force: options.force }).then(() => {
-                    expect(stub).to.be.called;
-                    cy.visit(href);
-                });
+                cy.root().click({ force: options.force })
+                    .then(() => {
+                        expect(stub).to.be.called;
+                        cy.visit(href);
+                    });
             }
         };
 
         if (options.first) {
-            cy.get(element, getOptions).first().within(callback);
+            cy.get(element, getOptions).first()
+                .within(callback);
         } else {
             cy.get(element, getOptions).within(callback);
         }

@@ -19,13 +19,13 @@ import { PageObjectSelector, SeeOptions } from '../types';
 import { CypressSavedElement, extractCommonGetOptions, getElement } from '../../src/functions';
 import { TableDefinition } from 'cucumber';
 
-export function register() {
+export function register(): void {
     When(`I see (element ){string}`, (selectorString: string, table: TableDefinition) => {
         const options = table ? new SeeOptions(table.rowsHash()) : new SeeOptions({});
         const selector = new PageObjectSelector(selectorString);
         const getOptions = extractCommonGetOptions(options);
 
-        let element: CypressSavedElement = getElement(selector, getOptions);
+        const element: CypressSavedElement = getElement(selector, getOptions);
         if (options.amount === 1) {
             cy.get(element)
                 .should('have.length', 1)
@@ -39,9 +39,9 @@ export function register() {
                 cy.wrap(matchedElements).each(matchedElement => {
                     cy.wrap(matchedElement)
                         .scrollIntoView()
-                        .should('be.visible')
-                })
-            })
+                        .should('be.visible');
+                });
+            });
         }
     });
 }

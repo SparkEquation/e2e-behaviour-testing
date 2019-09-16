@@ -1,3 +1,4 @@
+export declare const storage: Map<string, IPageObjectMetadata>;
 export declare enum PageObjectField {
     Selector = "Selector",
     Xpath = "Xpath",
@@ -24,5 +25,4 @@ export interface IPageObjectParams {
 export declare function registerPageObject<T extends {
     new (...args: any[]): {};
 }>(params: IPageObjectParams | string): (constructor: T) => void;
-export declare function registerSelector(type: PageObjectField | keyof typeof PageObjectField): (target: Object, key: string | symbol, descriptor?: PropertyDescriptor | undefined) => void;
-export declare const storage: Map<string, IPageObjectMetadata>;
+export declare function registerSelector(type: PageObjectField | keyof typeof PageObjectField): (target: Record<string, any>, key: string | symbol, descriptor?: PropertyDescriptor | undefined) => void;
