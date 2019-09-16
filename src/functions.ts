@@ -31,7 +31,7 @@ export function getElement(selector: PageObjectSelector, getOptions: GetOptions 
 		// @ts-ignore
 			cy.xpath(selector.getValue(), getOptions).as(getElementAlias);
 			break;
-		case PageObjectField.Selector:
+		case PageObjectField.Selector: {
 			const value = selector.getValue();
 			if (Array.isArray(value) && typeof value[1]  === 'string') {
 				const [ element, contains ] = value;
@@ -40,6 +40,7 @@ export function getElement(selector: PageObjectSelector, getOptions: GetOptions 
 				cy.get(selector.getValue(), getOptions).as(getElementAlias);
 			}
 			break;
+		}
 		default:
 			throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to see element by selector '${selector.toString()}' `);
 	}

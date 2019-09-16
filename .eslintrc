@@ -42,7 +42,6 @@
       "args": "after-used",
       "ignoreRestSiblings": true
     }],
-    "no-case-declarations": "off",
     "no-cond-assign": ["error", "always"],
     "no-template-curly-in-string": "error",
     "valid-typeof": ["error", {
