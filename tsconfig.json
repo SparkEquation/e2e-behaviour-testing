@@ -6,7 +6,7 @@
     "strictNullChecks": true,
     "preserveConstEnums": true,
     "sourceMap": true,
-    "isolatedModules": true
+    "declaration": true
   },
   "files": [
     "src/index.ts"

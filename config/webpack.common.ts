@@ -24,11 +24,18 @@ export const babelOptions = {
                 useBuiltIns: 'usage',
             },
         ],
-        '@babel/preset-typescript',
-    ],
-    plugins: [
-        ['@babel/plugin-proposal-decorators', { legacy: true }],
-        '@babel/proposal-class-properties',
-        '@babel/proposal-object-rest-spread',
     ],
 };
+
+export const rules = [
+    {
+        test: /\.ts$/,
+        use: [
+            {
+                loader: 'babel-loader',
+                options: babelOptions,
+            },
+            'ts-loader',
+        ],
+    },
+];

@@ -100,14 +100,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /*!****************************!*\
   !*** ./lib/Given/index.ts ***!
   \****************************/
-/*! exports provided: register */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var _openPage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./openPage */ "./lib/Given/openPage.ts");
-/* harmony import */ var _loggedIn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./loggedIn */ "./lib/Given/loggedIn.ts");
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -124,11 +121,28 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const OpenPage = __importStar(__webpack_require__(/*! ./openPage */ "./lib/Given/openPage.ts"));
+
+const LoggedIn = __importStar(__webpack_require__(/*! ./loggedIn */ "./lib/Given/loggedIn.ts"));
 
 function register() {
-  _openPage__WEBPACK_IMPORTED_MODULE_0__["register"]();
-  _loggedIn__WEBPACK_IMPORTED_MODULE_1__["register"]();
+  OpenPage.register();
+  LoggedIn.register();
 }
+
+exports.register = register;
 
 /***/ }),
 
@@ -136,19 +150,13 @@ function register() {
 /*!*******************************!*\
   !*** ./lib/Given/loggedIn.ts ***!
   \*******************************/
-/*! exports provided: register */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
-/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
-
 
 /*
  * Copyright 2019 Spark Equation
@@ -167,12 +175,21 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
 
 function register() {
   const loggedInAsFunction = (apiSelectorString, roleSelectorString, redirectSelectorString) => {
-    const navigationSelector = new _types__WEBPACK_IMPORTED_MODULE_2__["PageObjectSelector"](apiSelectorString);
-    const roleSelector = new _types__WEBPACK_IMPORTED_MODULE_2__["PageObjectSelector"](roleSelectorString);
-    const url = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["getNavigationUrl"])(navigationSelector);
+    const navigationSelector = new types_1.PageObjectSelector(apiSelectorString);
+    const roleSelector = new types_1.PageObjectSelector(roleSelectorString);
+    const url = functions_1.getNavigationUrl(navigationSelector);
     const requestBody = {};
 
     for (const field of roleSelector.getValue()) {
@@ -193,14 +210,16 @@ function register() {
     });
 
     if (redirectSelectorString) {
-      const redirectSelector = new _types__WEBPACK_IMPORTED_MODULE_2__["PageObjectSelector"](redirectSelectorString);
-      cy.visit(Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["getNavigationUrl"])(redirectSelector));
+      const redirectSelector = new types_1.PageObjectSelector(redirectSelectorString);
+      cy.visit(functions_1.getNavigationUrl(redirectSelector));
     }
   };
 
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__["Given"])(`I logged in at {string} as {string}`, loggedInAsFunction);
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__["Given"])(`I logged in at {string} as {string} and visit {string}`, loggedInAsFunction);
+  steps_1.Given(`I logged in at {string} as {string}`, loggedInAsFunction);
+  steps_1.Given(`I logged in at {string} as {string} and visit {string}`, loggedInAsFunction);
 }
+
+exports.register = register;
 
 /***/ }),
 
@@ -208,16 +227,11 @@ function register() {
 /*!*******************************!*\
   !*** ./lib/Given/openPage.ts ***!
   \*******************************/
-/*! exports provided: register */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
-/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -234,14 +248,24 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
 
 function register() {
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["Given"])(`I open {string}`, selectorString => {
-    const selector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](selectorString);
-    cy.visit(Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getNavigationUrl"])(selector));
+  steps_1.Given(`I open {string}`, selectorString => {
+    const selector = new types_1.PageObjectSelector(selectorString);
+    cy.visit(functions_1.getNavigationUrl(selector));
   });
 }
+
+exports.register = register;
 
 /***/ }),
 
@@ -249,16 +273,11 @@ function register() {
 /*!********************************!*\
   !*** ./lib/Then/correctUrl.ts ***!
   \********************************/
-/*! exports provided: register */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
-/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -275,12 +294,20 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
 
 function register() {
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["Then"])(`URL is {string}`, selectorString => {
-    const selector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](selectorString);
-    const url = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getNavigationUrl"])(selector);
+  steps_1.Then(`URL is {string}`, selectorString => {
+    const selector = new types_1.PageObjectSelector(selectorString);
+    const url = functions_1.getNavigationUrl(selector);
 
     if (url) {
       cy.url().should('include', `${Cypress.config().baseUrl}/${url}`);
@@ -288,20 +315,19 @@ function register() {
   });
 }
 
+exports.register = register;
+
 /***/ }),
 
 /***/ "./lib/Then/index.ts":
 /*!***************************!*\
   !*** ./lib/Then/index.ts ***!
   \***************************/
-/*! exports provided: register */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var _seeTitle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./seeTitle */ "./lib/Then/seeTitle.ts");
-/* harmony import */ var _correctUrl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./correctUrl */ "./lib/Then/correctUrl.ts");
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -318,11 +344,28 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const SeeTitle = __importStar(__webpack_require__(/*! ./seeTitle */ "./lib/Then/seeTitle.ts"));
+
+const CorrectUrl = __importStar(__webpack_require__(/*! ./correctUrl */ "./lib/Then/correctUrl.ts"));
 
 function register() {
-  _seeTitle__WEBPACK_IMPORTED_MODULE_0__["register"]();
-  _correctUrl__WEBPACK_IMPORTED_MODULE_1__["register"]();
+  SeeTitle.register();
+  CorrectUrl.register();
 }
+
+exports.register = register;
 
 /***/ }),
 
@@ -330,14 +373,11 @@ function register() {
 /*!******************************!*\
   !*** ./lib/Then/seeTitle.ts ***!
   \******************************/
-/*! exports provided: register */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__);
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -354,11 +394,19 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
 function register() {
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["Then"])(`I see {string} in title`, title => {
+  steps_1.Then(`I see {string} in title`, title => {
     cy.title().should('include', title);
   });
 }
+
+exports.register = register;
 
 /***/ }),
 
@@ -366,19 +414,13 @@ function register() {
 /*!***************************!*\
   !*** ./lib/When/click.ts ***!
   \***************************/
-/*! exports provided: register */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
 /* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.promise */ "core-js/modules/es.promise");
 /* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
-/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
-
 
 /*
  * Copyright 2019 Spark Equation
@@ -397,13 +439,22 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
 
 function register() {
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__["When"])(`I click {string}`, async (selectorString, table) => {
-    const options = table ? new _types__WEBPACK_IMPORTED_MODULE_2__["ClickOptions"](table.rowsHash()) : new _types__WEBPACK_IMPORTED_MODULE_2__["ClickOptions"]({});
-    const selector = new _types__WEBPACK_IMPORTED_MODULE_2__["PageObjectSelector"](selectorString);
-    const element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["getElement"])(selector);
-    const getOptions = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["extractCommonGetOptions"])(options);
+  steps_1.When(`I click {string}`, async (selectorString, table) => {
+    const options = table ? new types_1.ClickOptions(table.rowsHash()) : new types_1.ClickOptions({});
+    const selector = new types_1.PageObjectSelector(selectorString);
+    const element = functions_1.getElement(selector);
+    const getOptions = functions_1.extractCommonGetOptions(options);
 
     if (options.first) {
       cy.get(element, getOptions).first().click({
@@ -415,11 +466,11 @@ function register() {
       });
     }
   });
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__["When"])(`I click blank link {string}`, (selectorString, table) => {
-    const selector = new _types__WEBPACK_IMPORTED_MODULE_2__["PageObjectSelector"](selectorString);
-    const options = table ? new _types__WEBPACK_IMPORTED_MODULE_2__["BlankLinkClickOptions"](table.rowsHash()) : new _types__WEBPACK_IMPORTED_MODULE_2__["BlankLinkClickOptions"]({});
-    const element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["getElement"])(selector);
-    const getOptions = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["extractCommonGetOptions"])(options);
+  steps_1.When(`I click blank link {string}`, (selectorString, table) => {
+    const selector = new types_1.PageObjectSelector(selectorString);
+    const options = table ? new types_1.BlankLinkClickOptions(table.rowsHash()) : new types_1.BlankLinkClickOptions({});
+    const element = functions_1.getElement(selector);
+    const getOptions = functions_1.extractCommonGetOptions(options);
 
     const callback = el => {
       if (el.attr('target') === '_blank' && el.attr('href') && !options.customClick) {
@@ -455,22 +506,19 @@ function register() {
   });
 }
 
+exports.register = register;
+
 /***/ }),
 
 /***/ "./lib/When/hover.ts":
 /*!***************************!*\
   !*** ./lib/When/hover.ts ***!
   \***************************/
-/*! exports provided: register */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
-/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -487,12 +535,20 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
 
 function register() {
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["When"])(`I hover element {string} without sub hovers`, selectorString => {
-    const selector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](selectorString);
-    const element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getElement"])(selector);
+  steps_1.When(`I hover element {string} without sub hovers`, selectorString => {
+    const selector = new types_1.PageObjectSelector(selectorString);
+    const element = functions_1.getElement(selector);
 
     if (element === null) {
       return;
@@ -502,23 +558,19 @@ function register() {
   });
 }
 
+exports.register = register;
+
 /***/ }),
 
 /***/ "./lib/When/index.ts":
 /*!***************************!*\
   !*** ./lib/When/index.ts ***!
   \***************************/
-/*! exports provided: register */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var _click__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./click */ "./lib/When/click.ts");
-/* harmony import */ var _see__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./see */ "./lib/When/see.ts");
-/* harmony import */ var _logIn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./logIn */ "./lib/When/logIn.ts");
-/* harmony import */ var _typingIn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./typingIn */ "./lib/When/typingIn.ts");
-/* harmony import */ var _hover__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hover */ "./lib/When/hover.ts");
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -535,17 +587,37 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  result["default"] = mod;
+  return result;
+};
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+const Click = __importStar(__webpack_require__(/*! ./click */ "./lib/When/click.ts"));
 
+const See = __importStar(__webpack_require__(/*! ./see */ "./lib/When/see.ts"));
+
+const LogIn = __importStar(__webpack_require__(/*! ./logIn */ "./lib/When/logIn.ts"));
+
+const TypingIn = __importStar(__webpack_require__(/*! ./typingIn */ "./lib/When/typingIn.ts"));
+
+const Hover = __importStar(__webpack_require__(/*! ./hover */ "./lib/When/hover.ts"));
 
 function register() {
-  _click__WEBPACK_IMPORTED_MODULE_0__["register"]();
-  _see__WEBPACK_IMPORTED_MODULE_1__["register"]();
-  _logIn__WEBPACK_IMPORTED_MODULE_2__["register"]();
-  _typingIn__WEBPACK_IMPORTED_MODULE_3__["register"]();
-  _hover__WEBPACK_IMPORTED_MODULE_4__["register"]();
+  Click.register();
+  See.register();
+  LogIn.register();
+  TypingIn.register();
+  Hover.register();
 }
+
+exports.register = register;
 
 /***/ }),
 
@@ -553,22 +625,15 @@ function register() {
 /*!***************************!*\
   !*** ./lib/When/logIn.ts ***!
   \***************************/
-/*! exports provided: register */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.promise */ "core-js/modules/es.promise");
 /* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
-/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
-
-
 
 /*
  * Copyright 2019 Spark Equation
@@ -588,11 +653,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
 function register() {
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_2__["When"])(`I log in at {string} as {string}`, async (selectorString, roleSelectorString) => {
-    const elementSelector = new _types__WEBPACK_IMPORTED_MODULE_3__["PageObjectSelector"](selectorString);
-    const roleSelector = new _types__WEBPACK_IMPORTED_MODULE_3__["PageObjectSelector"](roleSelectorString);
-    const element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_4__["getElement"])(elementSelector);
+  steps_1.When(`I log in at {string} as {string}`, async (selectorString, roleSelectorString) => {
+    const elementSelector = new types_1.PageObjectSelector(selectorString);
+    const roleSelector = new types_1.PageObjectSelector(roleSelectorString);
+    const element = functions_1.getElement(elementSelector);
     cy.get(element).within(form => {
       cy.root().should('be.visible');
       const credentials = roleSelector.getValue();
@@ -606,22 +681,19 @@ function register() {
   });
 }
 
+exports.register = register;
+
 /***/ }),
 
 /***/ "./lib/When/see.ts":
 /*!*************************!*\
   !*** ./lib/When/see.ts ***!
   \*************************/
-/*! exports provided: register */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
-/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -638,14 +710,22 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
 
 function register() {
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["When"])(`I see (element ){string}`, (selectorString, table) => {
-    const options = table ? new _types__WEBPACK_IMPORTED_MODULE_1__["SeeOptions"](table.rowsHash()) : new _types__WEBPACK_IMPORTED_MODULE_1__["SeeOptions"]({});
-    const selector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](selectorString);
-    const getOptions = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["extractCommonGetOptions"])(options);
-    const element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getElement"])(selector, getOptions);
+  steps_1.When(`I see (element ){string}`, (selectorString, table) => {
+    const options = table ? new types_1.SeeOptions(table.rowsHash()) : new types_1.SeeOptions({});
+    const selector = new types_1.PageObjectSelector(selectorString);
+    const getOptions = functions_1.extractCommonGetOptions(options);
+    const element = functions_1.getElement(selector, getOptions);
 
     if (options.amount === 1) {
       cy.get(element).should('have.length', 1).scrollIntoView().should('be.visible');
@@ -663,22 +743,19 @@ function register() {
   });
 }
 
+exports.register = register;
+
 /***/ }),
 
 /***/ "./lib/When/typingIn.ts":
 /*!******************************!*\
   !*** ./lib/When/typingIn.ts ***!
   \******************************/
-/*! exports provided: register */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-/* harmony import */ var cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types */ "./lib/types.ts");
-/* harmony import */ var _src_core_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -695,12 +772,20 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
 
 function register() {
-  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["When"])(`I type {string} into element {string}`, (text, selectorString) => {
-    const selector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](selectorString);
-    const element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getElement"])(selector);
+  steps_1.When(`I type {string} into element {string}`, (text, selectorString) => {
+    const selector = new types_1.PageObjectSelector(selectorString);
+    const element = functions_1.getElement(selector);
 
     if (element === null) {
       return;
@@ -710,22 +795,21 @@ function register() {
   });
 }
 
+exports.register = register;
+
 /***/ }),
 
 /***/ "./lib/globalHooks.ts":
 /*!****************************!*\
   !*** ./lib/globalHooks.ts ***!
   \****************************/
-/*! exports provided: register */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _src_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/core */ "./src/core/index.ts");
-
 
 /*
  * Copyright 2019 Spark Equation
@@ -744,14 +828,28 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-function extractCredentials(credentials) {
-  var _dec, _class;
 
-  let // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  Credentials = (_dec = Object(_src_core__WEBPACK_IMPORTED_MODULE_1__["registerPageObject"])({
-    name: 'Credentials',
-    type: _src_core__WEBPACK_IMPORTED_MODULE_1__["PageObjectField"].RoleCredentials
-  }), _dec(_class = class Credentials {
+var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata = undefined && undefined.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const core_1 = __webpack_require__(/*! ../src/core */ "./src/core/index.ts");
+
+function extractCredentials(credentials) {
+  let Credentials = // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  class Credentials {
     constructor() {
       if (credentials) {
         Object.entries(credentials).forEach(([key, value]) => {
@@ -760,7 +858,12 @@ function extractCredentials(credentials) {
       }
     }
 
-  }) || _class);
+  };
+  Credentials = __decorate([core_1.registerPageObject({
+    name: 'Credentials',
+    type: core_1.PageObjectField.RoleCredentials
+  }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  , __metadata("design:paramtypes", [])], Credentials);
 }
 
 function register() {
@@ -774,25 +877,19 @@ function register() {
   });
 }
 
+exports.register = register;
+
 /***/ }),
 
 /***/ "./lib/index.ts":
 /*!**********************!*\
   !*** ./lib/index.ts ***!
   \**********************/
-/*! exports provided: register */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
-/* harmony import */ var reflect_metadata__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reflect-metadata */ "reflect-metadata");
-/* harmony import */ var reflect_metadata__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reflect_metadata__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./lib/types.ts");
-/* harmony import */ var _globalHooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./globalHooks */ "./lib/globalHooks.ts");
-/* harmony import */ var _Then__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Then */ "./lib/Then/index.ts");
-/* harmony import */ var _When__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./When */ "./lib/When/index.ts");
-/* harmony import */ var _Given__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Given */ "./lib/Given/index.ts");
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -809,18 +906,39 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  result["default"] = mod;
+  return result;
+};
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+__webpack_require__(/*! reflect-metadata */ "reflect-metadata");
 
+const Types = __importStar(__webpack_require__(/*! ./types */ "./lib/types.ts"));
 
+const GlobalHooks = __importStar(__webpack_require__(/*! ./globalHooks */ "./lib/globalHooks.ts"));
+
+const Then = __importStar(__webpack_require__(/*! ./Then */ "./lib/Then/index.ts"));
+
+const When = __importStar(__webpack_require__(/*! ./When */ "./lib/When/index.ts"));
+
+const Given = __importStar(__webpack_require__(/*! ./Given */ "./lib/Given/index.ts"));
 
 function register() {
-  _types__WEBPACK_IMPORTED_MODULE_1__["register"]();
-  _globalHooks__WEBPACK_IMPORTED_MODULE_2__["register"]();
-  _Given__WEBPACK_IMPORTED_MODULE_5__["register"]();
-  _When__WEBPACK_IMPORTED_MODULE_4__["register"]();
-  _Then__WEBPACK_IMPORTED_MODULE_3__["register"]();
+  Types.register();
+  GlobalHooks.register();
+  Given.register();
+  When.register();
+  Then.register();
 }
+
+exports.register = register;
 
 /***/ }),
 
@@ -828,23 +946,13 @@ function register() {
 /*!**********************!*\
   !*** ./lib/types.ts ***!
   \**********************/
-/*! exports provided: PageObjectSelector, ElementGetOptions, ClickOptions, BlankLinkClickOptions, SeeOptions, register */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageObjectSelector", function() { return PageObjectSelector; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ElementGetOptions", function() { return ElementGetOptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClickOptions", function() { return ClickOptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BlankLinkClickOptions", function() { return BlankLinkClickOptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SeeOptions", function() { return SeeOptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _src_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/core */ "./src/core/index.ts");
-
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /*
  * Copyright 2019 Spark Equation
@@ -862,20 +970,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * limitations under the License.
  */
 
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const core_1 = __webpack_require__(/*! ../src/core */ "./src/core/index.ts");
+
 class PageObjectSelector {
   constructor(pageObjectSelector) {
-    _defineProperty(this, "classInstance", void 0);
-
-    _defineProperty(this, "fieldDescriptor", void 0);
-
-    _defineProperty(this, "className", void 0);
-
-    _defineProperty(this, "fieldName", void 0);
-
     const [className, fieldName] = pageObjectSelector.split('.');
     this.fieldName = fieldName;
     this.className = className;
-    const classInstance = _src_core__WEBPACK_IMPORTED_MODULE_1__["storage"].get(className);
+    const classInstance = core_1.storage.get(className);
 
     if (classInstance === undefined) {
       throw new Error(`Cannot find page object class ${className}`);
@@ -898,52 +1005,59 @@ class PageObjectSelector {
   }
 
 }
+
+exports.PageObjectSelector = PageObjectSelector;
+
 class ElementGetOptions {
   constructor(props) {
-    _defineProperty(this, "wait", null);
-
+    this.wait = null;
     this.wait = Number(props.wait) || this.wait;
   }
 
 }
+
+exports.ElementGetOptions = ElementGetOptions;
+
 class ClickOptions extends ElementGetOptions {
   constructor(props) {
     super(props);
-
-    _defineProperty(this, "first", false);
-
-    _defineProperty(this, "force", false);
-
+    this.first = false;
+    this.force = false;
     this.first = Boolean(props.first) || this.first;
     this.force = Boolean(props.force) || this.force;
   }
 
 }
+
+exports.ClickOptions = ClickOptions;
+
 class BlankLinkClickOptions extends ClickOptions {
   constructor(props) {
     super(props);
-
-    _defineProperty(this, "customClick", false);
-
+    this.customClick = false;
     this.customClick = Boolean(props.customClick) || this.customClick;
   }
 
 }
+
+exports.BlankLinkClickOptions = BlankLinkClickOptions;
+
 class SeeOptions extends ElementGetOptions {
   constructor(props) {
     super(props);
-
-    _defineProperty(this, "amount", null);
-
+    this.amount = null;
     this.amount = Number(props.amount) || this.amount;
   }
 
 }
+
+exports.SeeOptions = SeeOptions;
+
 function register() {
   /* Use this across project as soon as
   https://youtrack.jetbrains.com/issue/WEB-39983?_ga=2.137121712.1268965974.1566197839-869244565.1565073645
   is resolved
-   defineParameterType({
+    defineParameterType({
       name: 'pageObjectSelector',
       regexp: /[a-zA-Z]+\.[a-zA-Z]+/,
       transformer: selector => new PageObjectSelector(selector)
@@ -951,25 +1065,21 @@ function register() {
    */
 }
 
+exports.register = register;
+
 /***/ }),
 
 /***/ "./src/core/functions.ts":
 /*!*******************************!*\
   !*** ./src/core/functions.ts ***!
   \*******************************/
-/*! exports provided: getElement, getNavigationUrl, extractCommonGetOptions, makeCypressWaitForPromise */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getElement", function() { return getElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNavigationUrl", function() { return getNavigationUrl; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "extractCommonGetOptions", function() { return extractCommonGetOptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeCypressWaitForPromise", function() { return makeCypressWaitForPromise; });
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pageObjectRegistrator */ "./src/core/pageObjectRegistrator.ts");
-
 
 /*
  * Copyright 2019 Spark Equation
@@ -987,18 +1097,26 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const pageObjectRegistrator_1 = __webpack_require__(/*! ./pageObjectRegistrator */ "./src/core/pageObjectRegistrator.ts");
+
 const getElementAlias = 'getElement';
+
 function getElement(selector, getOptions = {}) {
   const element = '@' + getElementAlias;
 
   switch (selector.fieldDescriptor.type) {
-    case _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_1__["PageObjectField"].Xpath:
+    case pageObjectRegistrator_1.PageObjectField.Xpath:
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       cy.xpath(selector.getValue(), getOptions).as(getElementAlias);
       break;
 
-    case _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_1__["PageObjectField"].Selector:
+    case pageObjectRegistrator_1.PageObjectField.Selector:
       {
         const value = selector.getValue();
 
@@ -1018,13 +1136,19 @@ function getElement(selector, getOptions = {}) {
 
   return element;
 }
+
+exports.getElement = getElement;
+
 function getNavigationUrl(selector) {
-  if (selector.fieldDescriptor.type !== _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_1__["PageObjectField"].Navigation) {
+  if (selector.fieldDescriptor.type !== pageObjectRegistrator_1.PageObjectField.Navigation) {
     throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to get URL by selector '${selector.toString()}' `);
   }
 
   return selector.getValue();
 }
+
+exports.getNavigationUrl = getNavigationUrl;
+
 function extractCommonGetOptions(options) {
   const result = {};
 
@@ -1034,11 +1158,16 @@ function extractCommonGetOptions(options) {
 
   return result;
 }
+
+exports.extractCommonGetOptions = extractCommonGetOptions;
+
 function makeCypressWaitForPromise(promiseToWait) {
   return new Cypress.Promise((resolve, reject) => {
     promiseToWait.then(resolve).catch(reject);
   });
 }
+
+exports.makeCypressWaitForPromise = makeCypressWaitForPromise;
 
 /***/ }),
 
@@ -1046,22 +1175,10 @@ function makeCypressWaitForPromise(promiseToWait) {
 /*!***************************!*\
   !*** ./src/core/index.ts ***!
   \***************************/
-/*! exports provided: makeCypressWaitForPromise, storage, PageObjectField, registerPageObject, registerSelector */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pageObjectRegistrator */ "./src/core/pageObjectRegistrator.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "storage", function() { return _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__["storage"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PageObjectField", function() { return _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__["PageObjectField"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerPageObject", function() { return _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__["registerPageObject"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerSelector", function() { return _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__["registerSelector"]; });
-
-/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./functions */ "./src/core/functions.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeCypressWaitForPromise", function() { return _functions__WEBPACK_IMPORTED_MODULE_1__["makeCypressWaitForPromise"]; });
 
 /*
  * Copyright 2019 Spark Equation
@@ -1079,7 +1196,19 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+function __export(m) {
+  for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+__export(__webpack_require__(/*! ./pageObjectRegistrator */ "./src/core/pageObjectRegistrator.ts"));
+
+var functions_1 = __webpack_require__(/*! ./functions */ "./src/core/functions.ts");
+
+exports.makeCypressWaitForPromise = functions_1.makeCypressWaitForPromise;
 
 /***/ }),
 
@@ -1087,18 +1216,13 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************!*\
   !*** ./src/core/pageObjectRegistrator.ts ***!
   \*******************************************/
-/*! exports provided: storage, PageObjectField, registerPageObject, registerSelector */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "storage", function() { return storage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageObjectField", function() { return PageObjectField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerPageObject", function() { return registerPageObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerSelector", function() { return registerSelector; });
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
-
 
 /*
  * Copyright 2019 Spark Equation
@@ -1115,19 +1239,25 @@ __webpack_require__.r(__webpack_exports__);
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const storage = new Map(); // Keys should be the same as values to allow following typecheck: keyof typeof PageObjectFieldType
 
-let PageObjectField;
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.storage = new Map(); // Keys should be the same as values to allow following typecheck: keyof typeof PageObjectFieldType
+
+var PageObjectField;
 
 (function (PageObjectField) {
   PageObjectField["Selector"] = "Selector";
   PageObjectField["Xpath"] = "Xpath";
   PageObjectField["Navigation"] = "Navigation";
   PageObjectField["RoleCredentials"] = "RoleCredentials";
-})(PageObjectField || (PageObjectField = {}));
+})(PageObjectField = exports.PageObjectField || (exports.PageObjectField = {}));
 
 const metadataTypeKey = 'PageObjectFieldType';
 const metadataInvokableKey = 'PageObjectFieldInvokable';
+
 function registerPageObject(params) {
   // TODO replace any with valid type
   const name = typeof params === 'string' ? params : params.name;
@@ -1163,13 +1293,16 @@ function registerPageObject(params) {
 
     cy.log(`Added ${name}`);
 
-    if (storage.has(name)) {
+    if (exports.storage.has(name)) {
       throw new Error(`Detected page object with duplicate name ${name}`);
     }
 
-    storage.set(name, classInstance);
+    exports.storage.set(name, classInstance);
   };
 }
+
+exports.registerPageObject = registerPageObject;
+
 function registerSelector(type) {
   return function (target, key, descriptor) {
     const invokable = descriptor !== undefined;
@@ -1178,30 +1311,18 @@ function registerSelector(type) {
   };
 }
 
+exports.registerSelector = registerSelector;
+
 /***/ }),
 
 /***/ "./src/index.ts":
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! exports provided: register, makeCypressWaitForPromise, storage, PageObjectField, registerPageObject, registerSelector */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core */ "./src/core/index.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeCypressWaitForPromise", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["makeCypressWaitForPromise"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "storage", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["storage"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PageObjectField", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["PageObjectField"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerPageObject", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["registerPageObject"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerSelector", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["registerSelector"]; });
-
-/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib */ "./lib/index.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "register", function() { return _lib__WEBPACK_IMPORTED_MODULE_1__["register"]; });
 
 /*
  * Copyright 2019 Spark Equation
@@ -1219,7 +1340,19 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+function __export(m) {
+  for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+__export(__webpack_require__(/*! ./core */ "./src/core/index.ts"));
+
+var lib_1 = __webpack_require__(/*! ../lib */ "./lib/index.ts");
+
+exports.register = lib_1.register;
 
 /***/ }),
 
