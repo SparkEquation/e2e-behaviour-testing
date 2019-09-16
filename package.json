@@ -40,7 +40,6 @@
     "lib",
     "dist",
     "postinstall",
-    "cypress.json",
     "LICENSE",
     "NOTICE",
     "README.md"
