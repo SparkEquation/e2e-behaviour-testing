@@ -65,7 +65,7 @@ export function extractCommonGetOptions(options: ElementGetOptions): Partial<Cyp
 }
 
 export function makeCypressWaitForPromise(promiseToWait: Promise<any>): Bluebird<any> {
-    return new Cypress.Promise((resolve, reject) => {
+    return new Cypress.Promise((resolve, reject): void => {
         promiseToWait.then(resolve).catch(reject);
     });
 }

@@ -6,7 +6,7 @@ process.env['TS_NODE_PROJECT'] = '';
 export const commonConfig = {
     target: 'node',
     mode: 'development',
-    devtool: "cheap-source-map",
+    devtool: 'source-map',
     externals: [nodeExternals()],
     resolve: {
         extensions: ['.js', '.ts', '.json'],
@@ -24,11 +24,11 @@ export const babelOptions = {
                 useBuiltIns: 'usage',
             },
         ],
-        "@babel/preset-typescript"
+        '@babel/preset-typescript',
     ],
     plugins: [
         ['@babel/plugin-proposal-decorators', { legacy: true }],
-        "@babel/proposal-class-properties",
-        "@babel/proposal-object-rest-spread",
+        '@babel/proposal-class-properties',
+        '@babel/proposal-object-rest-spread',
     ],
 };

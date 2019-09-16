@@ -15,7 +15,7 @@ const path = require('path');
 const cucumber = require('cypress-cucumber-preprocessor').default;
 const browserify = require('@cypress/browserify-preprocessor');
 
-module.exports = (on) => {
+module.exports = on => {
   const options = browserify.defaultOptions;
   const tsConfigPath = path.resolve('e2e', 'tsconfig.json');
   options.browserifyOptions.plugin.unshift(['tsify', { project: tsConfigPath }]);

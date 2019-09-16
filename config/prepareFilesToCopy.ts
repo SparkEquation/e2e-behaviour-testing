@@ -32,7 +32,7 @@ export function prepareFilesToCopy(): Array<IFilesToCopy> {
         {
             path: path.resolve(),
             name: ProjectNames.CYPRESS_CONFIG_FILE,
-        }
+        },
     ].map(fileInfo => ({
         from: path.resolve(fileInfo.path, fileInfo.name),
         to: path.resolve(ProjectNames.POSTINSTALL_FOLDER, filenameToPostInstallEntry(fileInfo.name)),

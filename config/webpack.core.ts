@@ -28,7 +28,7 @@ export default merge(
                     use: [
                         {
                             loader: 'babel-loader',
-                            options: babelOptions
+                            options: babelOptions,
                         },
                     ],
                 },
@@ -39,6 +39,6 @@ export default merge(
         ],
         resolve: {
             plugins: [new TsconfigPathsPlugin({ configFile: tsconfigPath })],
-        }
+        },
     },
-)
+);

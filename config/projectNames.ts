@@ -12,7 +12,6 @@ export enum ProjectNames {
     OUTPUT_CORE_FILENAME = 'main.js',
     POSTINSTALL_FOLDER = 'postinstall',
     SOURCES_FOLDER = 'src',
-    SOURCES_CORE_SUBFOLDER = 'core',
     CORE_ENTRY_FILE = 'index.ts',
     LIBRARY_NAME = 'e2e-behaviour-testing',
     CYPRESS_CONFIG_FILE = 'cypress.json',

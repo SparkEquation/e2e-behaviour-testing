@@ -175,7 +175,7 @@ function register() {
     const url = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["getNavigationUrl"])(navigationSelector);
     const requestBody = {};
 
-    for (let field of roleSelector.getValue()) {
+    for (const field of roleSelector.getValue()) {
       requestBody[field.fieldName] = field.value;
     }
 
@@ -356,7 +356,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function register() {
   Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["Then"])(`I see {string} in title`, title => {
-    cy.title().should("include", title);
+    cy.title().should('include', title);
   });
 }
 
@@ -402,7 +402,7 @@ function register() {
   Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__["When"])(`I click {string}`, async (selectorString, table) => {
     const options = table ? new _types__WEBPACK_IMPORTED_MODULE_2__["ClickOptions"](table.rowsHash()) : new _types__WEBPACK_IMPORTED_MODULE_2__["ClickOptions"]({});
     const selector = new _types__WEBPACK_IMPORTED_MODULE_2__["PageObjectSelector"](selectorString);
-    let element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["getElement"])(selector);
+    const element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["getElement"])(selector);
     const getOptions = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["extractCommonGetOptions"])(options);
 
     if (options.first) {
@@ -418,7 +418,7 @@ function register() {
   Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_1__["When"])(`I click blank link {string}`, (selectorString, table) => {
     const selector = new _types__WEBPACK_IMPORTED_MODULE_2__["PageObjectSelector"](selectorString);
     const options = table ? new _types__WEBPACK_IMPORTED_MODULE_2__["BlankLinkClickOptions"](table.rowsHash()) : new _types__WEBPACK_IMPORTED_MODULE_2__["BlankLinkClickOptions"]({});
-    let element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["getElement"])(selector);
+    const element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["getElement"])(selector);
     const getOptions = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_3__["extractCommonGetOptions"])(options);
 
     const callback = el => {
@@ -492,7 +492,7 @@ __webpack_require__.r(__webpack_exports__);
 function register() {
   Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["When"])(`I hover element {string} without sub hovers`, selectorString => {
     const selector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](selectorString);
-    let element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getElement"])(selector);
+    const element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getElement"])(selector);
 
     if (element === null) {
       return;
@@ -592,12 +592,12 @@ function register() {
   Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_2__["When"])(`I log in at {string} as {string}`, async (selectorString, roleSelectorString) => {
     const elementSelector = new _types__WEBPACK_IMPORTED_MODULE_3__["PageObjectSelector"](selectorString);
     const roleSelector = new _types__WEBPACK_IMPORTED_MODULE_3__["PageObjectSelector"](roleSelectorString);
-    let element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_4__["getElement"])(elementSelector);
+    const element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_4__["getElement"])(elementSelector);
     cy.get(element).within(form => {
       cy.root().should('be.visible');
       const credentials = roleSelector.getValue();
 
-      for (let field of credentials) {
+      for (const field of credentials) {
         cy.get(`input[name="${field.fieldName}"]`).type(field.value);
       }
 
@@ -641,30 +641,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function register() {
-    steps_1.When(`I see (element ){string}`, (selectorString, table) => {
-        const options = table ? new types_1.SeeOptions(table.rowsHash()) : new types_1.SeeOptions({});
-        const selector = new types_1.PageObjectSelector(selectorString);
-        const getOptions = functions_1.extractCommonGetOptions(options);
-        let element = functions_1.getElement(selector, getOptions);
-        if (options.amount === 1) {
-            cy.get(element)
-                .should('have.length', 1)
-                .scrollIntoView()
-                .should('be.visible');
+  Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["When"])(`I see (element ){string}`, (selectorString, table) => {
+    const options = table ? new _types__WEBPACK_IMPORTED_MODULE_1__["SeeOptions"](table.rowsHash()) : new _types__WEBPACK_IMPORTED_MODULE_1__["SeeOptions"]({});
+    const selector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](selectorString);
+    const getOptions = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["extractCommonGetOptions"])(options);
+    const element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getElement"])(selector, getOptions);
+
+    if (options.amount === 1) {
+      cy.get(element).should('have.length', 1).scrollIntoView().should('be.visible');
+    } else {
+      cy.get(element).then(matchedElements => {
+        if (options.amount) {
+          cy.wrap(matchedElements).should('have.length', options.amount);
         }
-        else {
-            cy.get(element).then(matchedElements => {
-                if (options.amount) {
-                    cy.wrap(matchedElements).should('have.length', options.amount);
-                }
-                cy.wrap(matchedElements).each(matchedElement => {
-                    cy.wrap(matchedElement)
-                        .scrollIntoView()
-                        .should('be.visible');
-                });
-            });
-        }
-    });
+
+        cy.wrap(matchedElements).each(matchedElement => {
+          cy.wrap(matchedElement).scrollIntoView().should('be.visible');
+        });
+      });
+    }
+  });
 }
 
 /***/ }),
@@ -704,7 +700,7 @@ __webpack_require__.r(__webpack_exports__);
 function register() {
   Object(cypress_cucumber_preprocessor_steps__WEBPACK_IMPORTED_MODULE_0__["When"])(`I type {string} into element {string}`, (text, selectorString) => {
     const selector = new _types__WEBPACK_IMPORTED_MODULE_1__["PageObjectSelector"](selectorString);
-    let element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getElement"])(selector);
+    const element = Object(_src_core_functions__WEBPACK_IMPORTED_MODULE_2__["getElement"])(selector);
 
     if (element === null) {
       return;
@@ -751,7 +747,8 @@ __webpack_require__.r(__webpack_exports__);
 function extractCredentials(credentials) {
   var _dec, _class;
 
-  let Credentials = (_dec = Object(_src_core__WEBPACK_IMPORTED_MODULE_1__["registerPageObject"])({
+  let // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  Credentials = (_dec = Object(_src_core__WEBPACK_IMPORTED_MODULE_1__["registerPageObject"])({
     name: 'Credentials',
     type: _src_core__WEBPACK_IMPORTED_MODULE_1__["PageObjectField"].RoleCredentials
   }), _dec(_class = class Credentials {
@@ -992,25 +989,28 @@ __webpack_require__.r(__webpack_exports__);
 
 const getElementAlias = 'getElement';
 function getElement(selector, getOptions = {}) {
-  let element = '@' + getElementAlias;
+  const element = '@' + getElementAlias;
 
   switch (selector.fieldDescriptor.type) {
     case _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_1__["PageObjectField"].Xpath:
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       cy.xpath(selector.getValue(), getOptions).as(getElementAlias);
       break;
 
     case _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_1__["PageObjectField"].Selector:
-      const value = selector.getValue();
+      {
+        const value = selector.getValue();
 
-      if (Array.isArray(value) && typeof value[1] === 'string') {
-        const [element, contains] = value;
-        cy.contains(element, contains, getOptions).as(getElementAlias);
-      } else {
-        cy.get(selector.getValue(), getOptions).as(getElementAlias);
+        if (Array.isArray(value) && typeof value[1] === 'string') {
+          const [element, contains] = value;
+          cy.contains(element, contains, getOptions).as(getElementAlias);
+        } else {
+          cy.get(selector.getValue(), getOptions).as(getElementAlias);
+        }
+
+        break;
       }
-
-      break;
 
     default:
       throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to see element by selector '${selector.toString()}' `);
@@ -1046,19 +1046,19 @@ function makeCypressWaitForPromise(promiseToWait) {
 /*!***************************!*\
   !*** ./src/core/index.ts ***!
   \***************************/
-/*! exports provided: makeCypressWaitForPromise, PageObjectField, registerPageObject, registerSelector, storage */
+/*! exports provided: makeCypressWaitForPromise, storage, PageObjectField, registerPageObject, registerSelector */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pageObjectRegistrator */ "./src/core/pageObjectRegistrator.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "storage", function() { return _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__["storage"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PageObjectField", function() { return _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__["PageObjectField"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerPageObject", function() { return _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__["registerPageObject"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerSelector", function() { return _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__["registerSelector"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "storage", function() { return _pageObjectRegistrator__WEBPACK_IMPORTED_MODULE_0__["storage"]; });
 
 /* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./functions */ "./src/core/functions.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeCypressWaitForPromise", function() { return _functions__WEBPACK_IMPORTED_MODULE_1__["makeCypressWaitForPromise"]; });
@@ -1087,15 +1087,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************!*\
   !*** ./src/core/pageObjectRegistrator.ts ***!
   \*******************************************/
-/*! exports provided: PageObjectField, registerPageObject, registerSelector, storage */
+/*! exports provided: storage, PageObjectField, registerPageObject, registerSelector */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "storage", function() { return storage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageObjectField", function() { return PageObjectField; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerPageObject", function() { return registerPageObject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerSelector", function() { return registerSelector; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "storage", function() { return storage; });
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -1115,7 +1115,8 @@ __webpack_require__.r(__webpack_exports__);
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// Keys should be the same as values to allow following typecheck: keyof typeof PageObjectFieldType
+const storage = new Map(); // Keys should be the same as values to allow following typecheck: keyof typeof PageObjectFieldType
+
 let PageObjectField;
 
 (function (PageObjectField) {
@@ -1176,7 +1177,6 @@ function registerSelector(type) {
     Reflect.defineMetadata(metadataInvokableKey, invokable, target, key);
   };
 }
-const storage = new Map();
 
 /***/ }),
 
@@ -1184,7 +1184,7 @@ const storage = new Map();
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! exports provided: register, makeCypressWaitForPromise, PageObjectField, registerPageObject, registerSelector, storage */
+/*! exports provided: register, makeCypressWaitForPromise, storage, PageObjectField, registerPageObject, registerSelector */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1192,13 +1192,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core */ "./src/core/index.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeCypressWaitForPromise", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["makeCypressWaitForPromise"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "storage", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["storage"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PageObjectField", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["PageObjectField"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerPageObject", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["registerPageObject"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerSelector", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["registerSelector"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "storage", function() { return _core__WEBPACK_IMPORTED_MODULE_0__["storage"]; });
 
 /* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib */ "./lib/index.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "register", function() { return _lib__WEBPACK_IMPORTED_MODULE_1__["register"]; });
