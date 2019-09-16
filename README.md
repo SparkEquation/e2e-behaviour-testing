@@ -138,13 +138,13 @@ the global value if it is present.
 
 * Type should be one of the following
   * Selector - either simple `jquery` like selector to get element
-    ```
+    ```typescript
     @registerSelector('Selector')
     public form = '#sign-in';
     ```
     or array of two elements, where the first one is selector
     and the second one is text which this element should contain
-    ```
+    ```typescript
     @registerSelector('Selector')
     public header = ['h1', 'Example.com'];
     ```
@@ -152,12 +152,12 @@ the global value if it is present.
         If you need to select multiple elements with some text use
         `:contains` pseudo class in selector instead
   * Xpath - same as `Selector` with one argument but uses xpath to select element 
-      ```
+      ```typescript
       @registerSelector('Xpath')
       public menuLink = '//a[@id="menu-link"]';
       ```
   * Navigation - plain text url used in navigation
-    ```
+    ```typescript
     @registerSelector('Navigation')
     public usernameElement = 'Users/login';
     ```
