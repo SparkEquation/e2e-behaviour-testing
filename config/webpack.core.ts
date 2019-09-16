@@ -1,7 +1,7 @@
 import path from 'path';
 import merge from 'webpack-merge';
 import CopyPlugin from 'copy-webpack-plugin';
-import { commonConfig, rules } from './webpack.common';
+import { babelOptions, commonConfig } from './webpack.common';
 import { prepareFilesToSave } from './prepareFilesToCopy';
 import { ProjectNames } from './projectNames';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
@@ -22,7 +22,25 @@ export default merge(
             libraryTarget: 'umd',
         },
         module: {
-            rules,
+            rules: [
+                {
+                    test: /\.ts$/,
+                    use: [
+                        {
+                            loader: 'babel-loader',
+                            options: babelOptions,
+                        },
+                        {
+                            loader: 'ts-loader',
+                            options: {
+                                compilerOptions: {
+                                    declaration: true,
+                                },
+                            },
+                        },
+                    ],
+                },
+            ],
         },
         plugins: [
             new CopyPlugin(files),
