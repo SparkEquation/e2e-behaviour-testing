@@ -2,7 +2,6 @@ import { LogInRole, PageObjectField, registerPageObject, registerSelector } from
 
 @registerPageObject('PhpTravels')
 export class PhpTravels {
-
     @registerSelector('Navigation')
     public adminPage = 'admin';
 
@@ -26,5 +25,4 @@ export class PhpTravels {
             value: 'demoadmin',
         },
     ];
-
 }
