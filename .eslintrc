@@ -37,8 +37,17 @@
   ],
   "rules": {
     "no-prototype-builtins": "off",
-    "no-unused-vars": "off",
+    "no-unused-vars": ["error", {
+      "vars": "all",
+      "args": "after-used",
+      "ignoreRestSiblings": true
+    }],
     "no-case-declarations": "off",
+    "no-cond-assign": ["error", "always"],
+    "no-template-curly-in-string": "error",
+    "valid-typeof": ["error", {
+      "requireStringLiterals": true
+    }],
     "no-duplicate-imports": "error",
     "object-curly-spacing": ["error", "always"],
     "prefer-object-spread": "error",
