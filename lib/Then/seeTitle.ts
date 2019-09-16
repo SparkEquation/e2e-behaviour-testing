@@ -21,5 +21,3 @@ export function register(): void {
         cy.title().should('include', title);
     });
 }
-
-

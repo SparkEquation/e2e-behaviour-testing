@@ -80,7 +80,7 @@ export class BlankLinkClickOptions extends ClickOptions {
 }
 
 export class SeeOptions extends ElementGetOptions {
-    public amount: number | null =      null;
+    public amount: number | null = null;
 
     constructor(props: DataTableRowsHash) {
         super(props);
@@ -100,4 +100,3 @@ export function register(): void {
     });
      */
 }
-

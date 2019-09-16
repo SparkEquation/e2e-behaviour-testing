@@ -51,7 +51,6 @@ export function register(): void {
         }
     };
 
-
     Given(`I logged in at {string} as {string}`, loggedInAsFunction);
     Given(`I logged in at {string} as {string} and visit {string}`, loggedInAsFunction);
 }

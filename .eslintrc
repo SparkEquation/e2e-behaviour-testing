@@ -1,99 +1,98 @@
 {
-    "parser": "@typescript-eslint/parser",
+    "root": true,
     "extends": [
-        "plugin:@typescript-eslint/recommended",
         "eslint:recommended"
     ],
     "env": {
+        "es6": true,
         "node": true
     },
     "parserOptions": {
         "ecmaVersion": 2019,
         "sourceType": "module"
     },
-    "rules": {
-        "@typescript-eslint/interface-name-prefix": [
-            "error",
-            {
-                "prefixWithI": "always"
+    "globals": {
+        "Cypress": false,
+        "cy": false,
+        "before": false,
+        "beforeEach": false,
+        "expect": false
+    },
+    "overrides": [
+        {
+            "files": [
+                "**/*.ts"
+            ],
+            "parser": "@typescript-eslint/parser",
+            "extends": [
+                "plugin:@typescript-eslint/recommended"
+            ],
+            "rules": {
+                "@typescript-eslint/interface-name-prefix": ["error", {
+                    "prefixWithI": "always"
+                }],
+                "@typescript-eslint/no-explicit-any": "off",
+                "indent": "off",
+                "@typescript-eslint/indent": ["error"]
             }
-        ],
-        "@typescript-eslint/no-explicit-any": "off",
-        "no-undef": "off",
+        }
+    ],
+    "rules": {
         "no-prototype-builtins": "off",
-        "no-unused-vars": "off",
-        "no-case-declarations": "off",
+        "no-unused-vars": ["error", {
+            "vars": "all",
+            "args": "after-used",
+            "ignoreRestSiblings": true
+        }],
+        "no-cond-assign": ["error", "always"],
+        "no-template-curly-in-string": "error",
+        "valid-typeof": ["error", {
+            "requireStringLiterals": true
+        }],
         "no-duplicate-imports": "error",
-        "object-curly-spacing": [
-            "error",
-            "always"
-        ],
+        "object-curly-spacing": ["error", "always"],
         "prefer-object-spread": "error",
         "sort-imports": "off",
         "block-spacing": "error",
         "brace-style": "error",
         "camelcase": "error",
-        "comma-dangle": [
-            "error",
-            "always-multiline"
-        ],
-        "comma-spacing": [
-            "error",
-            {
-                "before": false,
-                "after": true
-            }
-        ],
+        "comma-dangle": ["error", "always-multiline"],
+        "comma-spacing": ["error", {
+            "before": false,
+            "after": true
+        }],
         "computed-property-spacing": "error",
         "eol-last": "error",
         "func-call-spacing": "error",
-        "key-spacing": [
-            "error",
-            {
-                "beforeColon": false,
-                "afterColon": true,
-                "mode": "strict"
-            }
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "max-len": [
-            "error",
-            {
-                "code": 160
-            }
-        ],
+        "key-spacing": ["error", {
+            "beforeColon": false,
+            "afterColon": true,
+            "mode": "strict"
+        }],
+        "linebreak-style": ["error", "unix"],
+        "max-len": ["error", {
+            "code": 160
+        }],
+        "indent": ["error", 2],
+        "no-tabs": "error",
+        "no-multiple-empty-lines": ["error", {
+            "max": 1,
+            "maxEOF": 0,
+            "maxBOF": 0
+        }],
         "newline-per-chained-call": "error",
         "no-unneeded-ternary": "error",
-        "quotes": [
-            "error",
-            "single",
-            {
-                "allowTemplateLiterals": true
-            }
-        ],
+        "quotes": ["error", "single", {
+            "allowTemplateLiterals": true
+        }],
         "semi": "error",
-        "space-before-function-paren": [
-            "error",
-            {
-                "named": "never",
-                "anonymous": "always",
-                "asyncArrow": "always"
-            }
-        ],
+        "space-before-function-paren": ["error", {
+            "named": "never",
+            "anonymous": "always",
+            "asyncArrow": "always"
+        }],
         "space-infix-ops": "error",
-        "arrow-parens": [
-            "error",
-            "as-needed"
-        ],
-        "arrow-spacing": [
-            "error"
-        ],
-        "@typescript-eslint/indent": [
-            "error"
-        ],
-        "no-tabs": "error"
+        "arrow-parens": ["error", "as-needed"],
+        "arrow-spacing": ["error"]
     }
 }

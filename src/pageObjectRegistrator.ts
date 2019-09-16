@@ -105,5 +105,3 @@ export function registerSelector(type: PageObjectField | keyof typeof PageObject
         );
     };
 }
-
-
