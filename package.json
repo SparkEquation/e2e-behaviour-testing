@@ -73,6 +73,7 @@
     "cypress-cucumber-preprocessor": "^1.16.0",
     "cypress-xpath": "^1.4.0",
     "inquirer": "^7.0.0",
+    "readdir-withfiletypes": "^1.0.2",
     "reflect-metadata": "^0.1.13",
     "tsify": "^4.0.1",
     "typescript": "^3.5.3"

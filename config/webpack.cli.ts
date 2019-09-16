@@ -25,19 +25,9 @@ export default merge(
                     use: [
                         {
                             loader: 'babel-loader',
-                            options: {
-                                sourceType: 'script',
-                                ...babelOptions,
-                            },
+                            options: babelOptions,
                         },
-                        {
-                            loader: 'ts-loader',
-                            options: {
-                                compilerOptions: {
-                                    declaration: true,
-                                },
-                            },
-                        },
+                        'ts-loader',
                     ],
                 },
             ],

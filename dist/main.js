@@ -150,13 +150,10 @@ exports.register = register;
 /*!*******************************!*\
   !*** ./lib/Given/loggedIn.ts ***!
   \*******************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
 
 /*
  * Copyright 2019 Spark Equation
@@ -174,6 +171,7 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -414,13 +412,10 @@ exports.register = register;
 /*!***************************!*\
   !*** ./lib/When/click.ts ***!
   \***************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.promise */ "core-js/modules/es.promise");
-/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_0__);
 
 /*
  * Copyright 2019 Spark Equation
@@ -438,6 +433,7 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+__webpack_require__(/*! core-js/modules/es.promise */ "core-js/modules/es.promise");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -625,15 +621,10 @@ exports.register = register;
 /*!***************************!*\
   !*** ./lib/When/logIn.ts ***!
   \***************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.promise */ "core-js/modules/es.promise");
-/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__);
 
 /*
  * Copyright 2019 Spark Equation
@@ -651,7 +642,9 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 
+__webpack_require__(/*! core-js/modules/es.promise */ "core-js/modules/es.promise");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -803,13 +796,10 @@ exports.register = register;
 /*!****************************!*\
   !*** ./lib/globalHooks.ts ***!
   \****************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
 
 /*
  * Copyright 2019 Spark Equation
@@ -827,9 +817,9 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 
-
-var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+var __decorate = this && this.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -837,7 +827,7 @@ var __decorate = undefined && undefined.__decorate || function (decorators, targ
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata = undefined && undefined.__metadata || function (k, v) {
+var __metadata = this && this.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
@@ -946,13 +936,10 @@ exports.register = register;
 /*!**********************!*\
   !*** ./lib/types.ts ***!
   \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
 
 /*
  * Copyright 2019 Spark Equation
@@ -970,6 +957,7 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -1073,13 +1061,10 @@ exports.register = register;
 /*!*******************************!*\
   !*** ./src/core/functions.ts ***!
   \*******************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
 
 /*
  * Copyright 2019 Spark Equation
@@ -1097,6 +1082,7 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -1216,13 +1202,10 @@ exports.makeCypressWaitForPromise = functions_1.makeCypressWaitForPromise;
 /*!*******************************************!*\
   !*** ./src/core/pageObjectRegistrator.ts ***!
   \*******************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
 
 /*
  * Copyright 2019 Spark Equation
@@ -1240,6 +1223,7 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 
 Object.defineProperty(exports, "__esModule", {
   value: true

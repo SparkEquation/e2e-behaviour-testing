@@ -22,6 +22,7 @@ export const commonConfig = {
 };
 
 export const babelOptions = {
+    sourceType: 'script',
     presets: [
         ['@babel/preset-env',
             {

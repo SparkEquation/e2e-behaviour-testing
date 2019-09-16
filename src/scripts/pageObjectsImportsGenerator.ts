@@ -17,6 +17,7 @@
 import fs from 'fs';
 import path from 'path';
 import { ProjectNames } from '../../config/projectNames';
+import { readdirSync } from 'readdir-withFileTypes';
 
 const posixPath = path.posix;
 // Max depth of page objects files
@@ -30,7 +31,7 @@ const filesMap = (filename: string): string => filename.slice(0, -3).replace(`'`
 const filesReduce = (acc, filename): string => acc + `import '${filename}';\n`;
 
 function getFiles(pageObjectsPath, nestedPath = '.'): Array<string> {
-    const files = fs.readdirSync(
+    const files = readdirSync(
         path.resolve(pageObjectsPath, nestedPath),
         { withFileTypes: true }
     );
