@@ -73,6 +73,7 @@
       "code": 160
     }],
     "indent": ["error", 2],
+    "no-tabs": "error",
     "no-multiple-empty-lines": ["error", {
       "max": 1,
       "maxEOF": 0,
