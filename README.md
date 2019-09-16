@@ -1,5 +1,5 @@
 # e2e-behaviour-testing
-
+Clear and scalable e2e tests written in plain English
 > Based on [cypress-cucumber-example](https://github.com/TheBrainFamily/cypress-cucumber-example)
 
 ## Starting tests examples
