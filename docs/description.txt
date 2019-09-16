@@ -1,1 +1,1 @@
-Clear and scalable e2e tests written in English only
+Clear and scalable e2e tests written in plain English
