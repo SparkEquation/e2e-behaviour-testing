@@ -4,11 +4,19 @@
     "eslint:recommended"
   ],
   "env": {
+    "es6": true,
     "node": true
   },
   "parserOptions": {
     "ecmaVersion": 2019,
     "sourceType": "module"
+  },
+  "globals": {
+    "Cypress": false,
+    "cy": false,
+    "before": false,
+    "beforeEach": false,
+    "expect": false
   },
   "overrides": [
     {
@@ -28,7 +36,6 @@
     }
   ],
   "rules": {
-    "no-undef": "off",
     "no-prototype-builtins": "off",
     "no-unused-vars": "off",
     "no-case-declarations": "off",
