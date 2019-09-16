@@ -11,14 +11,7 @@ before adding licensed code into this project.
 Use `npm run checkLicense` to get the full list of licenses  
 
 ## Style guide
-- Maximum line length: 160
-- Interfaces should begin with capital `I`
-- All variables and functions should be names in camelCase
-- Multiline objects and array should have trailing comma
-- Only Unix line ending `\n`
-- Newline at the end of each file  
-Full list of files can be found in `.eslintrc` file.  
-Make sure that your code does not violate any of this rules
+You can find style rules in [`.eslintrc` file](../.eslintrc)
 
 ## Pull request rules
 - Non-trivial changes should be discussed in an issue first,
