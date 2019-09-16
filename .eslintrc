@@ -12,11 +12,11 @@
     "sourceType": "module"
   },
   "globals": {
-    "Cypress": false,
-    "cy": false,
-    "before": false,
-    "beforeEach": false,
-    "expect": false
+    "Cypress": "readonly",
+    "cy": "readonly",
+    "before": "readonly",
+    "beforeEach": "readonly",
+    "expect": "readonly"
   },
   "overrides": [
     {
