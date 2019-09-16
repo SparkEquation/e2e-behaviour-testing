@@ -34,16 +34,3 @@ export const babelOptions = {
         ],
     ],
 };
-
-export const rules = [
-    {
-        test: /\.ts$/,
-        use: [
-            {
-                loader: 'babel-loader',
-                options: babelOptions,
-            },
-            'ts-loader',
-        ],
-    },
-];

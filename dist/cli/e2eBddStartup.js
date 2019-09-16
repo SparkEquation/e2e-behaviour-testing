@@ -259,19 +259,10 @@ pageObjectsImportsGenerator_1.generatePageObjects(pageObjectsFolderPath);
 /*!****************************************************!*\
   !*** ./src/scripts/pageObjectsImportsGenerator.ts ***!
   \****************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_flat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.flat */ "core-js/modules/es.array.flat");
-/* harmony import */ var core_js_modules_es_array_flat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_flat__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_unscopables_flat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.unscopables.flat */ "core-js/modules/es.array.unscopables.flat");
-/* harmony import */ var core_js_modules_es_array_unscopables_flat__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_unscopables_flat__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "core-js/modules/es.string.replace");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3__);
 
 /*
  * Copyright 2019 Spark Equation
@@ -289,12 +280,15 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+__webpack_require__(/*! core-js/modules/es.array.flat */ "core-js/modules/es.array.flat");
 
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
 
+__webpack_require__(/*! core-js/modules/es.array.unscopables.flat */ "core-js/modules/es.array.unscopables.flat");
 
+__webpack_require__(/*! core-js/modules/es.string.replace */ "core-js/modules/es.string.replace");
 
-
-var __importDefault = undefined && undefined.__importDefault || function (mod) {
+var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
   };
