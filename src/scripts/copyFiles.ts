@@ -31,37 +31,37 @@ const filesToCopy = prepareSavedFilesToCopy(PROJECT_BASE_PATH, LIBRARY_TEMPLATES
 const directoriesToCreate = prepareDirectoriesToCreate(PROJECT_BASE_PATH);
 
 const choices = [
-	{
-		name: 'Copy all files',
-		value: 'all'
-	},
-	{
-		name: 'Copy files interactively',
-		value: 'interactive'
-	}
+    {
+        name: 'Copy all files',
+        value: 'all',
+    },
+    {
+        name: 'Copy files interactively',
+        value: 'interactive',
+    },
 ];
 
 inquirer.prompt([
-	{
-		type: 'list',
-		name: 'way',
-		message: 'How do you want to copy files?',
-		choices
-	},
-	{
-		type: 'confirm',
-		name: 'shouldReplaceExisting',
-		message: 'Do you want to replace the existing files?',
-		default: false,
-		when: ({ way }) => {
-			return way === 'all';
-		}
-	}
+    {
+        type: 'list',
+        name: 'way',
+        message: 'How do you want to copy files?',
+        choices,
+    },
+    {
+        type: 'confirm',
+        name: 'shouldReplaceExisting',
+        message: 'Do you want to replace the existing files?',
+        default: false,
+        when: ({ way }): boolean => {
+            return way === 'all';
+        },
+    },
 ]).then(({ way, shouldReplaceExisting }) => {
-	if (way === 'interactive') {
-		console.error('Not implemented yet. Vote for it in github repo');
-		return;
-	}
-	createNecessaryDirectories(directoriesToCreate);
-	copyNecessaryFiles(filesToCopy, shouldReplaceExisting);
+    if (way === 'interactive') {
+        console.error('Not implemented yet. Vote for it in github repo');
+        return;
+    }
+    createNecessaryDirectories(directoriesToCreate);
+    copyNecessaryFiles(filesToCopy, shouldReplaceExisting);
 });

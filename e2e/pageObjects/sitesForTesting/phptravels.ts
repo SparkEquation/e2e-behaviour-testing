@@ -2,7 +2,6 @@ import { LogInRole, PageObjectField, registerPageObject, registerSelector } from
 
 @registerPageObject('PhpTravels')
 export class PhpTravels {
-
     @registerSelector('Navigation')
     public adminPage = 'admin';
 
@@ -19,13 +18,11 @@ export class PhpTravels {
     public admin: LogInRole = [
         {
             fieldName: 'email',
-            value: 'admin@phptravels.com'
+            value: 'admin@phptravels.com',
         },
         {
             fieldName: 'password',
-            value: 'demoadmin'
-        }
+            value: 'demoadmin',
+        },
     ];
-
-
 }

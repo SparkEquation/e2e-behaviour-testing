@@ -91,91 +91,106 @@
 /*!**************************************!*\
   !*** ./config/prepareFilesToCopy.ts ***!
   \**************************************/
-/*! exports provided: prepareFilesToSave, prepareSavedFilesToCopy, prepareDirectoriesToCreate */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "prepareFilesToSave", function() { return prepareFilesToSave; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "prepareSavedFilesToCopy", function() { return prepareSavedFilesToCopy; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "prepareDirectoriesToCreate", function() { return prepareDirectoriesToCreate; });
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _src_util_postinstallFilenamesConvertor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/util/postinstallFilenamesConvertor */ "./src/util/postinstallFilenamesConvertor.ts");
-/* harmony import */ var _projectNames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./projectNames */ "./config/projectNames.ts");
 
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
+
+const postinstallFilenamesConvertor_1 = __webpack_require__(/*! ../src/util/postinstallFilenamesConvertor */ "./src/util/postinstallFilenamesConvertor.ts");
+
+const projectNames_1 = __webpack_require__(/*! ./projectNames */ "./config/projectNames.ts");
 
 function prepareFilesToSave() {
   return [{
-    path: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PLUGINS_SUBFOLDER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PLUGINS_FILE
+    path: path_1.default.resolve(projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_PLUGINS_SUBFOLDER),
+    name: projectNames_1.ProjectNames.E2E_PLUGINS_FILE
   }, {
-    path: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_SUPPORT_SUBFOLER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_SUPPORT_FILE
+    path: path_1.default.resolve(projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_SUPPORT_SUBFOLER),
+    name: projectNames_1.ProjectNames.E2E_SUPPORT_FILE
   }, {
-    path: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CONFIG_FOLDER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TSCONFIG_FILE
+    path: path_1.default.resolve(projectNames_1.ProjectNames.CONFIG_FOLDER),
+    name: projectNames_1.ProjectNames.E2E_TSCONFIG_FILE
   }, {
-    path: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PAGE_OBJECTS_FOLDER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].GITIGNORE_FILE
+    path: path_1.default.resolve(projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_PAGE_OBJECTS_FOLDER),
+    name: projectNames_1.ProjectNames.GITIGNORE_FILE
   }, {
-    path: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PAGE_OBJECTS_FOLDER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].GITIGNORE_FILE
+    path: path_1.default.resolve(projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_PAGE_OBJECTS_FOLDER),
+    name: projectNames_1.ProjectNames.GITIGNORE_FILE
   }, {
-    path: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_CONFIG_SUBFOLDER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_INTEGRATION_CONFIG_FILE
+    path: path_1.default.resolve(projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_CONFIG_SUBFOLDER),
+    name: projectNames_1.ProjectNames.CYPRESS_INTEGRATION_CONFIG_FILE
   }, {
-    path: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_CONFIG_SUBFOLDER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_UNIT_CONFIG_FILE
+    path: path_1.default.resolve(projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_CONFIG_SUBFOLDER),
+    name: projectNames_1.ProjectNames.CYPRESS_UNIT_CONFIG_FILE
   }].map(fileInfo => ({
-    from: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(fileInfo.path, fileInfo.name),
-    to: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].POSTINSTALL_FOLDER, Object(_src_util_postinstallFilenamesConvertor__WEBPACK_IMPORTED_MODULE_1__["filenameToPostInstallEntry"])(fileInfo.name))
+    from: path_1.default.resolve(fileInfo.path, fileInfo.name),
+    to: path_1.default.resolve(projectNames_1.ProjectNames.POSTINSTALL_FOLDER, postinstallFilenamesConvertor_1.filenameToPostInstallEntry(fileInfo.name))
   }));
 }
+
+exports.prepareFilesToSave = prepareFilesToSave;
+
 function prepareSavedFilesToCopy(projectBasePath, libraryTemplatesPath) {
   return [{
-    resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PAGE_OBJECTS_FOLDER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].GITIGNORE_FILE
+    resultDir: path_1.default.resolve(projectBasePath, projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_PAGE_OBJECTS_FOLDER),
+    name: projectNames_1.ProjectNames.GITIGNORE_FILE
   }, {
-    resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PLUGINS_SUBFOLDER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PLUGINS_FILE
+    resultDir: path_1.default.resolve(projectBasePath, projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_PLUGINS_SUBFOLDER),
+    name: projectNames_1.ProjectNames.E2E_PLUGINS_FILE
   }, {
-    resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_FEATURES_SUBFOLER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_FEATURES_COMMON_SUBFOLDER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_FEATURES_COMMON_BEFORE_FILE
+    resultDir: path_1.default.resolve(projectBasePath, projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_FEATURES_SUBFOLER, projectNames_1.ProjectNames.E2E_FEATURES_COMMON_SUBFOLDER),
+    name: projectNames_1.ProjectNames.E2E_FEATURES_COMMON_BEFORE_FILE
   }, {
-    resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_CUCUMBER_CONFIG_FILE
+    resultDir: path_1.default.resolve(projectBasePath),
+    name: projectNames_1.ProjectNames.CYPRESS_CUCUMBER_CONFIG_FILE
   }, {
-    resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_CONFIG_SUBFOLDER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_INTEGRATION_CONFIG_FILE
+    resultDir: path_1.default.resolve(projectBasePath, projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_CONFIG_SUBFOLDER),
+    name: projectNames_1.ProjectNames.CYPRESS_INTEGRATION_CONFIG_FILE
   }, {
-    resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_CONFIG_SUBFOLDER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_UNIT_CONFIG_FILE
+    resultDir: path_1.default.resolve(projectBasePath, projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_CONFIG_SUBFOLDER),
+    name: projectNames_1.ProjectNames.CYPRESS_UNIT_CONFIG_FILE
   }, {
-    resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TSCONFIG_FILE,
-    outputName: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].OUTPUT_TSCONFIG_FILE
+    resultDir: path_1.default.resolve(projectBasePath, projectNames_1.ProjectNames.E2E_TESTS_FOLDER),
+    name: projectNames_1.ProjectNames.E2E_TSCONFIG_FILE,
+    outputName: projectNames_1.ProjectNames.OUTPUT_TSCONFIG_FILE
   }, {
-    resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_SUPPORT_SUBFOLER),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_SUPPORT_FILE
+    resultDir: path_1.default.resolve(projectBasePath, projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_SUPPORT_SUBFOLER),
+    name: projectNames_1.ProjectNames.E2E_SUPPORT_FILE
   }, {
-    resultDir: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath),
-    name: _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].CYPRESS_ENV_FILE
+    resultDir: path_1.default.resolve(projectBasePath),
+    name: projectNames_1.ProjectNames.CYPRESS_ENV_FILE
   }].map(fileInfo => ({
-    from: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(libraryTemplatesPath, Object(_src_util_postinstallFilenamesConvertor__WEBPACK_IMPORTED_MODULE_1__["filenameToPostInstallEntry"])(fileInfo.name)),
-    to: path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(fileInfo.resultDir, fileInfo.outputName || fileInfo.name)
+    from: path_1.default.resolve(libraryTemplatesPath, postinstallFilenamesConvertor_1.filenameToPostInstallEntry(fileInfo.name)),
+    to: path_1.default.resolve(fileInfo.resultDir, fileInfo.outputName || fileInfo.name)
   }));
 }
+
+exports.prepareSavedFilesToCopy = prepareSavedFilesToCopy;
+
 function prepareDirectoriesToCreate(projectBasePath) {
-  const PROJECT_E2E_PATH = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(projectBasePath, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_TESTS_FOLDER);
-  const PROJECT_PLUGINS_PATH = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(PROJECT_E2E_PATH, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PLUGINS_SUBFOLDER);
-  const PROJECT_SUPPORT_PATH = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(PROJECT_E2E_PATH, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_SUPPORT_SUBFOLER);
-  const PROJECT_PAGE_OBJECTS_PATH = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(PROJECT_E2E_PATH, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_PAGE_OBJECTS_FOLDER);
-  const PROJECT_TESTS_COMMON_PATH = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(PROJECT_E2E_PATH, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_FEATURES_SUBFOLER, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_FEATURES_COMMON_SUBFOLDER);
-  const PROJECT_E2E_CONFIG_PATH = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(PROJECT_E2E_PATH, _projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].E2E_CONFIG_SUBFOLDER);
+  const PROJECT_E2E_PATH = path_1.default.resolve(projectBasePath, projectNames_1.ProjectNames.E2E_TESTS_FOLDER);
+  const PROJECT_PLUGINS_PATH = path_1.default.resolve(PROJECT_E2E_PATH, projectNames_1.ProjectNames.E2E_PLUGINS_SUBFOLDER);
+  const PROJECT_SUPPORT_PATH = path_1.default.resolve(PROJECT_E2E_PATH, projectNames_1.ProjectNames.E2E_SUPPORT_SUBFOLER);
+  const PROJECT_PAGE_OBJECTS_PATH = path_1.default.resolve(PROJECT_E2E_PATH, projectNames_1.ProjectNames.E2E_PAGE_OBJECTS_FOLDER);
+  const PROJECT_TESTS_COMMON_PATH = path_1.default.resolve(PROJECT_E2E_PATH, projectNames_1.ProjectNames.E2E_FEATURES_SUBFOLER, projectNames_1.ProjectNames.E2E_FEATURES_COMMON_SUBFOLDER);
+  const PROJECT_E2E_CONFIG_PATH = path_1.default.resolve(PROJECT_E2E_PATH, projectNames_1.ProjectNames.E2E_CONFIG_SUBFOLDER);
   return [PROJECT_PLUGINS_PATH, PROJECT_SUPPORT_PATH, PROJECT_PAGE_OBJECTS_PATH, PROJECT_TESTS_COMMON_PATH, PROJECT_E2E_CONFIG_PATH];
 }
+
+exports.prepareDirectoriesToCreate = prepareDirectoriesToCreate;
 
 /***/ }),
 
@@ -183,13 +198,16 @@ function prepareDirectoriesToCreate(projectBasePath) {
 /*!********************************!*\
   !*** ./config/projectNames.ts ***!
   \********************************/
-/*! exports provided: ProjectNames */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectNames", function() { return ProjectNames; });
-let ProjectNames;
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ProjectNames;
 
 (function (ProjectNames) {
   ProjectNames["E2E_TESTS_FOLDER"] = "e2e";
@@ -220,7 +238,7 @@ let ProjectNames;
   ProjectNames["CYPRESS_UNIT_CONFIG_FILE"] = "cypress.unit.json";
   ProjectNames["CYPRESS_ENV_FILE"] = "cypress.env.json";
   ProjectNames["CYPRESS_CUCUMBER_CONFIG_FILE"] = ".cypress-cucumber-preprocessorrc";
-})(ProjectNames || (ProjectNames = {}));
+})(ProjectNames = exports.ProjectNames || (exports.ProjectNames = {}));
 
 /***/ }),
 
@@ -228,18 +246,11 @@ let ProjectNames;
 /*!**********************************!*\
   !*** ./src/scripts/copyFiles.ts ***!
   \**********************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var inquirer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! inquirer */ "inquirer");
-/* harmony import */ var inquirer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(inquirer__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _config_projectNames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../config/projectNames */ "./config/projectNames.ts");
-/* harmony import */ var _fileOperationsFunctions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fileOperationsFunctions */ "./src/scripts/fileOperationsFunctions.ts");
-/* harmony import */ var _config_prepareFilesToCopy__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../config/prepareFilesToCopy */ "./config/prepareFilesToCopy.ts");
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -256,16 +267,31 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
+
+const inquirer_1 = __importDefault(__webpack_require__(/*! inquirer */ "inquirer"));
+
+const projectNames_1 = __webpack_require__(/*! ../../config/projectNames */ "./config/projectNames.ts");
+
+const fileOperationsFunctions_1 = __webpack_require__(/*! ./fileOperationsFunctions */ "./src/scripts/fileOperationsFunctions.ts");
+
+const prepareFilesToCopy_1 = __webpack_require__(/*! ../../config/prepareFilesToCopy */ "./config/prepareFilesToCopy.ts"); // Paths for project where this library is being installed
 
 
-
- // webpack
-
-// Paths for project where this library is being installed
-const PROJECT_BASE_PATH = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve();
-const LIBRARY_TEMPLATES_PATH = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve('node_modules', "e2e-behaviour-testing", _config_projectNames__WEBPACK_IMPORTED_MODULE_2__["ProjectNames"].POSTINSTALL_FOLDER);
-const filesToCopy = Object(_config_prepareFilesToCopy__WEBPACK_IMPORTED_MODULE_4__["prepareSavedFilesToCopy"])(PROJECT_BASE_PATH, LIBRARY_TEMPLATES_PATH);
-const directoriesToCreate = Object(_config_prepareFilesToCopy__WEBPACK_IMPORTED_MODULE_4__["prepareDirectoriesToCreate"])(PROJECT_BASE_PATH);
+const PROJECT_BASE_PATH = path_1.default.resolve();
+const LIBRARY_TEMPLATES_PATH = path_1.default.resolve('node_modules', "e2e-behaviour-testing", projectNames_1.ProjectNames.POSTINSTALL_FOLDER);
+const filesToCopy = prepareFilesToCopy_1.prepareSavedFilesToCopy(PROJECT_BASE_PATH, LIBRARY_TEMPLATES_PATH);
+const directoriesToCreate = prepareFilesToCopy_1.prepareDirectoriesToCreate(PROJECT_BASE_PATH);
 const choices = [{
   name: 'Copy all files',
   value: 'all'
@@ -273,7 +299,7 @@ const choices = [{
   name: 'Copy files interactively',
   value: 'interactive'
 }];
-inquirer__WEBPACK_IMPORTED_MODULE_1___default.a.prompt([{
+inquirer_1.default.prompt([{
   type: 'list',
   name: 'way',
   message: 'How do you want to copy files?',
@@ -297,8 +323,8 @@ inquirer__WEBPACK_IMPORTED_MODULE_1___default.a.prompt([{
     return;
   }
 
-  Object(_fileOperationsFunctions__WEBPACK_IMPORTED_MODULE_3__["createNecessaryDirectories"])(directoriesToCreate);
-  Object(_fileOperationsFunctions__WEBPACK_IMPORTED_MODULE_3__["copyNecessaryFiles"])(filesToCopy, shouldReplaceExisting);
+  fileOperationsFunctions_1.createNecessaryDirectories(directoriesToCreate);
+  fileOperationsFunctions_1.copyNecessaryFiles(filesToCopy, shouldReplaceExisting);
 });
 
 /***/ }),
@@ -307,17 +333,11 @@ inquirer__WEBPACK_IMPORTED_MODULE_1___default.a.prompt([{
 /*!************************************************!*\
   !*** ./src/scripts/fileOperationsFunctions.ts ***!
   \************************************************/
-/*! exports provided: copyNecessaryFiles, createNecessaryDirectories, createDirectoryIfNotExists, copyFile */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "copyNecessaryFiles", function() { return copyNecessaryFiles; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNecessaryDirectories", function() { return createNecessaryDirectories; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createDirectoryIfNotExists", function() { return createDirectoryIfNotExists; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "copyFile", function() { return copyFile; });
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ "fs");
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -334,6 +354,50 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const fs_1 = __importDefault(__webpack_require__(/*! fs */ "fs"));
+
+function copyFile(from, to, replaceExisting) {
+  const copyFlags = replaceExisting ? undefined : fs_1.default.constants.COPYFILE_EXCL;
+
+  try {
+    fs_1.default.copyFileSync(from, to, copyFlags);
+  } catch (e) {
+    if (e.code !== 'EEXIST' && !replaceExisting) {
+      console.warn(`${"e2e-behaviour-testing".toUpperCase()}: Warning:
+              Cannot copy file, details:
+            ${e}`);
+    }
+  }
+}
+
+exports.copyFile = copyFile;
+
+function createDirectoryIfNotExists(dirPath) {
+  if (!fs_1.default.existsSync(dirPath)) {
+    try {
+      fs_1.default.mkdirSync(dirPath, {
+        recursive: true
+      });
+    } catch (e) {
+      console.warn(`${"e2e-behaviour-testing".toUpperCase()}: Warning:
+              Cannot create directory, details:
+            ${e}`);
+    }
+  }
+}
+
+exports.createDirectoryIfNotExists = createDirectoryIfNotExists;
+
 function copyNecessaryFiles(filesList, replaceExisting = false) {
   filesList.forEach(({
     from,
@@ -342,37 +406,16 @@ function copyNecessaryFiles(filesList, replaceExisting = false) {
     copyFile(from, to, replaceExisting);
   });
 }
+
+exports.copyNecessaryFiles = copyNecessaryFiles;
+
 function createNecessaryDirectories(directoriesList) {
   directoriesList.forEach(directory => {
     createDirectoryIfNotExists(directory);
   });
 }
-function createDirectoryIfNotExists(dirPath) {
-  if (!fs__WEBPACK_IMPORTED_MODULE_0___default.a.existsSync(dirPath)) {
-    try {
-      fs__WEBPACK_IMPORTED_MODULE_0___default.a.mkdirSync(dirPath, {
-        recursive: true
-      });
-    } catch (e) {
-      console.warn(`${"e2e-behaviour-testing".toUpperCase()}: Warning:
-				Cannot create directory, details:
-			${e}`);
-    }
-  }
-}
-function copyFile(from, to, replaceExisting) {
-  let copyFlags = replaceExisting ? undefined : fs__WEBPACK_IMPORTED_MODULE_0___default.a.constants.COPYFILE_EXCL;
 
-  try {
-    fs__WEBPACK_IMPORTED_MODULE_0___default.a.copyFileSync(from, to, copyFlags);
-  } catch (e) {
-    if (e.code !== 'EEXIST' && !replaceExisting) {
-      console.warn(`${"e2e-behaviour-testing".toUpperCase()}: Warning:
-				Cannot copy file, details:
-			${e}`);
-    }
-  }
-}
+exports.createNecessaryDirectories = createNecessaryDirectories;
 
 /***/ }),
 
@@ -380,19 +423,23 @@ function copyFile(from, to, replaceExisting) {
 /*!***************************************************!*\
   !*** ./src/util/postinstallFilenamesConvertor.ts ***!
   \***************************************************/
-/*! exports provided: filenamePrefix, filenamePostfix, filenameToPostInstallEntry */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filenamePrefix", function() { return filenamePrefix; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filenamePostfix", function() { return filenamePostfix; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filenameToPostInstallEntry", function() { return filenameToPostInstallEntry; });
-const filenamePrefix = 'example';
-const filenamePostfix = 'template';
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.filenamePrefix = 'example';
+exports.filenamePostfix = 'template';
+
 function filenameToPostInstallEntry(name) {
-  return `${filenamePrefix}.${name}.${filenamePostfix}`;
+  return `${exports.filenamePrefix}.${name}.${exports.filenamePostfix}`;
 }
+
+exports.filenameToPostInstallEntry = filenameToPostInstallEntry;
 
 /***/ }),
 

@@ -3,11 +3,17 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./dist",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "strictNullChecks": true,
     "preserveConstEnums": true,
     "sourceMap": true,
-    "isolatedModules": true
+    "declaration": true
+
   },
+  "files": [
+    "src/index.ts"
+  ],
   "include": [
     "src/core/**/*.ts",
     "lib/**/*.ts"

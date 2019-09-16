@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import fs from 'fs'
+import fs from 'fs';
 import path from 'path';
 import { ProjectNames } from '../../config/projectNames';
 
@@ -24,27 +24,28 @@ const MAX_DEPTH = 10;
 const AVAILABLE_EXTENSIONS = ['.js', '.ts'];
 
 //Remove extensions and encapsulate single quotes
-const filesMap = filename => filename.slice(0, -3).replace(`'`, `\\'`);
+const filesMap = (filename: string): string => filename.slice(0, -3).replace(`'`, `\\'`);
 
 // Create file with imports
-const filesReduce = (acc, filename) => acc + `import '${filename}';\n`;
+const filesReduce = (acc, filename): string => acc + `import '${filename}';\n`;
 
-function getFiles (pageObjectsPath, nestedPath = '.') {
+function getFiles(pageObjectsPath, nestedPath = '.'): Array<string> {
     const files = fs.readdirSync(
         path.resolve(pageObjectsPath, nestedPath),
         { withFileTypes: true }
     );
 
-    return files.map(dirent => {
-        if (dirent.isDirectory()) {
-            return getFiles(pageObjectsPath, path.join(nestedPath, dirent.name));
-        }
-        return path.join(nestedPath, dirent.name);
-    })
+    return files
+        .map(dirent => {
+            if (dirent.isDirectory()) {
+                return getFiles(pageObjectsPath, path.join(nestedPath, dirent.name));
+            }
+            return path.join(nestedPath, dirent.name);
+        })
         .flat(MAX_DEPTH);
 }
 
-export const generatePageObjects = (pageObjectDirPath) => {
+export const generatePageObjects = (pageObjectDirPath: string): void => {
     const files = getFiles(pageObjectDirPath)
         .filter(
             filePath => AVAILABLE_EXTENSIONS.includes(

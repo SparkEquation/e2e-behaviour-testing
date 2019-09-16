@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+export const storage = new Map<string, IPageObjectMetadata>();
+
 // Keys should be the same as values to allow following typecheck: keyof typeof PageObjectFieldType
 export enum PageObjectField {
     Selector = 'Selector',
@@ -33,43 +35,45 @@ export type LogInRole = Array<IRoleCredentials>;
 // Metadata for fields
 export interface IPageObjectFieldDescription {
     invokable: boolean;
-    type: PageObjectField | null
+    type: PageObjectField | null;
 }
 
 export interface IPageObjectMetadata {
-    getFieldDescriptor(key: string): IPageObjectFieldDescription
+    getFieldDescriptor(key: string): IPageObjectFieldDescription;
 }
 
 export interface IPageObjectParams {
     name: string;
-    type?: PageObjectFieldType
+    type?: PageObjectFieldType;
 }
 
-const metadataTypeKey: string = 'PageObjectFieldType';
-const metadataInvokableKey: string = 'PageObjectFieldInvokable';
+const metadataTypeKey = 'PageObjectFieldType';
+const metadataInvokableKey = 'PageObjectFieldInvokable';
 
-export function registerPageObject<T extends {new(...args:any[]):{}}>(params: IPageObjectParams | string) {
+export function registerPageObject<T extends {new(...args: any[]): {}}>(
+    params: IPageObjectParams | string
+): (constructor: T) => void {
     // TODO replace any with valid type
     const name = typeof params === 'string' ? params : params.name;
     const type = params.hasOwnProperty('type') ? (params as IPageObjectParams).type : null;
-    return (constructor: T) =>  {
+    return (constructor: T): void => {
         class MetadataProvider extends constructor implements IPageObjectMetadata{
             public getFieldDescriptor(key: keyof MetadataProvider): IPageObjectFieldDescription {
                 if (Reflect.hasMetadata(metadataTypeKey, this, key)) {
                     return {
                         invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
-                        type: Reflect.getMetadata(metadataTypeKey, this, key)
-                    }
+                        type: Reflect.getMetadata(metadataTypeKey, this, key),
+                    };
                 } else if (Reflect.hasMetadata(metadataTypeKey, this)) {
                     return {
                         type: Reflect.getMetadata(metadataTypeKey, this),
-                        invokable: false
-                    }
+                        invokable: false,
+                    };
                 } else {
                     return {
                         type: null,
-                        invokable: false
-                    }
+                        invokable: false,
+                    };
                 }
             }
         }
@@ -90,7 +94,7 @@ export function registerPageObject<T extends {new(...args:any[]):{}}>(params: IP
 }
 
 export function registerSelector(type: PageObjectField | keyof typeof PageObjectField) {
-    return function (target: Object, key: string | symbol, descriptor?: PropertyDescriptor) {
+    return function (target: Record<string, any>, key: string | symbol, descriptor?: PropertyDescriptor): void {
         const invokable = descriptor !== undefined;
 
         Reflect.defineMetadata(
@@ -101,5 +105,3 @@ export function registerSelector(type: PageObjectField | keyof typeof PageObject
         );
     };
 }
-
-export const storage = new Map<string, IPageObjectMetadata>();

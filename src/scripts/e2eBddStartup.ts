@@ -30,7 +30,7 @@ const DEFAULT_PAGE_OBJECTS_FOLDER_NAME = ProjectNames.E2E_PAGE_OBJECTS_FOLDER;
 const EXPECTED_CONFIG_PATH = path.resolve(ProjectNames.CYPRESS_CONFIG_FILE);
 const FAULT_EXIT_CODE = 1;
 
-function copyConfig(config) {
+function copyConfig(config): void {
     const configPath = path.resolve(config);
     try {
         fs.copyFileSync(configPath, EXPECTED_CONFIG_PATH);
@@ -44,17 +44,20 @@ function copyConfig(config) {
     }
 }
 
-function readConfig() {
+function readConfig(): any {
+    let configContent: any = null;
     try {
-        return JSON.parse(fs.readFileSync(EXPECTED_CONFIG_PATH, { encoding: 'utf-8' }));
+        configContent = JSON.parse(
+            fs.readFileSync(EXPECTED_CONFIG_PATH, { encoding: 'utf-8' })
+        );
     } catch (err) {
         console.error(err.message);
         process.exit(FAULT_EXIT_CODE);
     }
+    return configContent;
 }
 
-
-function determinePageObjectsPath(cypressConfig) {
+function determinePageObjectsPath(cypressConfig: any): string {
     const { integrationFolder, pageObjectsFolder } = cypressConfig;
     if (pageObjectsFolder) {
         return path.resolve(pageObjectsFolder);
@@ -87,4 +90,4 @@ try {
     console.error(e.message);
     process.exit(FAULT_EXIT_CODE);
 }
-generatePageObjects(pageObjectsFolderPath)
+generatePageObjects(pageObjectsFolderPath);

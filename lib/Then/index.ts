@@ -17,7 +17,7 @@
 import * as SeeTitle from './seeTitle';
 import * as CorrectUrl from './correctUrl';
 
-export function register() {
+export function register(): void {
     SeeTitle.register();
     CorrectUrl.register();
 }

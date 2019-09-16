@@ -1,7 +1,6 @@
 import nodeExternals from 'webpack-node-externals';
 import webpack = require('webpack');
-// @ts-ignore
-import packageInfo from '../package.json'
+import packageInfo from '../package.json';
 
 // Caused by https://github.com/dividab/tsconfig-paths-webpack-plugin/issues/31
 process.env['TS_NODE_PROJECT'] = '';
@@ -9,7 +8,7 @@ process.env['TS_NODE_PROJECT'] = '';
 export const commonConfig = {
     target: 'node',
     mode: 'development',
-    devtool: "cheap-source-map",
+    devtool: 'source-map',
     externals: [nodeExternals()],
     resolve: {
         extensions: ['.js', '.ts', '.json'],
@@ -18,8 +17,8 @@ export const commonConfig = {
         new webpack.DefinePlugin({
             PACKAGE_VERSION: JSON.stringify(packageInfo.version),
             PACKAGE_NAME: JSON.stringify(packageInfo.name),
-        })
-    ]
+        }),
+    ],
 };
 
 export const babelOptions = {
@@ -33,11 +32,18 @@ export const babelOptions = {
                 useBuiltIns: 'usage',
             },
         ],
-        "@babel/preset-typescript"
-    ],
-    plugins: [
-        ['@babel/plugin-proposal-decorators', { legacy: true }],
-        "@babel/proposal-class-properties",
-        "@babel/proposal-object-rest-spread",
     ],
 };
+
+export const rules = [
+    {
+        test: /\.ts$/,
+        use: [
+            {
+                loader: 'babel-loader',
+                options: babelOptions,
+            },
+            'ts-loader',
+        ],
+    },
+];

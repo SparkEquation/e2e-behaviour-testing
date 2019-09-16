@@ -14,45 +14,45 @@
  * limitations under the License.
  */
 
-import fs from "fs";
+import fs from 'fs';
 import { IFilesToCopy } from '../../config/prepareFilesToCopy';
 
 // webpack
 declare const PACKAGE_NAME: string;
 
-export function copyNecessaryFiles(filesList: Array<IFilesToCopy>, replaceExisting: boolean = false) {
-    filesList.forEach(({from, to}) => {
-        copyFile(from, to, replaceExisting);
-    })
-}
-
-export function createNecessaryDirectories(directoriesList: Array<string>) {
-    directoriesList.forEach(directory => {
-        createDirectoryIfNotExists(directory);
-    })
-}
-
-export function createDirectoryIfNotExists(dirPath: string) {
-    if(!fs.existsSync(dirPath)) {
-        try {
-            fs.mkdirSync(dirPath, {recursive: true});
-        } catch (e) {
-            console.warn(`${PACKAGE_NAME.toUpperCase()}: Warning:
-				Cannot create directory, details:
-			${e}`);
-        }
-    }
-}
-
-export function copyFile(from: string, to: string, replaceExisting: boolean) {
-    let copyFlags = replaceExisting ? undefined : fs.constants.COPYFILE_EXCL;
+export function copyFile(from: string, to: string, replaceExisting: boolean): void {
+    const copyFlags = replaceExisting ? undefined : fs.constants.COPYFILE_EXCL;
     try {
         fs.copyFileSync(from, to, copyFlags);
     } catch (e) {
         if (e.code !== 'EEXIST' && !replaceExisting) {
             console.warn(`${PACKAGE_NAME.toUpperCase()}: Warning:
-				Cannot copy file, details:
-			${e}`);
+              Cannot copy file, details:
+            ${e}`);
         }
     }
+}
+
+export function createDirectoryIfNotExists(dirPath: string): void {
+    if(!fs.existsSync(dirPath)) {
+        try {
+            fs.mkdirSync(dirPath, { recursive: true });
+        } catch (e) {
+            console.warn(`${PACKAGE_NAME.toUpperCase()}: Warning:
+              Cannot create directory, details:
+            ${e}`);
+        }
+    }
+}
+
+export function copyNecessaryFiles(filesList: Array<IFilesToCopy>, replaceExisting = false): void {
+    filesList.forEach(({ from, to }) => {
+        copyFile(from, to, replaceExisting);
+    });
+}
+
+export function createNecessaryDirectories(directoriesList: Array<string>): void {
+    directoriesList.forEach(directory => {
+        createDirectoryIfNotExists(directory);
+    });
 }

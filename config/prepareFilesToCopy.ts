@@ -36,7 +36,7 @@ export function prepareFilesToSave(): Array<IFilesToCopy> {
         {
             path: path.resolve(ProjectNames.E2E_TESTS_FOLDER, ProjectNames.E2E_CONFIG_SUBFOLDER),
             name: ProjectNames.CYPRESS_UNIT_CONFIG_FILE,
-        }
+        },
     ].map(fileInfo => ({
         from: path.resolve(fileInfo.path, fileInfo.name),
         to: path.resolve(ProjectNames.POSTINSTALL_FOLDER, filenameToPostInstallEntry(fileInfo.name)),
@@ -87,7 +87,7 @@ export function prepareSavedFilesToCopy(projectBasePath: string, libraryTemplate
         },
     ].map(fileInfo => ({
         from: path.resolve(libraryTemplatesPath, filenameToPostInstallEntry(fileInfo.name)),
-        to: path.resolve(fileInfo.resultDir, (fileInfo.outputName || fileInfo.name))
+        to: path.resolve(fileInfo.resultDir, (fileInfo.outputName || fileInfo.name)),
     }));
 }
 
@@ -103,6 +103,6 @@ export function prepareDirectoriesToCreate(projectBasePath): Array<string> {
 
     return [
         PROJECT_PLUGINS_PATH, PROJECT_SUPPORT_PATH, PROJECT_PAGE_OBJECTS_PATH,
-        PROJECT_TESTS_COMMON_PATH, PROJECT_E2E_CONFIG_PATH
+        PROJECT_TESTS_COMMON_PATH, PROJECT_E2E_CONFIG_PATH,
     ];
 }

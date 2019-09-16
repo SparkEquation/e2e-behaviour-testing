@@ -19,16 +19,16 @@ import { PageObjectSelector } from '../types';
 import { CypressSavedElement, getElement } from '../../src/core/functions';
 import { LogInRole } from '../../src/core/index';
 
-export function register() {
+export function register(): void {
     When(`I log in at {string} as {string}`, async (selectorString: string, roleSelectorString: string) => {
         const elementSelector = new PageObjectSelector(selectorString);
         const roleSelector = new PageObjectSelector(roleSelectorString);
 
-        let element: CypressSavedElement = getElement(elementSelector);
+        const element: CypressSavedElement = getElement(elementSelector);
         cy.get(element).within(form => {
             cy.root().should('be.visible');
             const credentials: LogInRole = roleSelector.getValue();
-            for (let field of credentials) {
+            for (const field of credentials) {
                 cy.get(`input[name="${field.fieldName}"]`).type(field.value);
             }
 

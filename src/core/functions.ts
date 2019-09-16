@@ -23,15 +23,16 @@ export type CredentialsObject = { [key: string]: LogInRole };
 
 const getElementAlias: CypressSavedElement = 'getElement';
 
-export function getElement(selector: PageObjectSelector, getOptions: GetOptions = {}): CypressSavedElement {
-    let element: CypressSavedElement | null = '@' + getElementAlias;
+export function getElement(selector: PageObjectSelector, getOptions: GetOptions = {}): CypressSavedElement{
+    const element: CypressSavedElement | null = '@' + getElementAlias;
 
     switch (selector.fieldDescriptor.type) {
         case PageObjectField.Xpath:
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
             cy.xpath(selector.getValue(), getOptions).as(getElementAlias);
             break;
-        case PageObjectField.Selector:
+        case PageObjectField.Selector: {
             const value = selector.getValue();
             if (Array.isArray(value) && typeof value[1]  === 'string') {
                 const [ element, contains ] = value;
@@ -40,6 +41,7 @@ export function getElement(selector: PageObjectSelector, getOptions: GetOptions 
                 cy.get(selector.getValue(), getOptions).as(getElementAlias);
             }
             break;
+        }
         default:
             throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to see element by selector '${selector.toString()}' `);
     }
@@ -63,7 +65,7 @@ export function extractCommonGetOptions(options: ElementGetOptions): Partial<Cyp
 }
 
 export function makeCypressWaitForPromise(promiseToWait: Promise<any>): Bluebird<any> {
-    return new Cypress.Promise((resolve, reject) => {
+    return new Cypress.Promise((resolve, reject): void => {
         promiseToWait.then(resolve).catch(reject);
     });
 }

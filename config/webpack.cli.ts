@@ -3,7 +3,7 @@ import webpack from 'webpack';
 import merge from 'webpack-merge';
 
 import { ProjectNames } from './projectNames';
-import { commonConfig, babelOptions } from './webpack.common';
+import { commonConfig, rules } from './webpack.common';
 
 const SCRIPTS_FOLDER = path.resolve(ProjectNames.SOURCES_FOLDER, ProjectNames.SOURCES_SCRIPTS_SUBFOLDER);
 const BIN_FOLDER = path.resolve(ProjectNames.OUTPUT_FOLDER, ProjectNames.OUTPUT_SCRIPTS_SUBFOLDER);
@@ -19,18 +19,12 @@ export default merge(
             path: BIN_FOLDER,
         },
         module: {
-            rules: [
-                {
-                    test: /\.ts$/,
-                    loader: 'babel-loader',
-                    options: babelOptions,
-                },
-            ],
+            rules: rules,
         },
         plugins: [
             new webpack.BannerPlugin({
-                banner: "#!/usr/bin/env node", raw: true
-            })
+                banner: '#!/usr/bin/env node', raw: true,
+            }),
         ],
     }
 );

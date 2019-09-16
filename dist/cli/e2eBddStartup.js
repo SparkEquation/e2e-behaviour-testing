@@ -91,13 +91,16 @@
 /*!********************************!*\
   !*** ./config/projectNames.ts ***!
   \********************************/
-/*! exports provided: ProjectNames */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectNames", function() { return ProjectNames; });
-let ProjectNames;
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ProjectNames;
 
 (function (ProjectNames) {
   ProjectNames["E2E_TESTS_FOLDER"] = "e2e";
@@ -128,7 +131,7 @@ let ProjectNames;
   ProjectNames["CYPRESS_UNIT_CONFIG_FILE"] = "cypress.unit.json";
   ProjectNames["CYPRESS_ENV_FILE"] = "cypress.env.json";
   ProjectNames["CYPRESS_CUCUMBER_CONFIG_FILE"] = ".cypress-cucumber-preprocessorrc";
-})(ProjectNames || (ProjectNames = {}));
+})(ProjectNames = exports.ProjectNames || (exports.ProjectNames = {}));
 
 /***/ }),
 
@@ -136,19 +139,11 @@ let ProjectNames;
 /*!**************************************!*\
   !*** ./src/scripts/e2eBddStartup.ts ***!
   \**************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ "fs");
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var commander__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! commander */ "commander");
-/* harmony import */ var commander__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(commander__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _config_projectNames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../config/projectNames */ "./config/projectNames.ts");
-/* harmony import */ var _pageObjectsImportsGenerator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pageObjectsImportsGenerator */ "./src/scripts/pageObjectsImportsGenerator.ts");
+
 /*
  * Copyright 2019 Spark Equation
  *
@@ -165,21 +160,36 @@ __webpack_require__.r(__webpack_exports__);
  * limitations under the License.
  */
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
 
- // webpack
+const fs_1 = __importDefault(__webpack_require__(/*! fs */ "fs"));
 
-const DEFAULT_CYPRESS_FEATURES_FOLDER = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_config_projectNames__WEBPACK_IMPORTED_MODULE_3__["ProjectNames"].E2E_TESTS_FOLDER, _config_projectNames__WEBPACK_IMPORTED_MODULE_3__["ProjectNames"].E2E_FEATURES_SUBFOLER);
-const DEFAULT_PAGE_OBJECTS_FOLDER_NAME = _config_projectNames__WEBPACK_IMPORTED_MODULE_3__["ProjectNames"].E2E_PAGE_OBJECTS_FOLDER;
-const EXPECTED_CONFIG_PATH = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(_config_projectNames__WEBPACK_IMPORTED_MODULE_3__["ProjectNames"].CYPRESS_CONFIG_FILE);
+const commander_1 = __importDefault(__webpack_require__(/*! commander */ "commander"));
+
+const projectNames_1 = __webpack_require__(/*! ../../config/projectNames */ "./config/projectNames.ts");
+
+const pageObjectsImportsGenerator_1 = __webpack_require__(/*! ./pageObjectsImportsGenerator */ "./src/scripts/pageObjectsImportsGenerator.ts");
+
+const DEFAULT_CYPRESS_FEATURES_FOLDER = path_1.default.resolve(projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_FEATURES_SUBFOLER);
+const DEFAULT_PAGE_OBJECTS_FOLDER_NAME = projectNames_1.ProjectNames.E2E_PAGE_OBJECTS_FOLDER;
+const EXPECTED_CONFIG_PATH = path_1.default.resolve(projectNames_1.ProjectNames.CYPRESS_CONFIG_FILE);
 const FAULT_EXIT_CODE = 1;
 
 function copyConfig(config) {
-  const configPath = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(config);
+  const configPath = path_1.default.resolve(config);
 
   try {
-    fs__WEBPACK_IMPORTED_MODULE_1___default.a.copyFileSync(configPath, EXPECTED_CONFIG_PATH);
+    fs_1.default.copyFileSync(configPath, EXPECTED_CONFIG_PATH);
   } catch (err) {
     if (err.code === 'ENOENT') {
       console.error('Config file do not exist');
@@ -192,14 +202,18 @@ function copyConfig(config) {
 }
 
 function readConfig() {
+  let configContent = null;
+
   try {
-    return JSON.parse(fs__WEBPACK_IMPORTED_MODULE_1___default.a.readFileSync(EXPECTED_CONFIG_PATH, {
+    configContent = JSON.parse(fs_1.default.readFileSync(EXPECTED_CONFIG_PATH, {
       encoding: 'utf-8'
     }));
   } catch (err) {
     console.error(err.message);
     process.exit(FAULT_EXIT_CODE);
   }
+
+  return configContent;
 }
 
 function determinePageObjectsPath(cypressConfig) {
@@ -209,17 +223,17 @@ function determinePageObjectsPath(cypressConfig) {
   } = cypressConfig;
 
   if (pageObjectsFolder) {
-    return path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(pageObjectsFolder);
+    return path_1.default.resolve(pageObjectsFolder);
   }
 
-  const integrationFolderPath = path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(integrationFolder ? integrationFolder : DEFAULT_CYPRESS_FEATURES_FOLDER);
-  return path__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(integrationFolderPath, '..', DEFAULT_PAGE_OBJECTS_FOLDER_NAME);
+  const integrationFolderPath = path_1.default.resolve(integrationFolder ? integrationFolder : DEFAULT_CYPRESS_FEATURES_FOLDER);
+  return path_1.default.resolve(integrationFolderPath, '..', DEFAULT_PAGE_OBJECTS_FOLDER_NAME);
 }
 
-commander__WEBPACK_IMPORTED_MODULE_2___default.a.version("0.4.6").name('e2e-bdd-startup').option('-c, --config <path>', 'path to cypress config').parse(process.argv);
-const config = commander__WEBPACK_IMPORTED_MODULE_2___default.a.config || _config_projectNames__WEBPACK_IMPORTED_MODULE_3__["ProjectNames"].CYPRESS_CONFIG_FILE;
+commander_1.default.version("0.4.6").name('e2e-bdd-startup').option('-c, --config <path>', 'path to cypress config').parse(process.argv);
+const config = commander_1.default.config || projectNames_1.ProjectNames.CYPRESS_CONFIG_FILE;
 
-if (config !== _config_projectNames__WEBPACK_IMPORTED_MODULE_3__["ProjectNames"].CYPRESS_CONFIG_FILE) {
+if (config !== projectNames_1.ProjectNames.CYPRESS_CONFIG_FILE) {
   copyConfig(config);
 }
 
@@ -227,7 +241,7 @@ const cypressConfig = readConfig();
 const pageObjectsFolderPath = determinePageObjectsPath(cypressConfig);
 
 try {
-  const stats = fs__WEBPACK_IMPORTED_MODULE_1___default.a.statSync(pageObjectsFolderPath);
+  const stats = fs_1.default.statSync(pageObjectsFolderPath);
 
   if (!stats.isDirectory()) {
     throw new Error('Page objects is not a directory');
@@ -237,7 +251,7 @@ try {
   process.exit(FAULT_EXIT_CODE);
 }
 
-Object(_pageObjectsImportsGenerator__WEBPACK_IMPORTED_MODULE_4__["generatePageObjects"])(pageObjectsFolderPath);
+pageObjectsImportsGenerator_1.generatePageObjects(pageObjectsFolderPath);
 
 /***/ }),
 
@@ -245,12 +259,11 @@ Object(_pageObjectsImportsGenerator__WEBPACK_IMPORTED_MODULE_4__["generatePageOb
 /*!****************************************************!*\
   !*** ./src/scripts/pageObjectsImportsGenerator.ts ***!
   \****************************************************/
-/*! exports provided: generatePageObjects */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generatePageObjects", function() { return generatePageObjects; });
 /* harmony import */ var core_js_modules_es_array_flat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.flat */ "core-js/modules/es.array.flat");
 /* harmony import */ var core_js_modules_es_array_flat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_flat__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
@@ -259,15 +272,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_unscopables_flat__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_unscopables_flat__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "core-js/modules/es.string.replace");
 /* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! fs */ "fs");
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _config_projectNames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../config/projectNames */ "./config/projectNames.ts");
-
-
-
-
 
 /*
  * Copyright 2019 Spark Equation
@@ -287,7 +291,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const posixPath = path__WEBPACK_IMPORTED_MODULE_5___default.a.posix; // Max depth of page objects files
+
+
+
+var __importDefault = undefined && undefined.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const fs_1 = __importDefault(__webpack_require__(/*! fs */ "fs"));
+
+const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
+
+const projectNames_1 = __webpack_require__(/*! ../../config/projectNames */ "./config/projectNames.ts");
+
+const posixPath = path_1.default.posix; // Max depth of page objects files
 
 const MAX_DEPTH = 10;
 const AVAILABLE_EXTENSIONS = ['.js', '.ts']; //Remove extensions and encapsulate single quotes
@@ -298,24 +321,24 @@ const filesMap = filename => filename.slice(0, -3).replace(`'`, `\\'`); // Creat
 const filesReduce = (acc, filename) => acc + `import '${filename}';\n`;
 
 function getFiles(pageObjectsPath, nestedPath = '.') {
-  const files = fs__WEBPACK_IMPORTED_MODULE_4___default.a.readdirSync(path__WEBPACK_IMPORTED_MODULE_5___default.a.resolve(pageObjectsPath, nestedPath), {
+  const files = fs_1.default.readdirSync(path_1.default.resolve(pageObjectsPath, nestedPath), {
     withFileTypes: true
   });
   return files.map(dirent => {
     if (dirent.isDirectory()) {
-      return getFiles(pageObjectsPath, path__WEBPACK_IMPORTED_MODULE_5___default.a.join(nestedPath, dirent.name));
+      return getFiles(pageObjectsPath, path_1.default.join(nestedPath, dirent.name));
     }
 
-    return path__WEBPACK_IMPORTED_MODULE_5___default.a.join(nestedPath, dirent.name);
+    return path_1.default.join(nestedPath, dirent.name);
   }).flat(MAX_DEPTH);
 }
 
-const generatePageObjects = pageObjectDirPath => {
-  const files = getFiles(pageObjectDirPath).filter(filePath => AVAILABLE_EXTENSIONS.includes(path__WEBPACK_IMPORTED_MODULE_5___default.a.extname(filePath)) && filePath !== _config_projectNames__WEBPACK_IMPORTED_MODULE_6__["ProjectNames"].TESTS_INDEX_FILE).map(filesMap).map(file => {
-    return `./${posixPath.join(...file.split(path__WEBPACK_IMPORTED_MODULE_5___default.a.sep))}`;
+exports.generatePageObjects = pageObjectDirPath => {
+  const files = getFiles(pageObjectDirPath).filter(filePath => AVAILABLE_EXTENSIONS.includes(path_1.default.extname(filePath)) && filePath !== projectNames_1.ProjectNames.TESTS_INDEX_FILE).map(filesMap).map(file => {
+    return `./${posixPath.join(...file.split(path_1.default.sep))}`;
   });
   const importContent = files.reduce(filesReduce, '');
-  fs__WEBPACK_IMPORTED_MODULE_4___default.a.writeFileSync(path__WEBPACK_IMPORTED_MODULE_5___default.a.resolve(pageObjectDirPath, 'index.ts'), importContent);
+  fs_1.default.writeFileSync(path_1.default.resolve(pageObjectDirPath, 'index.ts'), importContent);
 };
 
 /***/ }),
