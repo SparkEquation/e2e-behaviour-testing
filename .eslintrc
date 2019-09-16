@@ -31,7 +31,8 @@
         "@typescript-eslint/interface-name-prefix": ["error", {
           "prefixWithI": "always"
         }],
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        "indent": ["error", 4]
       }
     }
   ],
@@ -70,6 +71,12 @@
     "linebreak-style": ["error", "unix"],
     "max-len": ["error", {
       "code": 160
+    }],
+    "indent": ["error", 2],
+    "no-multiple-empty-lines": ["error", {
+      "max": 1,
+      "maxEOF": 0,
+      "maxBOF": 0
     }],
     "newline-per-chained-call": "error",
     "no-unneeded-ternary": "error",

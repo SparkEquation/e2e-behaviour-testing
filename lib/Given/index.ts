@@ -18,6 +18,6 @@ import * as OpenPage from './openPage';
 import * as LoggedIn from './loggedIn';
 
 export function register(): void {
-	OpenPage.register();
-	LoggedIn.register();
+    OpenPage.register();
+    LoggedIn.register();
 }

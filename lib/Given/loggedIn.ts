@@ -20,38 +20,37 @@ import { LogInRole } from '../../src';
 import { getNavigationUrl } from '../../src/functions';
 
 export function register(): void {
-	const loggedInAsFunction = (
-		apiSelectorString: string, roleSelectorString: string, redirectSelectorString?: string
-	): void => {
-		const navigationSelector = new PageObjectSelector(apiSelectorString);
-		const roleSelector = new PageObjectSelector(roleSelectorString);
-		const url = getNavigationUrl(navigationSelector);
+    const loggedInAsFunction = (
+        apiSelectorString: string, roleSelectorString: string, redirectSelectorString?: string
+    ): void => {
+        const navigationSelector = new PageObjectSelector(apiSelectorString);
+        const roleSelector = new PageObjectSelector(roleSelectorString);
+        const url = getNavigationUrl(navigationSelector);
 
-		const requestBody = {};
-		for (const field of roleSelector.getValue() as LogInRole) {
-			requestBody[field.fieldName] = field.value;
-		}
+        const requestBody = {};
+        for (const field of roleSelector.getValue() as LogInRole) {
+            requestBody[field.fieldName] = field.value;
+        }
 
-		cy.request({
-			method: 'POST',
-			url,
-			form: true,
-			body: requestBody,
-			headers: {
-				'X-Requested-With': 'XMLHttpRequest',
-			},
-		}).then(response => {
-			expect(response.status).to.eq(200);
-			expect(response).to.have.property('headers');
-		});
+        cy.request({
+            method: 'POST',
+            url,
+            form: true,
+            body: requestBody,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        }).then(response => {
+            expect(response.status).to.eq(200);
+            expect(response).to.have.property('headers');
+        });
 
-		if (redirectSelectorString) {
-			const redirectSelector = new PageObjectSelector(redirectSelectorString);
-			cy.visit(getNavigationUrl(redirectSelector));
-		}
-	};
+        if (redirectSelectorString) {
+            const redirectSelector = new PageObjectSelector(redirectSelectorString);
+            cy.visit(getNavigationUrl(redirectSelector));
+        }
+    };
 
-
-	Given(`I logged in at {string} as {string}`, loggedInAsFunction);
-	Given(`I logged in at {string} as {string} and visit {string}`, loggedInAsFunction);
+    Given(`I logged in at {string} as {string}`, loggedInAsFunction);
+    Given(`I logged in at {string} as {string} and visit {string}`, loggedInAsFunction);
 }
