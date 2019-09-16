@@ -19,14 +19,16 @@ import { PageObjectSelector } from '../types';
 import { LogInRole } from '../../src';
 import { getNavigationUrl } from '../../src/functions';
 
-export function register () {
-    const loggedInAsFunction = (apiSelectorString: string, roleSelectorString: string, redirectSelectorString?: string) => {
+export function register(): void {
+    const loggedInAsFunction = (
+        apiSelectorString: string, roleSelectorString: string, redirectSelectorString?: string
+    ): void => {
         const navigationSelector = new PageObjectSelector(apiSelectorString);
         const roleSelector = new PageObjectSelector(roleSelectorString);
         const url = getNavigationUrl(navigationSelector);
 
         const requestBody = {};
-        for (let field of roleSelector.getValue() as LogInRole) {
+        for (const field of roleSelector.getValue() as LogInRole) {
             requestBody[field.fieldName] = field.value;
         }
 
@@ -36,8 +38,8 @@ export function register () {
             form: true,
             body: requestBody,
             headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
+                'X-Requested-With': 'XMLHttpRequest',
+            },
         }).then(response => {
             expect(response.status).to.eq(200);
             expect(response).to.have.property('headers');
@@ -48,7 +50,6 @@ export function register () {
             cy.visit(getNavigationUrl(redirectSelector));
         }
     };
-
 
     Given(`I logged in at {string} as {string}`, loggedInAsFunction);
     Given(`I logged in at {string} as {string} and visit {string}`, loggedInAsFunction);
