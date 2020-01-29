@@ -3,10 +3,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./dist",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "strictNullChecks": true,
     "preserveConstEnums": true,
-    "sourceMap": true,
-    "declaration": true
+    "sourceMap": true
   },
   "files": [
     "src/index.ts"
