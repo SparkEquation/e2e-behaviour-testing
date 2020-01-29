@@ -40,8 +40,8 @@ fs.readdirSync(logsPath)
   .filter(filename => path.extname(filename) === '.json')
   .map(filename => JSON.parse(
     fs.readFileSync(
-      path.resolve(logsPath, filename), { encoding: 'utf-8' }
-    ))
+      path.resolve(logsPath, filename), { encoding: 'utf-8' },
+    )),
   )
   .forEach(featuresArray => {
     featuresArray.forEach(feature => {
@@ -56,7 +56,7 @@ fs.readdirSync(logsPath)
           element.result.status = 'skipped';
         } else {
           element.result.status = element.steps.some(
-            step => step.result.status === 'failed'
+            step => step.result.status === 'failed',
           ) ? 'failed' : 'success';
         }
         processTags(element.tags, element.result);

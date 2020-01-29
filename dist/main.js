@@ -1045,7 +1045,7 @@ function register() {
   /* Use this across project as soon as
   https://youtrack.jetbrains.com/issue/WEB-39983?_ga=2.137121712.1268965974.1566197839-869244565.1565073645
   is resolved
-    defineParameterType({
+   defineParameterType({
       name: 'pageObjectSelector',
       regexp: /[a-zA-Z]+\.[a-zA-Z]+/,
       transformer: selector => new PageObjectSelector(selector)

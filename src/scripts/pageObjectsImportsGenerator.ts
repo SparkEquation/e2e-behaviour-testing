@@ -17,7 +17,7 @@
 import fs from 'fs';
 import path from 'path';
 import { ProjectNames } from '../../config/projectNames';
-import { readdirSync } from 'readdir-withFileTypes';
+import { readdirSync } from 'readdir-withfiletypes';
 
 const posixPath = path.posix;
 // Max depth of page objects files

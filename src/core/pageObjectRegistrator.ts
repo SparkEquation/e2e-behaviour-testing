@@ -51,7 +51,7 @@ const metadataTypeKey = 'PageObjectFieldType';
 const metadataInvokableKey = 'PageObjectFieldInvokable';
 
 export function registerPageObject<T extends {new(...args: any[]): {}}>(
-    params: IPageObjectParams | string
+    params: IPageObjectParams | string,
 ): (constructor: T) => void {
     // TODO replace any with valid type
     const name = typeof params === 'string' ? params : params.name;
@@ -98,10 +98,10 @@ export function registerSelector(type: PageObjectField | keyof typeof PageObject
         const invokable = descriptor !== undefined;
 
         Reflect.defineMetadata(
-            metadataTypeKey, type, target,  key
+            metadataTypeKey, type, target,  key,
         );
         Reflect.defineMetadata(
-            metadataInvokableKey, invokable, target, key
+            metadataInvokableKey, invokable, target, key,
         );
     };
 }

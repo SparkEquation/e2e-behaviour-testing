@@ -45,7 +45,8 @@
     "README.md"
   ],
   "scripts": {
-    "lint": "eslint **/*.ts **/*.js",
+    "build": "webpack",
+    "lint": "eslint '**/*.{ts,js}'",
     "lint:fix": "npm run lint -- --fix",
     "pretest": "npm run build:cli && node dist/cli/e2eBddStartup.js -c e2e/config/cypress.integration.json",
     "version": "npm --no-git-tag-version version",
@@ -68,14 +69,14 @@
     "@cypress/browserify-preprocessor": "^2.1.1",
     "core-js": "^3.2.1",
     "cucumber": "^5.1.0",
-    "cypress": "^3.4.1",
-    "cypress-cucumber-preprocessor": "^1.16.0",
+    "cypress": "^3.8.3",
+    "cypress-cucumber-preprocessor": "^1.19.2",
     "cypress-xpath": "^1.4.0",
     "inquirer": "^7.0.0",
     "readdir-withfiletypes": "^1.0.2",
     "reflect-metadata": "^0.1.13",
     "tsify": "^4.0.1",
-    "typescript": "^3.5.3"
+    "typescript": "^3.7.5"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

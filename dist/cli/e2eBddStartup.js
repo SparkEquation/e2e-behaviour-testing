@@ -135,76 +135,6 @@ var ProjectNames;
 
 /***/ }),
 
-/***/ "./node_modules/readdir-withFileTypes/dist/readdir.js":
-/*!************************************************************!*\
-  !*** ./node_modules/readdir-withFileTypes/dist/readdir.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var fs_1 = __importDefault(__webpack_require__(/*! fs */ "fs"));
-var path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
-var util_1 = __webpack_require__(/*! util */ "util");
-var fsReaddir = util_1.promisify(fs_1.default.readdir);
-var fsLstat = util_1.promisify(fs_1.default.lstat);
-function createDirent(name, stat) {
-    return {
-        name: name,
-        isBlockDevice: stat.isBlockDevice.bind(stat),
-        isCharacterDevice: stat.isCharacterDevice.bind(stat),
-        isDirectory: stat.isDirectory.bind(stat),
-        isFIFO: stat.isFIFO.bind(stat),
-        isFile: stat.isFile.bind(stat),
-        isSocket: stat.isSocket.bind(stat),
-        isSymbolicLink: stat.isSymbolicLink.bind(stat),
-    };
-}
-exports.readdir = (function (dir, options, callback) {
-    if (typeof options === "function") {
-        callback = options;
-        options = {};
-    }
-    if (typeof callback !== "function") {
-        var err = new TypeError("Callback must be a function");
-        err.code = "ERR_INVALID_CALLBACK";
-        throw err;
-    }
-    fsReaddir(dir, options)
-        .then(function (entries) {
-        if (!options.withFileTypes)
-            return entries;
-        return Promise.all(entries.map(function (entry) {
-            if (typeof entry !== "string")
-                return entry;
-            return fsLstat(path_1.default.join(dir.toString(), entry)).then(function (stat) {
-                return createDirent(entry, stat);
-            });
-        }));
-    })
-        .then(function (results) { return callback(null, results); })
-        .catch(function (err) { return callback(err); });
-});
-exports.readdirSync = (function (dir, options) {
-    var entries = fs_1.default.readdirSync(dir, options);
-    if (!(options && options.withFileTypes))
-        return entries;
-    return entries.map(function (entry) {
-        if (typeof entry !== "string")
-            return entry;
-        var stat = fs_1.default.lstatSync(path_1.default.join(dir, entry));
-        return createDirent(entry, stat);
-    });
-});
-//# sourceMappingURL=readdir.js.map
-
-/***/ }),
-
 /***/ "./src/scripts/e2eBddStartup.ts":
 /*!**************************************!*\
   !*** ./src/scripts/e2eBddStartup.ts ***!
@@ -374,7 +304,7 @@ const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
 
 const projectNames_1 = __webpack_require__(/*! ../../config/projectNames */ "./config/projectNames.ts");
 
-const readdir_withFileTypes_1 = __webpack_require__(/*! readdir-withFileTypes */ "./node_modules/readdir-withFileTypes/dist/readdir.js");
+const readdir_withfiletypes_1 = __webpack_require__(/*! readdir-withfiletypes */ "readdir-withfiletypes");
 
 const posixPath = path_1.default.posix; // Max depth of page objects files
 
@@ -387,7 +317,7 @@ const filesMap = filename => filename.slice(0, -3).replace(`'`, `\\'`); // Creat
 const filesReduce = (acc, filename) => acc + `import '${filename}';\n`;
 
 function getFiles(pageObjectsPath, nestedPath = '.') {
-  const files = readdir_withFileTypes_1.readdirSync(path_1.default.resolve(pageObjectsPath, nestedPath), {
+  const files = readdir_withfiletypes_1.readdirSync(path_1.default.resolve(pageObjectsPath, nestedPath), {
     withFileTypes: true
   });
   return files.map(dirent => {
@@ -486,14 +416,14 @@ module.exports = require("path");
 
 /***/ }),
 
-/***/ "util":
-/*!***********************!*\
-  !*** external "util" ***!
-  \***********************/
+/***/ "readdir-withfiletypes":
+/*!****************************************!*\
+  !*** external "readdir-withfiletypes" ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("util");
+module.exports = require("readdir-withfiletypes");
 
 /***/ })
 
