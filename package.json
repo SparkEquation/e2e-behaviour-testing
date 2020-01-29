@@ -45,7 +45,6 @@
     "README.md"
   ],
   "scripts": {
-    "build": "webpack",
     "lint": "eslint '**/*.{ts,js}'",
     "lint:fix": "npm run lint -- --fix",
     "pretest": "npm run build:cli && node dist/cli/e2eBddStartup.js -c e2e/config/cypress.integration.json",
