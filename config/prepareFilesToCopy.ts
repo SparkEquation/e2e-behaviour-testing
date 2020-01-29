@@ -26,8 +26,8 @@ export function prepareFilesToSave(): Array<IFilesToCopy> {
             name: ProjectNames.GITIGNORE_FILE,
         },
         {
-            path: path.resolve(ProjectNames.E2E_TESTS_FOLDER, ProjectNames.E2E_PAGE_OBJECTS_FOLDER),
-            name: ProjectNames.GITIGNORE_FILE,
+            path: path.resolve('.'),
+            name: ProjectNames.CYPRESS_CUCUMBER_CONFIG_FILE,
         },
         {
             path: path.resolve(ProjectNames.E2E_TESTS_FOLDER, ProjectNames.E2E_CONFIG_SUBFOLDER),

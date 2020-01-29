@@ -100,8 +100,5 @@
     "webpack-cli": "^3.3.6",
     "webpack-merge": "^4.2.2",
     "webpack-node-externals": "^1.7.2"
-  },
-  "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
   }
 }

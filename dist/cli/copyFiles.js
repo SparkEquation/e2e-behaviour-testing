@@ -127,8 +127,8 @@ function prepareFilesToSave() {
     path: path_1.default.resolve(projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_PAGE_OBJECTS_FOLDER),
     name: projectNames_1.ProjectNames.GITIGNORE_FILE
   }, {
-    path: path_1.default.resolve(projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_PAGE_OBJECTS_FOLDER),
-    name: projectNames_1.ProjectNames.GITIGNORE_FILE
+    path: path_1.default.resolve('.'),
+    name: projectNames_1.ProjectNames.CYPRESS_CUCUMBER_CONFIG_FILE
   }, {
     path: path_1.default.resolve(projectNames_1.ProjectNames.E2E_TESTS_FOLDER, projectNames_1.ProjectNames.E2E_CONFIG_SUBFOLDER),
     name: projectNames_1.ProjectNames.CYPRESS_INTEGRATION_CONFIG_FILE
