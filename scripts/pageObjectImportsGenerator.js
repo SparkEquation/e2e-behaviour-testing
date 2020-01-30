@@ -36,7 +36,7 @@ const filesReduce = (acc, filename) => acc + `import '${filename}';\n`;
 function getFiles(pageObjectsPath, nestedPath = '.') {
   const files = fs.readdirSync(
     path.resolve(pageObjectsPath, nestedPath),
-    { withFileTypes: true }
+    { withFileTypes: true },
   );
 
   return files.map(dirent => {
@@ -52,7 +52,7 @@ const pageObjectDirPath = path.resolve('integration', 'pageObjects');
 
 const files = getFiles(pageObjectDirPath)
   .filter(
-    filePath => AVAILABLE_EXTENSIONS.includes(path.extname(filePath)) && filePath !== INDEX_FILENAME
+    filePath => AVAILABLE_EXTENSIONS.includes(path.extname(filePath)) && filePath !== INDEX_FILENAME,
   )
   .map(filesMap)
   .map(file => {

@@ -21,7 +21,7 @@ import { getNavigationUrl } from '../../src/functions';
 
 export function register(): void {
     const loggedInAsFunction = (
-        apiSelectorString: string, roleSelectorString: string, redirectSelectorString?: string
+        apiSelectorString: string, roleSelectorString: string, redirectSelectorString?: string,
     ): void => {
         const navigationSelector = new PageObjectSelector(apiSelectorString);
         const roleSelector = new PageObjectSelector(roleSelectorString);

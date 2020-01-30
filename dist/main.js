@@ -949,7 +949,7 @@ function getElement(selector, getOptions = {}) {
             // @ts-ignore
             cy.xpath(selector.getValue(), getOptions).as(getElementAlias);
             break;
-        case pageObjectRegistrator_1.PageObjectField.Selector:
+        case pageObjectRegistrator_1.PageObjectField.Selector: {
             const value = selector.getValue();
             if (Array.isArray(value) && typeof value[1] === 'string') {
                 const [element, contains] = value;
@@ -959,6 +959,7 @@ function getElement(selector, getOptions = {}) {
                 cy.get(selector.getValue(), getOptions).as(getElementAlias);
             }
             break;
+        }
         default:
             throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to see element by selector '${selector.toString()}' `);
     }
