@@ -16,7 +16,7 @@
 
 import { Given } from 'cypress-cucumber-preprocessor/steps';
 import { PageObjectSelector } from '../types';
-import { getNavigationUrl } from '../../src/functions';
+import { getNavigationUrl } from '../../src/core/functions';
 
 export function register(): void {
     Given(`I open {string}`, (selectorString: string) => {

@@ -120,22 +120,29 @@ return /******/ (function(modules) { // webpackBootstrap
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const OpenPage = __importStar(__webpack_require__(/*! ./openPage */ "./lib/Given/openPage.ts"));
-const LoggedIn = __importStar(__webpack_require__(/*! ./loggedIn */ "./lib/Given/loggedIn.ts"));
-function register() {
-    OpenPage.register();
-    LoggedIn.register();
-}
-exports.register = register;
 
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const OpenPage = __importStar(__webpack_require__(/*! ./openPage */ "./lib/Given/openPage.ts"));
+
+const LoggedIn = __importStar(__webpack_require__(/*! ./loggedIn */ "./lib/Given/loggedIn.ts"));
+
+function register() {
+  OpenPage.register();
+  LoggedIn.register();
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -163,41 +170,54 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
-function register() {
-    const loggedInAsFunction = (apiSelectorString, roleSelectorString, redirectSelectorString) => {
-        const navigationSelector = new types_1.PageObjectSelector(apiSelectorString);
-        const roleSelector = new types_1.PageObjectSelector(roleSelectorString);
-        const url = functions_1.getNavigationUrl(navigationSelector);
-        const requestBody = {};
-        for (const field of roleSelector.getValue()) {
-            requestBody[field.fieldName] = field.value;
-        }
-        cy.request({
-            method: 'POST',
-            url,
-            form: true,
-            body: requestBody,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-            },
-        }).then(response => {
-            expect(response.status).to.eq(200);
-            expect(response).to.have.property('headers');
-        });
-        if (redirectSelectorString) {
-            const redirectSelector = new types_1.PageObjectSelector(redirectSelectorString);
-            cy.visit(functions_1.getNavigationUrl(redirectSelector));
-        }
-    };
-    steps_1.Given(`I logged in at {string} as {string}`, loggedInAsFunction);
-    steps_1.Given(`I logged in at {string} as {string} and visit {string}`, loggedInAsFunction);
-}
-exports.register = register;
 
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
+function register() {
+  const loggedInAsFunction = (apiSelectorString, roleSelectorString, redirectSelectorString) => {
+    const navigationSelector = new types_1.PageObjectSelector(apiSelectorString);
+    const roleSelector = new types_1.PageObjectSelector(roleSelectorString);
+    const url = functions_1.getNavigationUrl(navigationSelector);
+    const requestBody = {};
+
+    for (const field of roleSelector.getValue()) {
+      requestBody[field.fieldName] = field.value;
+    }
+
+    cy.request({
+      method: 'POST',
+      url,
+      form: true,
+      body: requestBody,
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    }).then(response => {
+      expect(response.status).to.eq(200);
+      expect(response).to.have.property('headers');
+    });
+
+    if (redirectSelectorString) {
+      const redirectSelector = new types_1.PageObjectSelector(redirectSelectorString);
+      cy.visit(functions_1.getNavigationUrl(redirectSelector));
+    }
+  };
+
+  steps_1.Given(`I logged in at {string} as {string}`, loggedInAsFunction);
+  steps_1.Given(`I logged in at {string} as {string} and visit {string}`, loggedInAsFunction);
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -225,18 +245,25 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
-function register() {
-    steps_1.Given(`I open {string}`, (selectorString) => {
-        const selector = new types_1.PageObjectSelector(selectorString);
-        cy.visit(functions_1.getNavigationUrl(selector));
-    });
-}
-exports.register = register;
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
+function register() {
+  steps_1.Given(`I open {string}`, selectorString => {
+    const selector = new types_1.PageObjectSelector(selectorString);
+    cy.visit(functions_1.getNavigationUrl(selector));
+  });
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -264,21 +291,29 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
-function register() {
-    steps_1.Then(`URL is {string}`, (selectorString) => {
-        const selector = new types_1.PageObjectSelector(selectorString);
-        const url = functions_1.getNavigationUrl(selector);
-        if (url) {
-            cy.url().should('include', `${Cypress.config().baseUrl}/${url}`);
-        }
-    });
-}
-exports.register = register;
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
+function register() {
+  steps_1.Then(`URL is {string}`, selectorString => {
+    const selector = new types_1.PageObjectSelector(selectorString);
+    const url = functions_1.getNavigationUrl(selector);
+
+    if (url) {
+      cy.url().should('include', `${Cypress.config().baseUrl}/${url}`);
+    }
+  });
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -306,22 +341,29 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const SeeTitle = __importStar(__webpack_require__(/*! ./seeTitle */ "./lib/Then/seeTitle.ts"));
-const CorrectUrl = __importStar(__webpack_require__(/*! ./correctUrl */ "./lib/Then/correctUrl.ts"));
-function register() {
-    SeeTitle.register();
-    CorrectUrl.register();
-}
-exports.register = register;
 
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const SeeTitle = __importStar(__webpack_require__(/*! ./seeTitle */ "./lib/Then/seeTitle.ts"));
+
+const CorrectUrl = __importStar(__webpack_require__(/*! ./correctUrl */ "./lib/Then/correctUrl.ts"));
+
+function register() {
+  SeeTitle.register();
+  CorrectUrl.register();
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -349,15 +391,20 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-function register() {
-    steps_1.Then(`I see {string} in title`, (title) => {
-        cy.title().should('include', title);
-    });
-}
-exports.register = register;
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+function register() {
+  steps_1.Then(`I see {string} in title`, title => {
+    cy.title().should('include', title);
+  });
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -385,65 +432,77 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
-function register() {
-    steps_1.When(`I click {string}`, async (selectorString, table) => {
-        const options = table ? new types_1.ClickOptions(table.rowsHash()) : new types_1.ClickOptions({});
-        const selector = new types_1.PageObjectSelector(selectorString);
-        const element = functions_1.getElement(selector);
-        const getOptions = functions_1.extractCommonGetOptions(options);
-        if (options.first) {
-            cy.get(element, getOptions)
-                .first()
-                .click({ force: options.force });
-        }
-        else {
-            cy.get(element, getOptions)
-                .click({ force: options.force });
-        }
-    });
-    steps_1.When(`I click blank link {string}`, (selectorString, table) => {
-        const selector = new types_1.PageObjectSelector(selectorString);
-        const options = table ? new types_1.BlankLinkClickOptions(table.rowsHash()) : new types_1.BlankLinkClickOptions({});
-        const element = functions_1.getElement(selector);
-        const getOptions = functions_1.extractCommonGetOptions(options);
-        const callback = (el) => {
-            if (el.attr('target') === '_blank' && el.attr('href') && !options.customClick) {
-                const url = el.attr('href');
-                if (!options.force) {
-                    cy.root().should('be.visible');
-                }
-                cy.visit(url);
-            }
-            else {
-                let href;
-                let stub;
-                cy.window().then(win => {
-                    stub = cy.stub(win, 'open').callsFake(passedHref => {
-                        href = passedHref;
-                    });
-                });
-                cy.root().click({ force: options.force })
-                    .then(() => {
-                    expect(stub).to.be.called;
-                    cy.visit(href);
-                });
-            }
-        };
-        if (options.first) {
-            cy.get(element, getOptions).first()
-                .within(callback);
-        }
-        else {
-            cy.get(element, getOptions).within(callback);
-        }
-    });
-}
-exports.register = register;
 
+__webpack_require__(/*! core-js/modules/es.promise */ "core-js/modules/es.promise");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
+function register() {
+  steps_1.When(`I click {string}`, async (selectorString, table) => {
+    const options = table ? new types_1.ClickOptions(table.rowsHash()) : new types_1.ClickOptions({});
+    const selector = new types_1.PageObjectSelector(selectorString);
+    const element = functions_1.getElement(selector);
+    const getOptions = functions_1.extractCommonGetOptions(options);
+
+    if (options.first) {
+      cy.get(element, getOptions).first().click({
+        force: options.force
+      });
+    } else {
+      cy.get(element, getOptions).click({
+        force: options.force
+      });
+    }
+  });
+  steps_1.When(`I click blank link {string}`, (selectorString, table) => {
+    const selector = new types_1.PageObjectSelector(selectorString);
+    const options = table ? new types_1.BlankLinkClickOptions(table.rowsHash()) : new types_1.BlankLinkClickOptions({});
+    const element = functions_1.getElement(selector);
+    const getOptions = functions_1.extractCommonGetOptions(options);
+
+    const callback = el => {
+      if (el.attr('target') === '_blank' && el.attr('href') && !options.customClick) {
+        const url = el.attr('href');
+
+        if (!options.force) {
+          cy.root().should('be.visible');
+        }
+
+        cy.visit(url);
+      } else {
+        let href;
+        let stub;
+        cy.window().then(win => {
+          stub = cy.stub(win, 'open').callsFake(passedHref => {
+            href = passedHref;
+          });
+        });
+        cy.root().click({
+          force: options.force
+        }).then(() => {
+          expect(stub).to.be.called;
+          cy.visit(href);
+        });
+      }
+    };
+
+    if (options.first) {
+      cy.get(element, getOptions).first().within(callback);
+    } else {
+      cy.get(element, getOptions).within(callback);
+    }
+  });
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -471,24 +530,31 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
-function register() {
-    steps_1.When(`I hover element {string} without sub hovers`, (selectorString) => {
-        const selector = new types_1.PageObjectSelector(selectorString);
-        const element = functions_1.getElement(selector);
-        if (element === null) {
-            return;
-        }
-        cy.get(element)
-            .first()
-            .trigger('mouseover');
-    });
-}
-exports.register = register;
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
+function register() {
+  steps_1.When(`I hover element {string} without sub hovers`, selectorString => {
+    const selector = new types_1.PageObjectSelector(selectorString);
+    const element = functions_1.getElement(selector);
+
+    if (element === null) {
+      return;
+    }
+
+    cy.get(element).first().trigger('mouseover');
+  });
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -516,28 +582,38 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const Click = __importStar(__webpack_require__(/*! ./click */ "./lib/When/click.ts"));
-const See = __importStar(__webpack_require__(/*! ./see */ "./lib/When/see.ts"));
-const LogIn = __importStar(__webpack_require__(/*! ./logIn */ "./lib/When/logIn.ts"));
-const TypingIn = __importStar(__webpack_require__(/*! ./typingIn */ "./lib/When/typingIn.ts"));
-const Hover = __importStar(__webpack_require__(/*! ./hover */ "./lib/When/hover.ts"));
-function register() {
-    Click.register();
-    See.register();
-    LogIn.register();
-    TypingIn.register();
-    Hover.register();
-}
-exports.register = register;
 
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const Click = __importStar(__webpack_require__(/*! ./click */ "./lib/When/click.ts"));
+
+const See = __importStar(__webpack_require__(/*! ./see */ "./lib/When/see.ts"));
+
+const LogIn = __importStar(__webpack_require__(/*! ./logIn */ "./lib/When/logIn.ts"));
+
+const TypingIn = __importStar(__webpack_require__(/*! ./typingIn */ "./lib/When/typingIn.ts"));
+
+const Hover = __importStar(__webpack_require__(/*! ./hover */ "./lib/When/hover.ts"));
+
+function register() {
+  Click.register();
+  See.register();
+  LogIn.register();
+  TypingIn.register();
+  Hover.register();
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -565,27 +641,40 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
-function register() {
-    steps_1.When(`I log in at {string} as {string}`, async (selectorString, roleSelectorString) => {
-        const elementSelector = new types_1.PageObjectSelector(selectorString);
-        const roleSelector = new types_1.PageObjectSelector(roleSelectorString);
-        const element = functions_1.getElement(elementSelector);
-        cy.get(element).within(form => {
-            cy.root().should('be.visible');
-            const credentials = roleSelector.getValue();
-            for (const field of credentials) {
-                cy.get(`input[name="${field.fieldName}"]`).type(field.value);
-            }
-            cy.wrap(form).submit();
-        });
-    });
-}
-exports.register = register;
 
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+
+__webpack_require__(/*! core-js/modules/es.promise */ "core-js/modules/es.promise");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
+function register() {
+  steps_1.When(`I log in at {string} as {string}`, async (selectorString, roleSelectorString) => {
+    const elementSelector = new types_1.PageObjectSelector(selectorString);
+    const roleSelector = new types_1.PageObjectSelector(roleSelectorString);
+    const element = functions_1.getElement(elementSelector);
+    cy.get(element).within(form => {
+      cy.root().should('be.visible');
+      const credentials = roleSelector.getValue();
+
+      for (const field of credentials) {
+        cy.get(`input[name="${field.fieldName}"]`).type(field.value);
+      }
+
+      cy.wrap(form).submit();
+    });
+  });
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -613,38 +702,41 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
-function register() {
-    steps_1.When(`I see (element ){string}`, (selectorString, table) => {
-        const options = table ? new types_1.SeeOptions(table.rowsHash()) : new types_1.SeeOptions({});
-        const selector = new types_1.PageObjectSelector(selectorString);
-        const getOptions = functions_1.extractCommonGetOptions(options);
-        const element = functions_1.getElement(selector, getOptions);
-        if (options.amount === 1) {
-            cy.get(element)
-                .should('have.length', 1)
-                .scrollIntoView()
-                .should('be.visible');
-        }
-        else {
-            cy.get(element).then(matchedElements => {
-                if (options.amount) {
-                    cy.wrap(matchedElements).should('have.length', options.amount);
-                }
-                cy.wrap(matchedElements).each(matchedElement => {
-                    cy.wrap(matchedElement)
-                        .scrollIntoView()
-                        .should('be.visible');
-                });
-            });
-        }
-    });
-}
-exports.register = register;
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
+function register() {
+  steps_1.When(`I see (element ){string}`, (selectorString, table) => {
+    const options = table ? new types_1.SeeOptions(table.rowsHash()) : new types_1.SeeOptions({});
+    const selector = new types_1.PageObjectSelector(selectorString);
+    const getOptions = functions_1.extractCommonGetOptions(options);
+    const element = functions_1.getElement(selector, getOptions);
+
+    if (options.amount === 1) {
+      cy.get(element).should('have.length', 1).scrollIntoView().should('be.visible');
+    } else {
+      cy.get(element).then(matchedElements => {
+        if (options.amount) {
+          cy.wrap(matchedElements).should('have.length', options.amount);
+        }
+
+        cy.wrap(matchedElements).each(matchedElement => {
+          cy.wrap(matchedElement).scrollIntoView().should('be.visible');
+        });
+      });
+    }
+  });
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -672,25 +764,31 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
-const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
-const functions_1 = __webpack_require__(/*! ../../src/functions */ "./src/functions.ts");
-function register() {
-    steps_1.When(`I type {string} into element {string}`, (text, selectorString) => {
-        const selector = new types_1.PageObjectSelector(selectorString);
-        const element = functions_1.getElement(selector);
-        if (element === null) {
-            return;
-        }
-        cy.get(element)
-            .scrollIntoView()
-            .should('be.visible')
-            .type(`${text}{enter}`);
-    });
-}
-exports.register = register;
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const steps_1 = __webpack_require__(/*! cypress-cucumber-preprocessor/steps */ "cypress-cucumber-preprocessor/steps");
+
+const types_1 = __webpack_require__(/*! ../types */ "./lib/types.ts");
+
+const functions_1 = __webpack_require__(/*! ../../src/core/functions */ "./src/core/functions.ts");
+
+function register() {
+  steps_1.When(`I type {string} into element {string}`, (text, selectorString) => {
+    const selector = new types_1.PageObjectSelector(selectorString);
+    const element = functions_1.getElement(selector);
+
+    if (element === null) {
+      return;
+    }
+
+    cy.get(element).scrollIntoView().should('be.visible').type(`${text}{enter}`);
+  });
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -718,48 +816,58 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const src_1 = __webpack_require__(/*! ../src */ "./src/index.ts");
-function extractCredentials(credentials) {
-    let Credentials = 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    class Credentials {
-        constructor() {
-            if (credentials) {
-                Object.entries(credentials).forEach(([key, value]) => {
-                    this[key] = value;
-                });
-            }
-        }
-    };
-    Credentials = __decorate([
-        src_1.registerPageObject({ name: 'Credentials', type: src_1.PageObjectField.RoleCredentials })
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        ,
-        __metadata("design:paramtypes", [])
-    ], Credentials);
-}
-function register() {
-    before(() => {
-        const credentials = Cypress.env('credentials') || {};
-        extractCredentials(credentials);
-    });
-    beforeEach(() => {
-        const urlToVisit = Cypress.env('startUrl') || '/';
-        cy.visit(urlToVisit);
-    });
-}
-exports.register = register;
 
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+
+var __decorate = this && this.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata = this && this.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const core_1 = __webpack_require__(/*! ../src/core */ "./src/core/index.ts");
+
+function extractCredentials(credentials) {
+  let Credentials = // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  class Credentials {
+    constructor() {
+      if (credentials) {
+        Object.entries(credentials).forEach(([key, value]) => {
+          this[key] = value;
+        });
+      }
+    }
+
+  };
+  Credentials = __decorate([core_1.registerPageObject({
+    name: 'Credentials',
+    type: core_1.PageObjectField.RoleCredentials
+  }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  , __metadata("design:paramtypes", [])], Credentials);
+}
+
+function register() {
+  before(() => {
+    const credentials = Cypress.env('credentials') || {};
+    extractCredentials(credentials);
+  });
+  beforeEach(() => {
+    const urlToVisit = Cypress.env('startUrl') || '/';
+    cy.visit(urlToVisit);
+  });
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -787,29 +895,40 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(/*! reflect-metadata */ "reflect-metadata");
-const Types = __importStar(__webpack_require__(/*! ./types */ "./lib/types.ts"));
-const GlobalHooks = __importStar(__webpack_require__(/*! ./globalHooks */ "./lib/globalHooks.ts"));
-const Then = __importStar(__webpack_require__(/*! ./Then */ "./lib/Then/index.ts"));
-const When = __importStar(__webpack_require__(/*! ./When */ "./lib/When/index.ts"));
-const Given = __importStar(__webpack_require__(/*! ./Given */ "./lib/Given/index.ts"));
-function register() {
-    Types.register();
-    GlobalHooks.register();
-    Given.register();
-    When.register();
-    Then.register();
-}
-exports.register = register;
 
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+__webpack_require__(/*! reflect-metadata */ "reflect-metadata");
+
+const Types = __importStar(__webpack_require__(/*! ./types */ "./lib/types.ts"));
+
+const GlobalHooks = __importStar(__webpack_require__(/*! ./globalHooks */ "./lib/globalHooks.ts"));
+
+const Then = __importStar(__webpack_require__(/*! ./Then */ "./lib/Then/index.ts"));
+
+const When = __importStar(__webpack_require__(/*! ./When */ "./lib/When/index.ts"));
+
+const Given = __importStar(__webpack_require__(/*! ./Given */ "./lib/Given/index.ts"));
+
+function register() {
+  Types.register();
+  GlobalHooks.register();
+  Given.register();
+  When.register();
+  Then.register();
+}
+
+exports.register = register;
 
 /***/ }),
 
@@ -837,87 +956,111 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-const pageObjectRegistrator_1 = __webpack_require__(/*! ../src/pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
+
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const core_1 = __webpack_require__(/*! ../src/core */ "./src/core/index.ts");
+
 class PageObjectSelector {
-    constructor(pageObjectSelector) {
-        const [className, fieldName] = pageObjectSelector.split('.');
-        this.fieldName = fieldName;
-        this.className = className;
-        const classInstance = pageObjectRegistrator_1.storage.get(className);
-        if (classInstance === undefined) {
-            throw new Error(`Cannot find page object class ${className}`);
-        }
-        this.classInstance = classInstance;
-        this.fieldDescriptor = this.classInstance.getFieldDescriptor(this.fieldName);
+  constructor(pageObjectSelector) {
+    const [className, fieldName] = pageObjectSelector.split('.');
+    this.fieldName = fieldName;
+    this.className = className;
+    const classInstance = core_1.storage.get(className);
+
+    if (classInstance === undefined) {
+      throw new Error(`Cannot find page object class ${className}`);
     }
-    getValue() {
-        if (this.fieldDescriptor.invokable) {
-            return this.classInstance[this.fieldName]();
-        }
-        else {
-            return this.classInstance[this.fieldName];
-        }
+
+    this.classInstance = classInstance;
+    this.fieldDescriptor = this.classInstance.getFieldDescriptor(this.fieldName);
+  }
+
+  getValue() {
+    if (this.fieldDescriptor.invokable) {
+      return this.classInstance[this.fieldName]();
+    } else {
+      return this.classInstance[this.fieldName];
     }
-    toString() {
-        return `${this.className}.${this.fieldName}`;
-    }
+  }
+
+  toString() {
+    return `${this.className}.${this.fieldName}`;
+  }
+
 }
+
 exports.PageObjectSelector = PageObjectSelector;
+
 class ElementGetOptions {
-    constructor(props) {
-        this.wait = null;
-        this.wait = Number(props.wait) || this.wait;
-    }
+  constructor(props) {
+    this.wait = null;
+    this.wait = Number(props.wait) || this.wait;
+  }
+
 }
+
 exports.ElementGetOptions = ElementGetOptions;
+
 class ClickOptions extends ElementGetOptions {
-    constructor(props) {
-        super(props);
-        this.first = false;
-        this.force = false;
-        this.first = Boolean(props.first) || this.first;
-        this.force = Boolean(props.force) || this.force;
-    }
+  constructor(props) {
+    super(props);
+    this.first = false;
+    this.force = false;
+    this.first = Boolean(props.first) || this.first;
+    this.force = Boolean(props.force) || this.force;
+  }
+
 }
+
 exports.ClickOptions = ClickOptions;
+
 class BlankLinkClickOptions extends ClickOptions {
-    constructor(props) {
-        super(props);
-        this.customClick = false;
-        this.customClick = Boolean(props.customClick) || this.customClick;
-    }
+  constructor(props) {
+    super(props);
+    this.customClick = false;
+    this.customClick = Boolean(props.customClick) || this.customClick;
+  }
+
 }
+
 exports.BlankLinkClickOptions = BlankLinkClickOptions;
+
 class SeeOptions extends ElementGetOptions {
-    constructor(props) {
-        super(props);
-        this.amount = null;
-        this.amount = Number(props.amount) || this.amount;
-    }
+  constructor(props) {
+    super(props);
+    this.amount = null;
+    this.amount = Number(props.amount) || this.amount;
+  }
+
 }
+
 exports.SeeOptions = SeeOptions;
+
 function register() {
-    /* Use this across project as soon as
-    https://youtrack.jetbrains.com/issue/WEB-39983?_ga=2.137121712.1268965974.1566197839-869244565.1565073645
-    is resolved
-
-    defineParameterType({
-        name: 'pageObjectSelector',
-        regexp: /[a-zA-Z]+\.[a-zA-Z]+/,
-        transformer: selector => new PageObjectSelector(selector)
-    });
-     */
+  /* Use this across project as soon as
+  https://youtrack.jetbrains.com/issue/WEB-39983?_ga=2.137121712.1268965974.1566197839-869244565.1565073645
+  is resolved
+   defineParameterType({
+      name: 'pageObjectSelector',
+      regexp: /[a-zA-Z]+\.[a-zA-Z]+/,
+      transformer: selector => new PageObjectSelector(selector)
+  });
+   */
 }
-exports.register = register;
 
+exports.register = register;
 
 /***/ }),
 
-/***/ "./src/functions.ts":
-/*!**************************!*\
-  !*** ./src/functions.ts ***!
-  \**************************/
+/***/ "./src/core/functions.ts":
+/*!*******************************!*\
+  !*** ./src/core/functions.ts ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -938,50 +1081,221 @@ exports.register = register;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-const pageObjectRegistrator_1 = __webpack_require__(/*! ./pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
+
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const pageObjectRegistrator_1 = __webpack_require__(/*! ./pageObjectRegistrator */ "./src/core/pageObjectRegistrator.ts");
+
 const getElementAlias = 'getElement';
+
 function getElement(selector, getOptions = {}) {
-    const element = '@' + getElementAlias;
-    switch (selector.fieldDescriptor.type) {
-        case pageObjectRegistrator_1.PageObjectField.Xpath:
-            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-            // @ts-ignore
-            cy.xpath(selector.getValue(), getOptions).as(getElementAlias);
-            break;
-        case pageObjectRegistrator_1.PageObjectField.Selector: {
-            const value = selector.getValue();
-            if (Array.isArray(value) && typeof value[1] === 'string') {
-                const [element, contains] = value;
-                cy.contains(element, contains, getOptions).as(getElementAlias);
-            }
-            else {
-                cy.get(selector.getValue(), getOptions).as(getElementAlias);
-            }
-            break;
+  const element = '@' + getElementAlias;
+
+  switch (selector.fieldDescriptor.type) {
+    case pageObjectRegistrator_1.PageObjectField.Xpath:
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      cy.xpath(selector.getValue(), getOptions).as(getElementAlias);
+      break;
+
+    case pageObjectRegistrator_1.PageObjectField.Selector:
+      {
+        const value = selector.getValue();
+
+        if (Array.isArray(value) && typeof value[1] === 'string') {
+          const [element, contains] = value;
+          cy.contains(element, contains, getOptions).as(getElementAlias);
+        } else {
+          cy.get(selector.getValue(), getOptions).as(getElementAlias);
         }
-        default:
-            throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to see element by selector '${selector.toString()}' `);
-    }
-    return element;
+
+        break;
+      }
+
+    default:
+      throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to see element by selector '${selector.toString()}' `);
+  }
+
+  return element;
 }
+
 exports.getElement = getElement;
+
 function getNavigationUrl(selector) {
-    if (selector.fieldDescriptor.type !== pageObjectRegistrator_1.PageObjectField.Navigation) {
-        throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to get URL by selector '${selector.toString()}' `);
-    }
-    return selector.getValue();
+  if (selector.fieldDescriptor.type !== pageObjectRegistrator_1.PageObjectField.Navigation) {
+    throw new Error(`Incorrect field type: '${selector.fieldDescriptor.type}' when trying to get URL by selector '${selector.toString()}' `);
+  }
+
+  return selector.getValue();
 }
+
 exports.getNavigationUrl = getNavigationUrl;
+
 function extractCommonGetOptions(options) {
-    const result = {};
-    if (options.wait !== null && !isNaN(options.wait)) {
-        result.timeout = options.wait;
-    }
-    return result;
+  const result = {};
+
+  if (options.wait !== null && !isNaN(options.wait)) {
+    result.timeout = options.wait;
+  }
+
+  return result;
 }
+
 exports.extractCommonGetOptions = extractCommonGetOptions;
 
+function makeCypressWaitForPromise(promiseToWait) {
+  return new Cypress.Promise((resolve, reject) => {
+    promiseToWait.then(resolve).catch(reject);
+  });
+}
+
+exports.makeCypressWaitForPromise = makeCypressWaitForPromise;
+
+/***/ }),
+
+/***/ "./src/core/index.ts":
+/*!***************************!*\
+  !*** ./src/core/index.ts ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/*
+ * Copyright 2019 Spark Equation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+function __export(m) {
+  for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+__export(__webpack_require__(/*! ./pageObjectRegistrator */ "./src/core/pageObjectRegistrator.ts"));
+
+var functions_1 = __webpack_require__(/*! ./functions */ "./src/core/functions.ts");
+
+exports.makeCypressWaitForPromise = functions_1.makeCypressWaitForPromise;
+
+/***/ }),
+
+/***/ "./src/core/pageObjectRegistrator.ts":
+/*!*******************************************!*\
+  !*** ./src/core/pageObjectRegistrator.ts ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/*
+ * Copyright 2019 Spark Equation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.storage = new Map(); // Keys should be the same as values to allow following typecheck: keyof typeof PageObjectFieldType
+
+var PageObjectField;
+
+(function (PageObjectField) {
+  PageObjectField["Selector"] = "Selector";
+  PageObjectField["Xpath"] = "Xpath";
+  PageObjectField["Navigation"] = "Navigation";
+  PageObjectField["RoleCredentials"] = "RoleCredentials";
+})(PageObjectField = exports.PageObjectField || (exports.PageObjectField = {}));
+
+const metadataTypeKey = 'PageObjectFieldType';
+const metadataInvokableKey = 'PageObjectFieldInvokable';
+
+function registerPageObject(params) {
+  // TODO replace any with valid type
+  const name = typeof params === 'string' ? params : params.name;
+  const type = params.hasOwnProperty('type') ? params.type : null;
+  return constructor => {
+    class MetadataProvider extends constructor {
+      getFieldDescriptor(key) {
+        if (Reflect.hasMetadata(metadataTypeKey, this, key)) {
+          return {
+            invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
+            type: Reflect.getMetadata(metadataTypeKey, this, key)
+          };
+        } else if (Reflect.hasMetadata(metadataTypeKey, this)) {
+          return {
+            type: Reflect.getMetadata(metadataTypeKey, this),
+            invokable: false
+          };
+        } else {
+          return {
+            type: null,
+            invokable: false
+          };
+        }
+      }
+
+    }
+
+    const classInstance = new MetadataProvider();
+
+    if (type !== null) {
+      Reflect.defineMetadata(metadataTypeKey, type, MetadataProvider.prototype);
+    }
+
+    cy.log(`Added ${name}`);
+
+    if (exports.storage.has(name)) {
+      throw new Error(`Detected page object with duplicate name ${name}`);
+    }
+
+    exports.storage.set(name, classInstance);
+  };
+}
+
+exports.registerPageObject = registerPageObject;
+
+function registerSelector(type) {
+  return function (target, key, descriptor) {
+    const invokable = descriptor !== undefined;
+    Reflect.defineMetadata(metadataTypeKey, type, target, key);
+    Reflect.defineMetadata(metadataInvokableKey, invokable, target, key);
+  };
+}
+
+exports.registerSelector = registerSelector;
 
 /***/ }),
 
@@ -1009,101 +1323,42 @@ exports.extractCommonGetOptions = extractCommonGetOptions;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-var pageObjectRegistrator_1 = __webpack_require__(/*! ./pageObjectRegistrator */ "./src/pageObjectRegistrator.ts");
-exports.registerSelector = pageObjectRegistrator_1.registerSelector;
-exports.registerPageObject = pageObjectRegistrator_1.registerPageObject;
-exports.PageObjectField = pageObjectRegistrator_1.PageObjectField;
-var lib_1 = __webpack_require__(/*! ../lib */ "./lib/index.ts");
-exports.register = lib_1.register;
 
+function __export(m) {
+  for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+__export(__webpack_require__(/*! ./core */ "./src/core/index.ts"));
+
+var lib_1 = __webpack_require__(/*! ../lib */ "./lib/index.ts");
+
+exports.register = lib_1.register;
 
 /***/ }),
 
-/***/ "./src/pageObjectRegistrator.ts":
-/*!**************************************!*\
-  !*** ./src/pageObjectRegistrator.ts ***!
-  \**************************************/
+/***/ "core-js/modules/es.array.iterator":
+/*!****************************************************!*\
+  !*** external "core-js/modules/es.array.iterator" ***!
+  \****************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
+module.exports = require("core-js/modules/es.array.iterator");
 
-/*
- * Copyright 2019 Spark Equation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.storage = new Map();
-// Keys should be the same as values to allow following typecheck: keyof typeof PageObjectFieldType
-var PageObjectField;
-(function (PageObjectField) {
-    PageObjectField["Selector"] = "Selector";
-    PageObjectField["Xpath"] = "Xpath";
-    PageObjectField["Navigation"] = "Navigation";
-    PageObjectField["RoleCredentials"] = "RoleCredentials";
-})(PageObjectField = exports.PageObjectField || (exports.PageObjectField = {}));
-const metadataTypeKey = 'PageObjectFieldType';
-const metadataInvokableKey = 'PageObjectFieldInvokable';
-function registerPageObject(params) {
-    // TODO replace any with valid type
-    const name = typeof params === 'string' ? params : params.name;
-    const type = params.hasOwnProperty('type') ? params.type : null;
-    return (constructor) => {
-        class MetadataProvider extends constructor {
-            getFieldDescriptor(key) {
-                if (Reflect.hasMetadata(metadataTypeKey, this, key)) {
-                    return {
-                        invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
-                        type: Reflect.getMetadata(metadataTypeKey, this, key),
-                    };
-                }
-                else if (Reflect.hasMetadata(metadataTypeKey, this)) {
-                    return {
-                        type: Reflect.getMetadata(metadataTypeKey, this),
-                        invokable: false,
-                    };
-                }
-                else {
-                    return {
-                        type: null,
-                        invokable: false,
-                    };
-                }
-            }
-        }
-        const classInstance = new MetadataProvider();
-        if (type !== null) {
-            Reflect.defineMetadata(metadataTypeKey, type, MetadataProvider.prototype);
-        }
-        cy.log(`Added ${name}`);
-        if (exports.storage.has(name)) {
-            throw new Error(`Detected page object with duplicate name ${name}`);
-        }
-        exports.storage.set(name, classInstance);
-    };
-}
-exports.registerPageObject = registerPageObject;
-function registerSelector(type) {
-    return function (target, key, descriptor) {
-        const invokable = descriptor !== undefined;
-        Reflect.defineMetadata(metadataTypeKey, type, target, key);
-        Reflect.defineMetadata(metadataInvokableKey, invokable, target, key);
-    };
-}
-exports.registerSelector = registerSelector;
+/***/ }),
 
+/***/ "core-js/modules/es.promise":
+/*!*********************************************!*\
+  !*** external "core-js/modules/es.promise" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/es.promise");
 
 /***/ }),
 

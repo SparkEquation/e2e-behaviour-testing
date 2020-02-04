@@ -1,0 +1,12 @@
+{
+  "testFiles": "**/*.feature",
+  "integrationFolder": "e2e/unitFeatures",
+  "pageObjectsFolder": "e2e/pageObjects",
+  "supportFile": "e2e/support/support.js",
+  "pluginsFile": "e2e/plugins/plugins.js",
+  "fixturesFolder": "false",
+  "videosFolder": "e2e/videos",
+  "screenshotsFolder": "e2e/screenshots",
+  "viewportWidth": 1600,
+  "viewportHeight": 900
+}

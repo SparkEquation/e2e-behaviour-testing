@@ -1,7 +1,0 @@
-import { register } from 'e2e-behaviour-testing';
-
-register();
-
-before(() => {
-    import('../../pageObjects/index');
-});

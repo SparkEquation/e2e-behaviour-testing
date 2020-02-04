@@ -14,5 +14,11 @@
  * limitations under the License.
  */
 
-export * from './core';
-export { register } from '../lib';
+import { register } from '../../../lib';
+import { makeCypressWaitForPromise } from '../../../src/core';
+
+register();
+
+before(() => {
+    return makeCypressWaitForPromise(import('../../pageObjects'));
+});

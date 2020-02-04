@@ -1,0 +1,21 @@
+{
+  "extends": "../config/tsconfig.common",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "esnext",
+    "lib": [
+      "es5",
+      "es6",
+      "es7",
+      "dom"
+    ],
+    "types": ["cypress", "node", "reflect-metadata"],
+    "preserveConstEnums": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
+}

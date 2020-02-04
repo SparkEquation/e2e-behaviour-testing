@@ -1,4 +1,3 @@
 .idea/
 node_modules/
-cypress/
-*.env.json
+cypress*.json

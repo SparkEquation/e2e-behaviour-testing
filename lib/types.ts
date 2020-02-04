@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { IPageObjectFieldDescription, IPageObjectMetadata, storage } from '../src/pageObjectRegistrator';
+import { IPageObjectFieldDescription, IPageObjectMetadata, storage } from '../src/core';
 
 export class PageObjectSelector {
     public classInstance: IPageObjectMetadata;

@@ -33,7 +33,8 @@
         }],
         "@typescript-eslint/no-explicit-any": "off",
         "indent": "off",
-        "@typescript-eslint/indent": ["error"]
+        "@typescript-eslint/indent": ["error"],
+        "@typescript-eslint/ban-types": "off"
       }
     }
   ],

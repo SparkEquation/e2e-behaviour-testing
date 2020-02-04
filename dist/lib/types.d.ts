@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { IPageObjectFieldDescription, IPageObjectMetadata } from '../src/pageObjectRegistrator';
+import { IPageObjectFieldDescription, IPageObjectMetadata } from '../src/core';
 export declare class PageObjectSelector {
     classInstance: IPageObjectMetadata;
     fieldDescriptor: IPageObjectFieldDescription;

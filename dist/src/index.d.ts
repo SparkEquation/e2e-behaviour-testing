@@ -1,2 +1,2 @@
-export { registerSelector, registerPageObject, PageObjectField, IRoleCredentials, LogInRole, } from './pageObjectRegistrator';
+export * from './core';
 export { register } from '../lib';

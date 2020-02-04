@@ -1,14 +1,23 @@
 {
-  "extends": "./integration/tsconfig",
+  "extends": "./config/tsconfig.common",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./dist",
-    "declaration": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "strictNullChecks": true,
     "preserveConstEnums": true,
     "sourceMap": true
   },
+  "files": [
+    "src/index.ts"
+  ],
+  "include": [
+    "src/core/**/*.ts",
+    "lib/**/*.ts"
+  ],
   "exclude": [
     "./node_modules",
-    "integration"
+    "e2e/features"
   ]
 }
