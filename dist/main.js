@@ -860,6 +860,9 @@ function register() {
   before(() => {
     const credentials = Cypress.env('credentials') || {};
     extractCredentials(credentials);
+    core_1.storage.forEach((_, key) => {
+      cy.log(`Page Object "${key}" is registered`);
+    });
   });
   beforeEach(() => {
     const urlToVisit = Cypress.env('startUrl') || '/';
@@ -1298,12 +1301,7 @@ function registerPageObject(params) {
 
     if (typeParameter !== null) {
       Reflect.defineMetadata(metadataTypeKey, typeParameter, MetadataProvider.prototype);
-    } // Trying to log outside of test leads to an error
-
-
-    try {
-      cy.log(`Added ${nameParameter}`); // eslint-disable-next-line no-empty
-    } catch (e) {}
+    }
 
     if (exports.storage.has(nameParameter)) {
       throw new Error(`Detected page object with duplicate name ${nameParameter}`);

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { PageObjectField, registerPageObject } from '../src/core';
+import { PageObjectField, registerPageObject, storage } from '../src/core';
 import { CredentialsObject } from '../src/core/functions';
 
 function extractCredentials(credentials: CredentialsObject): void {
@@ -35,6 +35,9 @@ export function register(): void {
     before(() => {
         const credentials: CredentialsObject = Cypress.env('credentials') || {};
         extractCredentials(credentials);
+        storage.forEach((_, key) => {
+            cy.log(`Page Object "${key}" is registered`);
+        });
     });
 
     beforeEach(() => {

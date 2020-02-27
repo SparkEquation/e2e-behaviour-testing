@@ -110,12 +110,6 @@ export function registerPageObject<T extends ClassType>(params: RegisterPOParams
             Reflect.defineMetadata(metadataTypeKey, typeParameter, MetadataProvider.prototype);
         }
 
-        // Trying to log outside of test leads to an error
-        try {
-            cy.log(`Added ${nameParameter}`);
-            // eslint-disable-next-line no-empty
-        } catch (e) {}
-
         if (storage.has(nameParameter)) {
             throw new Error(`Detected page object with duplicate name ${nameParameter}`);
         }
