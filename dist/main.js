@@ -908,8 +908,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-__webpack_require__(/*! reflect-metadata */ "reflect-metadata");
-
 const Types = __importStar(__webpack_require__(/*! ./types */ "./lib/types.ts"));
 
 const GlobalHooks = __importStar(__webpack_require__(/*! ./globalHooks */ "./lib/globalHooks.ts"));
@@ -1207,6 +1205,12 @@ exports.makeCypressWaitForPromise = functions_1.makeCypressWaitForPromise;
 
 "use strict";
 
+
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 /*
  * Copyright 2019 Spark Equation
  *
@@ -1223,11 +1227,8 @@ exports.makeCypressWaitForPromise = functions_1.makeCypressWaitForPromise;
  * limitations under the License.
  */
 
-__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+__webpack_require__(/*! reflect-metadata */ "reflect-metadata");
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 exports.storage = new Map(); // Keys should be the same as values to allow following typecheck: keyof typeof PageObjectFieldType
 
 var PageObjectField;
@@ -1243,9 +1244,16 @@ const metadataTypeKey = 'PageObjectFieldType';
 const metadataInvokableKey = 'PageObjectFieldInvokable';
 
 function registerPageObject(params) {
-  // TODO replace any with valid type
-  const name = typeof params === 'string' ? params : params.name;
-  const type = params.hasOwnProperty('type') ? params.type : null;
+  let nameParameter;
+  let typeParameter;
+
+  if (typeof params === 'string') {
+    nameParameter = params;
+  } else if (typeof params === 'object') {
+    nameParameter = params.name || null;
+    typeParameter = params.type || null;
+  }
+
   return constructor => {
     class MetadataProvider extends constructor {
       getFieldDescriptor(key) {
@@ -1271,17 +1279,21 @@ function registerPageObject(params) {
 
     const classInstance = new MetadataProvider();
 
-    if (type !== null) {
-      Reflect.defineMetadata(metadataTypeKey, type, MetadataProvider.prototype);
+    if (typeParameter !== null) {
+      Reflect.defineMetadata(metadataTypeKey, typeParameter, MetadataProvider.prototype);
     }
 
-    cy.log(`Added ${name}`);
+    const storedName = nameParameter || constructor.name; // Trying to log outside of test leads to an error
 
-    if (exports.storage.has(name)) {
-      throw new Error(`Detected page object with duplicate name ${name}`);
+    try {
+      cy.log(`Added ${storedName}`); // eslint-disable-next-line no-empty
+    } catch (e) {}
+
+    if (exports.storage.has(storedName)) {
+      throw new Error(`Detected page object with duplicate name ${nameParameter}`);
     }
 
-    exports.storage.set(name, classInstance);
+    exports.storage.set(storedName, classInstance);
   };
 }
 

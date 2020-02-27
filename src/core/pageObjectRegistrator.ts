@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import 'reflect-metadata';
 
 export const storage = new Map<string, IPageObjectMetadata>();
 
@@ -43,21 +44,28 @@ export interface IPageObjectMetadata {
 }
 
 export interface IPageObjectParams {
-    name: string;
+    name?: string;
     type?: PageObjectFieldType;
 }
 
 const metadataTypeKey = 'PageObjectFieldType';
 const metadataInvokableKey = 'PageObjectFieldInvokable';
 
-export function registerPageObject<T extends {new(...args: any[]): {}}>(
-    params: IPageObjectParams | string,
+export function registerPageObject<T extends {new(...args: Array<any>): {}}>(
+    params: IPageObjectParams | string | undefined,
 ): (constructor: T) => void {
-    // TODO replace any with valid type
-    const name = typeof params === 'string' ? params : params.name;
-    const type = params.hasOwnProperty('type') ? (params as IPageObjectParams).type : null;
+    let nameParameter: string | null;
+    let typeParameter: PageObjectFieldType | null;
+
+    if (typeof params === 'string') {
+        nameParameter = params;
+    } else if (typeof params === 'object') {
+        nameParameter = params.name || null;
+        typeParameter = params.type || null;
+    }
+
     return (constructor: T): void => {
-        class MetadataProvider extends constructor implements IPageObjectMetadata{
+        class MetadataProvider extends constructor implements IPageObjectMetadata {
             public getFieldDescriptor(key: keyof MetadataProvider): IPageObjectFieldDescription {
                 if (Reflect.hasMetadata(metadataTypeKey, this, key)) {
                     return {
@@ -80,16 +88,22 @@ export function registerPageObject<T extends {new(...args: any[]): {}}>(
 
         const classInstance = new MetadataProvider();
 
-        if (type !== null) {
-            Reflect.defineMetadata(metadataTypeKey, type, MetadataProvider.prototype);
+        if (typeParameter !== null) {
+            Reflect.defineMetadata(metadataTypeKey, typeParameter, MetadataProvider.prototype);
         }
 
-        cy.log(`Added ${name}`);
+        const storedName = nameParameter || constructor.name;
 
-        if (storage.has(name)) {
-            throw new Error(`Detected page object with duplicate name ${ name }`);
+        // Trying to log outside of test leads to an error
+        try {
+            cy.log(`Added ${storedName}`);
+            // eslint-disable-next-line no-empty
+        } catch (e) {}
+
+        if (storage.has(storedName)) {
+            throw new Error(`Detected page object with duplicate name ${ nameParameter }`);
         }
-        storage.set(name, classInstance);
+        storage.set(storedName, classInstance);
     };
 }
 

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import 'reflect-metadata';
 import * as Types from './types';
 import * as GlobalHooks from './globalHooks';
 import * as Then from './Then';

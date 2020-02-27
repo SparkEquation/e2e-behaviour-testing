@@ -37,5 +37,5 @@ export default merge(
                 banner: '#!/usr/bin/env node', raw: true,
             }),
         ],
-    }
+    },
 );
