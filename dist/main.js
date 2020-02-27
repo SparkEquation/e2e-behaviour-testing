@@ -1243,9 +1243,9 @@ var PageObjectField;
 const metadataTypeKey = 'PageObjectFieldType';
 const metadataInvokableKey = 'PageObjectFieldInvokable';
 
-function registerPageObject(params) {
-  let nameParameter;
-  let typeParameter;
+function registerPageObjectParamsParser(params, className) {
+  let nameParameter = null;
+  let typeParameter = null;
 
   if (typeof params === 'string') {
     nameParameter = params;
@@ -1254,46 +1254,62 @@ function registerPageObject(params) {
     typeParameter = params.type || null;
   }
 
-  return constructor => {
-    class MetadataProvider extends constructor {
-      getFieldDescriptor(key) {
-        if (Reflect.hasMetadata(metadataTypeKey, this, key)) {
-          return {
-            invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
-            type: Reflect.getMetadata(metadataTypeKey, this, key)
-          };
-        } else if (Reflect.hasMetadata(metadataTypeKey, this)) {
-          return {
-            type: Reflect.getMetadata(metadataTypeKey, this),
-            invokable: false
-          };
-        } else {
-          return {
-            type: null,
-            invokable: false
-          };
-        }
-      }
+  nameParameter = nameParameter || className;
+  return {
+    nameParameter,
+    typeParameter
+  };
+}
 
+function createPOWrapperClass(constructor) {
+  return class MetadataProvider extends constructor {
+    getFieldDescriptor(key) {
+      if (Reflect.hasMetadata(metadataTypeKey, this, key)) {
+        return {
+          invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
+          type: Reflect.getMetadata(metadataTypeKey, this, key)
+        };
+      } else if (Reflect.hasMetadata(metadataTypeKey, this)) {
+        return {
+          type: Reflect.getMetadata(metadataTypeKey, this),
+          invokable: false
+        };
+      } else {
+        return {
+          type: null,
+          invokable: false
+        };
+      }
     }
 
+  };
+}
+
+exports.createPOWrapperClass = createPOWrapperClass;
+
+function registerPageObject(params) {
+  return constructor => {
+    const MetadataProvider = createPOWrapperClass(constructor);
     const classInstance = new MetadataProvider();
+    const {
+      nameParameter,
+      typeParameter
+    } = registerPageObjectParamsParser(params, constructor.name);
 
     if (typeParameter !== null) {
       Reflect.defineMetadata(metadataTypeKey, typeParameter, MetadataProvider.prototype);
-    }
+    } // Trying to log outside of test leads to an error
 
-    const storedName = nameParameter || constructor.name; // Trying to log outside of test leads to an error
 
     try {
-      cy.log(`Added ${storedName}`); // eslint-disable-next-line no-empty
+      cy.log(`Added ${nameParameter}`); // eslint-disable-next-line no-empty
     } catch (e) {}
 
-    if (exports.storage.has(storedName)) {
+    if (exports.storage.has(nameParameter)) {
       throw new Error(`Detected page object with duplicate name ${nameParameter}`);
     }
 
-    exports.storage.set(storedName, classInstance);
+    exports.storage.set(nameParameter, classInstance);
   };
 }
 

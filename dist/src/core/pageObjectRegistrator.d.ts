@@ -23,7 +23,12 @@ export interface IPageObjectParams {
     name?: string;
     type?: PageObjectFieldType;
 }
-export declare function registerPageObject<T extends {
+declare type ClassType = {
     new (...args: Array<any>): {};
-}>(params: IPageObjectParams | string | undefined): (constructor: T) => void;
+};
+declare type ClassTypeWithGeneric<T> = new (...args: Array<any>) => T;
+declare type RegisterPOParams = IPageObjectParams | string | undefined;
+export declare function createPOWrapperClass<T extends ClassType>(constructor: T): ClassTypeWithGeneric<IPageObjectMetadata>;
+export declare function registerPageObject<T extends ClassType>(params: RegisterPOParams): (constructor: T) => void;
 export declare function registerSelector(type: PageObjectField | keyof typeof PageObjectField): (target: Record<string, any>, key: string | symbol, descriptor?: PropertyDescriptor | undefined) => void;
+export {};

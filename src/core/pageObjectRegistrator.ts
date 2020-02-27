@@ -51,11 +51,19 @@ export interface IPageObjectParams {
 const metadataTypeKey = 'PageObjectFieldType';
 const metadataInvokableKey = 'PageObjectFieldInvokable';
 
-export function registerPageObject<T extends {new(...args: Array<any>): {}}>(
-    params: IPageObjectParams | string | undefined,
-): (constructor: T) => void {
-    let nameParameter: string | null;
-    let typeParameter: PageObjectFieldType | null;
+type ClassType = {new (...args: Array<any>): {}};
+type ClassTypeWithGeneric<T> = new (...args: Array<any>) => T;
+
+type RegisterPOParams = IPageObjectParams | string | undefined;
+
+interface IRegisterPOConfig {
+    nameParameter: string;
+    typeParameter: PageObjectFieldType | null;
+}
+
+function registerPageObjectParamsParser(params: RegisterPOParams, className: string): IRegisterPOConfig {
+    let nameParameter: string | null = null;
+    let typeParameter: PageObjectFieldType | null = null;
 
     if (typeof params === 'string') {
         nameParameter = params;
@@ -64,46 +72,54 @@ export function registerPageObject<T extends {new(...args: Array<any>): {}}>(
         typeParameter = params.type || null;
     }
 
-    return (constructor: T): void => {
-        class MetadataProvider extends constructor implements IPageObjectMetadata {
-            public getFieldDescriptor(key: keyof MetadataProvider): IPageObjectFieldDescription {
-                if (Reflect.hasMetadata(metadataTypeKey, this, key)) {
-                    return {
-                        invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
-                        type: Reflect.getMetadata(metadataTypeKey, this, key),
-                    };
-                } else if (Reflect.hasMetadata(metadataTypeKey, this)) {
-                    return {
-                        type: Reflect.getMetadata(metadataTypeKey, this),
-                        invokable: false,
-                    };
-                } else {
-                    return {
-                        type: null,
-                        invokable: false,
-                    };
-                }
+    nameParameter = nameParameter || className;
+
+    return { nameParameter, typeParameter };
+}
+
+export function createPOWrapperClass<T extends ClassType>(constructor: T): ClassTypeWithGeneric<IPageObjectMetadata> {
+    return class MetadataProvider extends constructor implements IPageObjectMetadata {
+        public getFieldDescriptor(key: keyof MetadataProvider): IPageObjectFieldDescription {
+            if (Reflect.hasMetadata(metadataTypeKey, this, key)) {
+                return {
+                    invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
+                    type: Reflect.getMetadata(metadataTypeKey, this, key),
+                };
+            } else if (Reflect.hasMetadata(metadataTypeKey, this)) {
+                return {
+                    type: Reflect.getMetadata(metadataTypeKey, this),
+                    invokable: false,
+                };
+            } else {
+                return {
+                    type: null,
+                    invokable: false,
+                };
             }
         }
+    };
+}
 
+export function registerPageObject<T extends ClassType>(params: RegisterPOParams): (constructor: T) => void {
+    return (constructor: T): void => {
+        const MetadataProvider = createPOWrapperClass(constructor);
         const classInstance = new MetadataProvider();
+        const { nameParameter, typeParameter } = registerPageObjectParamsParser(params, constructor.name);
 
         if (typeParameter !== null) {
             Reflect.defineMetadata(metadataTypeKey, typeParameter, MetadataProvider.prototype);
         }
 
-        const storedName = nameParameter || constructor.name;
-
         // Trying to log outside of test leads to an error
         try {
-            cy.log(`Added ${storedName}`);
+            cy.log(`Added ${nameParameter}`);
             // eslint-disable-next-line no-empty
         } catch (e) {}
 
-        if (storage.has(storedName)) {
-            throw new Error(`Detected page object with duplicate name ${ nameParameter }`);
+        if (storage.has(nameParameter)) {
+            throw new Error(`Detected page object with duplicate name ${nameParameter}`);
         }
-        storage.set(storedName, classInstance);
+        storage.set(nameParameter, classInstance);
     };
 }
 
