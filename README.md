@@ -113,13 +113,16 @@ As a result `Credentials` page object will be accessible in feature flies.
  `startPage` env variable. It should contain relative to basePath url.
 
 ## Page object details
-* Page object file should export one class with any name.
+* Page object file should have one (recommended) class.
 
-* Every one of classes should be annotated with `@registerPageObject` directive with
-either `name` parameter or object with `name` and optional `type` fields.
+* Every one of classes should be annotated with `@registerPageObject` directive.
+    Page object name (how you would access it in feature files) can be set up
+    * If `registerPageObject` directive don't have params your page object will be available by class name
+    * If the directive's param is string - it will be used as page object name
+    * If directive's param is object - name field will be used as PO name, if exists. Class name otherwise.
 
 * When you are trying to resolve page object in your `.feature` files
-you address the class just as you name it.
+you address the page object just as you name it.
 **Do not use same name for multiple classes**.
 * Do not forget that `Credentials` is built-in page object,
 as [mentioned here](#environment-variables)
@@ -195,5 +198,5 @@ To successfully run it you need to do the following steps:
         IndexPage: string = ''
     }
 ```
-* Run`page-objects-create && cypress open`
+* Run`e2e-bdd-startup && cypress open`
 * Choose your file from list and click it

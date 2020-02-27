@@ -59,7 +59,7 @@ export abstract class ElementGetOptions {
 
 export type GetOptions = Partial<Cypress.Timeoutable>;
 
-export class ClickOptions extends ElementGetOptions{
+export class ClickOptions extends ElementGetOptions {
     public first = false;
     public force = false;
 

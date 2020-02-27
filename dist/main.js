@@ -860,6 +860,9 @@ function register() {
   before(() => {
     const credentials = Cypress.env('credentials') || {};
     extractCredentials(credentials);
+    core_1.storage.forEach((_, key) => {
+      cy.log(`Page Object "${key}" is registered`);
+    });
   });
   beforeEach(() => {
     const urlToVisit = Cypress.env('startUrl') || '/';
@@ -907,8 +910,6 @@ var __importStar = this && this.__importStar || function (mod) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-__webpack_require__(/*! reflect-metadata */ "reflect-metadata");
 
 const Types = __importStar(__webpack_require__(/*! ./types */ "./lib/types.ts"));
 
@@ -1207,6 +1208,12 @@ exports.makeCypressWaitForPromise = functions_1.makeCypressWaitForPromise;
 
 "use strict";
 
+
+__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 /*
  * Copyright 2019 Spark Equation
  *
@@ -1223,11 +1230,8 @@ exports.makeCypressWaitForPromise = functions_1.makeCypressWaitForPromise;
  * limitations under the License.
  */
 
-__webpack_require__(/*! core-js/modules/es.array.iterator */ "core-js/modules/es.array.iterator");
+__webpack_require__(/*! reflect-metadata */ "reflect-metadata");
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 exports.storage = new Map(); // Keys should be the same as values to allow following typecheck: keyof typeof PageObjectFieldType
 
 var PageObjectField;
@@ -1242,46 +1246,68 @@ var PageObjectField;
 const metadataTypeKey = 'PageObjectFieldType';
 const metadataInvokableKey = 'PageObjectFieldInvokable';
 
-function registerPageObject(params) {
-  // TODO replace any with valid type
-  const name = typeof params === 'string' ? params : params.name;
-  const type = params.hasOwnProperty('type') ? params.type : null;
-  return constructor => {
-    class MetadataProvider extends constructor {
-      getFieldDescriptor(key) {
-        if (Reflect.hasMetadata(metadataTypeKey, this, key)) {
-          return {
-            invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
-            type: Reflect.getMetadata(metadataTypeKey, this, key)
-          };
-        } else if (Reflect.hasMetadata(metadataTypeKey, this)) {
-          return {
-            type: Reflect.getMetadata(metadataTypeKey, this),
-            invokable: false
-          };
-        } else {
-          return {
-            type: null,
-            invokable: false
-          };
-        }
+function registerPageObjectParamsParser(params, className) {
+  let nameParameter = null;
+  let typeParameter = null;
+
+  if (typeof params === 'string') {
+    nameParameter = params;
+  } else if (typeof params === 'object') {
+    nameParameter = params.name || null;
+    typeParameter = params.type || null;
+  }
+
+  nameParameter = nameParameter || className;
+  return {
+    nameParameter,
+    typeParameter
+  };
+}
+
+function createPOWrapperClass(constructor) {
+  return class MetadataProvider extends constructor {
+    getFieldDescriptor(key) {
+      if (Reflect.hasMetadata(metadataTypeKey, this, key)) {
+        return {
+          invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
+          type: Reflect.getMetadata(metadataTypeKey, this, key)
+        };
+      } else if (Reflect.hasMetadata(metadataTypeKey, this)) {
+        return {
+          type: Reflect.getMetadata(metadataTypeKey, this),
+          invokable: false
+        };
+      } else {
+        return {
+          type: null,
+          invokable: false
+        };
       }
-
     }
 
+  };
+}
+
+exports.createPOWrapperClass = createPOWrapperClass;
+
+function registerPageObject(params) {
+  return constructor => {
+    const MetadataProvider = createPOWrapperClass(constructor);
     const classInstance = new MetadataProvider();
+    const {
+      nameParameter,
+      typeParameter
+    } = registerPageObjectParamsParser(params, constructor.name);
 
-    if (type !== null) {
-      Reflect.defineMetadata(metadataTypeKey, type, MetadataProvider.prototype);
+    if (typeParameter !== null) {
+      Reflect.defineMetadata(metadataTypeKey, typeParameter, MetadataProvider.prototype);
     }
 
-    cy.log(`Added ${name}`);
-
-    if (exports.storage.has(name)) {
-      throw new Error(`Detected page object with duplicate name ${name}`);
+    if (exports.storage.has(nameParameter)) {
+      throw new Error(`Detected page object with duplicate name ${nameParameter}`);
     }
 
-    exports.storage.set(name, classInstance);
+    exports.storage.set(nameParameter, classInstance);
   };
 }
 

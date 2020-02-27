@@ -56,7 +56,7 @@ export function prepareSavedFilesToCopy(projectBasePath: string, libraryTemplate
         {
             resultDir: path.resolve(
                 projectBasePath, ProjectNames.E2E_TESTS_FOLDER,
-                ProjectNames.E2E_FEATURES_SUBFOLER, ProjectNames.E2E_FEATURES_COMMON_SUBFOLDER
+                ProjectNames.E2E_FEATURES_SUBFOLER, ProjectNames.E2E_FEATURES_COMMON_SUBFOLDER,
             ),
             name: ProjectNames.E2E_FEATURES_COMMON_BEFORE_FILE,
         },
@@ -97,7 +97,7 @@ export function prepareDirectoriesToCreate(projectBasePath): Array<string> {
     const PROJECT_SUPPORT_PATH = path.resolve(PROJECT_E2E_PATH, ProjectNames.E2E_SUPPORT_SUBFOLER);
     const PROJECT_PAGE_OBJECTS_PATH = path.resolve(PROJECT_E2E_PATH, ProjectNames.E2E_PAGE_OBJECTS_FOLDER);
     const PROJECT_TESTS_COMMON_PATH = path.resolve(
-        PROJECT_E2E_PATH, ProjectNames.E2E_FEATURES_SUBFOLER, ProjectNames.E2E_FEATURES_COMMON_SUBFOLDER
+        PROJECT_E2E_PATH, ProjectNames.E2E_FEATURES_SUBFOLER, ProjectNames.E2E_FEATURES_COMMON_SUBFOLDER,
     );
     const PROJECT_E2E_CONFIG_PATH = path.resolve(PROJECT_E2E_PATH, ProjectNames.E2E_CONFIG_SUBFOLDER);
 

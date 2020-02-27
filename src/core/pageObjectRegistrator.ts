@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import 'reflect-metadata';
 
 export const storage = new Map<string, IPageObjectMetadata>();
 
@@ -43,53 +44,76 @@ export interface IPageObjectMetadata {
 }
 
 export interface IPageObjectParams {
-    name: string;
+    name?: string;
     type?: PageObjectFieldType;
 }
 
 const metadataTypeKey = 'PageObjectFieldType';
 const metadataInvokableKey = 'PageObjectFieldInvokable';
 
-export function registerPageObject<T extends {new(...args: any[]): {}}>(
-    params: IPageObjectParams | string,
-): (constructor: T) => void {
-    // TODO replace any with valid type
-    const name = typeof params === 'string' ? params : params.name;
-    const type = params.hasOwnProperty('type') ? (params as IPageObjectParams).type : null;
-    return (constructor: T): void => {
-        class MetadataProvider extends constructor implements IPageObjectMetadata{
-            public getFieldDescriptor(key: keyof MetadataProvider): IPageObjectFieldDescription {
-                if (Reflect.hasMetadata(metadataTypeKey, this, key)) {
-                    return {
-                        invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
-                        type: Reflect.getMetadata(metadataTypeKey, this, key),
-                    };
-                } else if (Reflect.hasMetadata(metadataTypeKey, this)) {
-                    return {
-                        type: Reflect.getMetadata(metadataTypeKey, this),
-                        invokable: false,
-                    };
-                } else {
-                    return {
-                        type: null,
-                        invokable: false,
-                    };
-                }
+type ClassType = {new (...args: Array<any>): {}};
+type ClassTypeWithGeneric<T> = new (...args: Array<any>) => T;
+
+type RegisterPOParams = IPageObjectParams | string | undefined;
+
+interface IRegisterPOConfig {
+    nameParameter: string;
+    typeParameter: PageObjectFieldType | null;
+}
+
+function registerPageObjectParamsParser(params: RegisterPOParams, className: string): IRegisterPOConfig {
+    let nameParameter: string | null = null;
+    let typeParameter: PageObjectFieldType | null = null;
+
+    if (typeof params === 'string') {
+        nameParameter = params;
+    } else if (typeof params === 'object') {
+        nameParameter = params.name || null;
+        typeParameter = params.type || null;
+    }
+
+    nameParameter = nameParameter || className;
+
+    return { nameParameter, typeParameter };
+}
+
+export function createPOWrapperClass<T extends ClassType>(constructor: T): ClassTypeWithGeneric<IPageObjectMetadata> {
+    return class MetadataProvider extends constructor implements IPageObjectMetadata {
+        public getFieldDescriptor(key: keyof MetadataProvider): IPageObjectFieldDescription {
+            if (Reflect.hasMetadata(metadataTypeKey, this, key)) {
+                return {
+                    invokable: Reflect.getMetadata(metadataInvokableKey, this, key),
+                    type: Reflect.getMetadata(metadataTypeKey, this, key),
+                };
+            } else if (Reflect.hasMetadata(metadataTypeKey, this)) {
+                return {
+                    type: Reflect.getMetadata(metadataTypeKey, this),
+                    invokable: false,
+                };
+            } else {
+                return {
+                    type: null,
+                    invokable: false,
+                };
             }
         }
+    };
+}
 
+export function registerPageObject<T extends ClassType>(params: RegisterPOParams): (constructor: T) => void {
+    return (constructor: T): void => {
+        const MetadataProvider = createPOWrapperClass(constructor);
         const classInstance = new MetadataProvider();
+        const { nameParameter, typeParameter } = registerPageObjectParamsParser(params, constructor.name);
 
-        if (type !== null) {
-            Reflect.defineMetadata(metadataTypeKey, type, MetadataProvider.prototype);
+        if (typeParameter !== null) {
+            Reflect.defineMetadata(metadataTypeKey, typeParameter, MetadataProvider.prototype);
         }
 
-        cy.log(`Added ${name}`);
-
-        if (storage.has(name)) {
-            throw new Error(`Detected page object with duplicate name ${ name }`);
+        if (storage.has(nameParameter)) {
+            throw new Error(`Detected page object with duplicate name ${nameParameter}`);
         }
-        storage.set(name, classInstance);
+        storage.set(nameParameter, classInstance);
     };
 }
 

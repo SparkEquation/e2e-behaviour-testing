@@ -24,7 +24,7 @@ import { generatePageObjects } from './pageObjectsImportsGenerator';
 declare const PACKAGE_VERSION: string;
 
 const DEFAULT_CYPRESS_FEATURES_FOLDER = path.resolve(
-    ProjectNames.E2E_TESTS_FOLDER, ProjectNames.E2E_FEATURES_SUBFOLER
+    ProjectNames.E2E_TESTS_FOLDER, ProjectNames.E2E_FEATURES_SUBFOLER,
 );
 const DEFAULT_PAGE_OBJECTS_FOLDER_NAME = ProjectNames.E2E_PAGE_OBJECTS_FOLDER;
 const EXPECTED_CONFIG_PATH = path.resolve(ProjectNames.CYPRESS_CONFIG_FILE);
@@ -48,7 +48,7 @@ function readConfig(): any {
     let configContent: any = null;
     try {
         configContent = JSON.parse(
-            fs.readFileSync(EXPECTED_CONFIG_PATH, { encoding: 'utf-8' })
+            fs.readFileSync(EXPECTED_CONFIG_PATH, { encoding: 'utf-8' }),
         );
     } catch (err) {
         console.error(err.message);
