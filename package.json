@@ -57,7 +57,9 @@
     "build:cli": "cross-env TS_NODE_PROJECT='config/tsconfig.webpack.json' webpack --config config/webpack.cli.ts",
     "prebuild:all": "npm run lint",
     "postbuild:all": "git add dist && git add postinstall",
-    "checkLicense": "legally"
+    "checkLicense": "legally",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "husky": {
     "hooks": {
@@ -75,7 +77,8 @@
     "readdir-withfiletypes": "^1.0.2",
     "reflect-metadata": "^0.1.13",
     "tsify": "^4.0.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -100,5 +103,6 @@
     "webpack-cli": "^3.3.6",
     "webpack-merge": "^4.2.2",
     "webpack-node-externals": "^1.7.2"
-  }
+  },
+  "snyk": true
 }
