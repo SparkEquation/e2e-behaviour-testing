@@ -68,7 +68,7 @@
     "@cypress/browserify-preprocessor": "^2.1.1",
     "core-js": "^3.2.1",
     "cucumber": "^5.1.0",
-    "cypress": "^3.8.3",
+    "cypress": "^4.11.0",
     "cypress-cucumber-preprocessor": "^1.19.2",
     "cypress-xpath": "^1.4.0",
     "inquirer": "^7.0.0",
